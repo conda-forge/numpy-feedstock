@@ -10,6 +10,15 @@ source:
   fn: numpy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
   md5: aed294de0aa1ac7bd3f9745f4f1968ad
+  patches:
+    # Adds a patch to workaround a known test failure on Linux.
+    # This patch comes from an accepted PR, but it is unclear
+    # if it will be put into a 1.10.x release. It is already
+    # in use in 1.11.x. Link below for reference.
+    #
+    # https://github.com/numpy/numpy/pull/6975
+    #
+    - numpy_PR_6975.diff
 
 build:
   number: 200
