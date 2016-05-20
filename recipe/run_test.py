@@ -14,4 +14,7 @@ import numpy.fft.fftpack_lite
 import numpy.linalg.lapack_lite
 import numpy.random.mtrand
 
+assert numpy.__config__.get_info("openblas") != {}
+numpy.__config__.show()
+
 numpy.test()
