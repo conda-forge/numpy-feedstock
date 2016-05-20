@@ -13,5 +13,5 @@ echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
 ) > site.cfg
 
-python setup.py build install --single-version-externally-managed --record=record.txt
+python setup.py build install
 if errorlevel 1 exit 1

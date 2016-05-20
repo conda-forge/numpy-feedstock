@@ -1,4 +1,4 @@
-{% set version="1.11.0" %}
+{% set version="1.10.4" %}
 
 {% set variant = 'openblas' %}
 
@@ -9,7 +9,7 @@ package:
 source:
   fn: numpy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
-  md5: bc56fb9fc2895aa4961802ffbdb31d0b
+  md5: aed294de0aa1ac7bd3f9745f4f1968ad
 
 build:
   number: 200
@@ -22,7 +22,6 @@ requirements:
   build:
     - cython
     - python
-    - setuptools
     - blas 1.1 {{ variant }}
     - openblas 0.2.18*
   run:
