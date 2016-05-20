@@ -12,7 +12,7 @@ source:
   md5: bc56fb9fc2895aa4961802ffbdb31d0b
 
 build:
-  number: 100
+  number: 200
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: true  # [win]
   features:
@@ -24,11 +24,11 @@ requirements:
     - python
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2*
+    - openblas 0.2.18*
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2*
+    - openblas 0.2.18*
 
 test:
   requires:
