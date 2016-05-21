@@ -1,0 +1,17 @@
+diff --git numpy/core/src/private/npy_config.h numpy/core/src/private/npy_config.h
+index fa20eb4..eb9c1e1 100644
+--- numpy/core/src/private/npy_config.h
++++ numpy/core/src/private/npy_config.h
+@@ -93,6 +93,12 @@
+ #undef HAVE_CATANH
+ #undef HAVE_CATANHF
+ #undef HAVE_CATANHL
++#undef HAVE_CACOS
++#undef HAVE_CACOSF
++#undef HAVE_CACOSL
++#undef HAVE_CACOSH
++#undef HAVE_CACOSHF
++#undef HAVE_CACOSHL
+ #endif
+ #undef TRIG_OK
+ 
