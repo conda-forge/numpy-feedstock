@@ -1,6 +1,6 @@
-{% set version="1.11.0" %}
+{% set version = "1.11.0" %}
 
-{% set variant = 'openblas' %}
+{% set variant = "openblas" %}
 
 package:
   name: numpy
@@ -41,7 +41,7 @@ test:
 
 about:
   home: http://numpy.scipy.org/
-  license: BSD 3-clause
+  license: BSD 3-Clause
   license_file: LICENSE.txt
   summary: array processing for numbers, strings, records, and objects.
 
