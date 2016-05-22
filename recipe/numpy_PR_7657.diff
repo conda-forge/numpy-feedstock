@@ -1,7 +1,16 @@
 diff --git numpy/core/src/private/npy_config.h numpy/core/src/private/npy_config.h
-index fa20eb4..eb9c1e1 100644
+index fa20eb4..cd78b7d 100644
 --- numpy/core/src/private/npy_config.h
 +++ numpy/core/src/private/npy_config.h
+@@ -75,7 +75,7 @@
+ 
+ #if defined(HAVE_FEATURES_H)
+ #include <features.h>
+-#define TRIG_OK __GLIBC_PREREQ(2, 16)
++#define TRIG_OK __GLIBC_PREREQ(2, 18)
+ #else
+ #define TRIG_OK 0
+ #endif
 @@ -93,6 +93,12 @@
  #undef HAVE_CATANH
  #undef HAVE_CATANHF
