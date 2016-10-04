@@ -71,8 +71,8 @@ Terminology
 Current build status
 ====================
 
-Linux: [![Circle CI](https://circleci.com/gh/conda-forge/numpy.svg?style=shield)](https://circleci.com/gh/conda-forge/numpy)
-OSX: [![TravisCI](https://travis-ci.org/conda-forge/numpy.svg?branch=master)](https://travis-ci.org/conda-forge/numpy)
+Linux: [![Circle CI](https://circleci.com/gh/conda-forge/numpy-feedstock.svg?style=shield)](https://circleci.com/gh/conda-forge/numpy-feedstock)
+OSX: [![TravisCI](https://travis-ci.org/conda-forge/numpy-feedstock.svg?branch=master)](https://travis-ci.org/conda-forge/numpy-feedstock)
 Windows: ![](https://cdn.rawgit.com/conda-forge/conda-smithy/90845bba35bec53edac7a16638aa4d77217a3713/conda_smithy/static/disabled.svg)
 
 Current release info
