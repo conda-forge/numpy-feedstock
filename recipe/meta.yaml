@@ -23,7 +23,7 @@ source:
     - numpy_PR_7657.diff
 
 build:
-  number: 203
+  number: 204
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: true  # [win]
   features:
@@ -31,6 +31,7 @@ build:
 
 requirements:
   build:
+    - toolchain
     - cython
     - python
     - blas 1.1 {{ variant }}
