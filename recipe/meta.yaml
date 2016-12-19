@@ -1,6 +1,6 @@
 {% set version = "1.11.3" %}
 
-{% set variant = "openblas" %}
+{% set variant = os.environ.get('BLAS_VARIANT', 'openblas') %}
 
 package:
   name: numpy
@@ -12,11 +12,17 @@ source:
   sha256: 956afdeb9b5600e873326e410e9379684dac8f8f47ea569151a417984e7799cf
 
 build:
+  script_env:
+    - BLAS_VARIANT
+  features:
+    - blas_{{ variant }}
+
+{# OPENBLAS #}
+{% if variant == 'openblas' %}
+
   number: 200
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: true  # [win]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
@@ -30,6 +36,21 @@ requirements:
     - python
     - blas 1.1 {{ variant }}
     - openblas 0.2.19|0.2.19.*
+
+{# NOBLAS #}
+{% elif variant == 'noblas' %}
+  number: 100
+
+requirements:
+  build:
+    - cython
+    - python
+    - setuptools
+    - blas 1.0 {{ variant }}
+  run:
+    - python
+    - blas 1.0 {{ variant }}
+{% endif %}
 
 test:
   requires:
