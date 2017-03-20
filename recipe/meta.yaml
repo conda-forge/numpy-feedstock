@@ -1,4 +1,4 @@
-{% set version = "1.10.4" %}
+{% set version = "1.12.1" %}
 
 {% set variant = "openblas" %}
 
@@ -8,22 +8,11 @@ package:
 
 source:
   fn: numpy-{{ version }}.tar.gz
-  url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
-  md5: aed294de0aa1ac7bd3f9745f4f1968ad
-  patches:
-    # Adds a patch to workaround a known test failure on Linux.
-    # This patch comes from an accepted PR to the 1.10.x maintenance
-    # branch. However, it is unclear whether there will be a 1.10.5
-    # release. If there is, this can be dropped.
-    # 
-    # Link below for reference.
-    #
-    # https://github.com/numpy/numpy/pull/7657
-    #
-    - numpy_PR_7657.diff
+  url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
+  sha256: 71253c0db5df2d0a925090b0804aa1070e9c336d891217bda5701f455d8141f7
 
 build:
-  number: 205
+  number: 200
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: true  # [win]
   features:
@@ -34,6 +23,7 @@ requirements:
     - toolchain
     - cython
     - python
+    - setuptools
     - blas 1.1 {{ variant }}
     - openblas 0.2.19|0.2.19.*
   run:
@@ -54,10 +44,12 @@ about:
   home: http://numpy.scipy.org/
   license: BSD 3-Clause
   license_file: LICENSE.txt
-  summary: array processing for numbers, strings, records, and objects.
+  summary: 'Array processing for numbers, strings, records, and objects.'
 
 extra:
   recipe-maintainers:
     - jakirkham
     - msarahan
     - pelson
+    - rgommers
+    - ocefpaf

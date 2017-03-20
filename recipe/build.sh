@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# Letting NumPy set these for us.
-# This may not be the best long term strategy,
-# but it works fine to get our first build.
-unset LDFLAGS
-
 cat > site.cfg <<EOF
 [DEFAULT]
 library_dirs = $PREFIX/lib
@@ -24,4 +19,4 @@ EOF
 
 $PYTHON setup.py config
 $PYTHON setup.py build
-$PYTHON setup.py install
+$PYTHON setup.py install --single-version-externally-managed --record=record.txt
