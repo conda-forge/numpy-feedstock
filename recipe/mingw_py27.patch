@@ -1,0 +1,38 @@
+Index: numpy/distutils/mingw32ccompiler.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- numpy/distutils/mingw32ccompiler.py	(revision cfb909f35de8ad238066eb176bc408d86f15c9c8)
++++ numpy/distutils/mingw32ccompiler.py	(revision 9389e4e2506c197e9b8490024b3eb3ccf30e442d)
+@@ -254,7 +254,7 @@
+     # - in system32,
+     # - ortherwise (Sxs), I don't know how to get it.
+     stems = [sys.prefix]
+-    if sys.base_prefix != sys.prefix:
++    if hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix:
+         stems.append(sys.base_prefix)
+ 
+     sub_dirs = ['', 'lib', 'bin']
+@@ -426,7 +426,7 @@
+ 
+     # directory trees that may contain the library
+     stems = [sys.prefix]
+-    if sys.base_prefix != sys.prefix:
++    if hasattr(sys, 'base_prefix') and sys.base_prefix != sys.prefix:
+         stems.append(sys.base_prefix)
+ 
+     # possible subdirectories within those trees where it is placed
+@@ -482,7 +482,11 @@
+     if not os.path.isfile(lib_file):
+         # didn't find library file in virtualenv, try base distribution, too,
+         # and use that instead if found there
+-        base_lib = os.path.join(sys.base_prefix, 'libs', lib_name)
++        if hasattr(sys, 'base_prefix'):
++            base_lib = os.path.join(sys.base_prefix, 'libs', lib_name)
++        else:
++            base_lib = ''  # os.path.isfile('') == False
++
+         if os.path.isfile(base_lib):
+             lib_file = base_lib
+         else:

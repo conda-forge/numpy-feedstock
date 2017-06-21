@@ -10,6 +10,8 @@ source:
   fn: numpy-{{ version }}.tar.gz
   url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
   sha256: dbbaaf3e86d0d138d42c61b1243d580bd6351088f0bcf2e44a7374c4559a1845
+  patches:
+    - mingw_py27.patch
 
 build:
   number: 200
