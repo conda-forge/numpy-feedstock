@@ -1,5 +1,4 @@
-{% set version = "1.13.1" %}
-
+{% set version = "1.9.3" %}
 {% set variant = "openblas" %}
 
 package:
@@ -8,13 +7,13 @@ package:
 
 source:
   fn: numpy-{{ version }}.tar.gz
-  url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
-  sha256: cf8652b96582b282a5bb710aa4fe2300dca63bdd678a3cd7820314cb6c97ca89
+  url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
+  sha256: c3b74d3b9da4ceb11f66abd21e117da8cf584b63a0efbd01a9b7e91b693fbbd6
 
 build:
   number: 200
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: true  # [win]
+  skip: True  # [win]
   features:
     - blas_{{ variant }}
 
@@ -34,11 +33,13 @@ requirements:
 test:
   requires:
     - nose
-  commands:
-    - f2py -h
   imports:
     - numpy
     - numpy.linalg.lapack_lite
+  commands:
+    - f2py -h
+    - conda inspect linkages -p $PREFIX numpy  # [not win]
+    - conda inspect objects -p $PREFIX numpy  # [osx]
 
 about:
   home: http://numpy.scipy.org/
