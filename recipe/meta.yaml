@@ -1,5 +1,4 @@
 {% set version = "1.13.1" %}
-
 {% set variant = "openblas" %}
 
 package:
@@ -12,7 +11,7 @@ source:
   sha256: cf8652b96582b282a5bb710aa4fe2300dca63bdd678a3cd7820314cb6c97ca89
 
 build:
-  number: 200
+  number: 201
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: true  # [win]
   features:
@@ -25,17 +24,19 @@ requirements:
     - python
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
 
 test:
   requires:
     - nose
   commands:
     - f2py -h
+    - conda inspect linkages -p $PREFIX numpy  # [not win]
+    - conda inspect objects -p $PREFIX numpy  # [osx]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
