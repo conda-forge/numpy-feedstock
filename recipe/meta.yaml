@@ -33,6 +33,8 @@ test:
     - nose
   commands:
     - f2py -h
+    - conda inspect linkages -p $PREFIX numpy  # [not win]
+    - conda inspect objects -p $PREFIX numpy  # [osx]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
