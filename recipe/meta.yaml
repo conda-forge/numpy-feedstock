@@ -1,4 +1,4 @@
-{% set version = "1.13.1" %}
+{% set version = "1.8.2" %}
 {% set variant = "openblas" %}
 
 package:
@@ -6,14 +6,14 @@ package:
   version: {{ version }}
 
 source:
-  fn: numpy-{{ version }}.tar.gz
   url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
-  sha256: cf8652b96582b282a5bb710aa4fe2300dca63bdd678a3cd7820314cb6c97ca89
+  sha256: 2f38f0a4c9fc763cc573d084b42f550e178a8762d9953bb3b7fd8415fe038269
+  patches:
+    - gzip.patch
 
 build:
-  number: 201
-  # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: true  # [win]
+  number: 200
+  skip: True  # [win]
   features:
     - blas_{{ variant }}
 
@@ -22,13 +22,12 @@ requirements:
     - toolchain
     - cython
     - python
-    - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas 0.2.19|0.2.19.*
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas 0.2.19|0.2.19.*
 
 test:
   requires:
