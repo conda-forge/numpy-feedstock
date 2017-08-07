@@ -1,5 +1,4 @@
 {% set version = "1.12.1" %}
-
 {% set variant = "openblas" %}
 
 package:
@@ -7,14 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  fn: numpy-{{ version }}.tar.gz
   url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
   sha256: 71253c0db5df2d0a925090b0804aa1070e9c336d891217bda5701f455d8141f7
 
 build:
   number: 200
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: true  # [win]
+  skip: True  # [win]
   features:
     - blas_{{ variant }}
 
