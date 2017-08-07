@@ -6,7 +6,6 @@ package:
   version: {{ version }}
 
 source:
-  fn: numpy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
   sha256: c3b74d3b9da4ceb11f66abd21e117da8cf584b63a0efbd01a9b7e91b693fbbd6
 
