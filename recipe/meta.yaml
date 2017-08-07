@@ -9,6 +9,7 @@ source:
   url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
   sha256: 2f38f0a4c9fc763cc573d084b42f550e178a8762d9953bb3b7fd8415fe038269
   patches:
+    # backport https://github.com/numpy/numpy/pull/6016
     - gzip.patch
 
 build:
