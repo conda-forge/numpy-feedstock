@@ -6,14 +6,13 @@ package:
   version: {{ version }}
 
 source:
-  fn: numpy-{{ version }}.tar.gz
   url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
   sha256: f963f6a5e21438dede6b4412cf9aaa230c145038a6d234aefdd70d20152f8d53
 
 build:
-  number: 201
+  number: 202
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: True  # [win or py3k]
+  skip: True  # [win or py35 or py36]
   features:
     - blas_{{ variant }}
 
@@ -24,11 +23,11 @@ requirements:
     - python
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20  # [linux]
+    - openblas 0.2.19|0.2.19.*  # [linux]
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas >=0.2.15  # [linux]
+    - openblas 0.2.19|0.2.19.*  # [linux]
 
 test:
   requires:
