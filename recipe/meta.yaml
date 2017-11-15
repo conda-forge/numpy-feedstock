@@ -10,7 +10,7 @@ source:
   sha256: 956afdeb9b5600e873326e410e9379684dac8f8f47ea569151a417984e7799cf
 
 build:
-  number: 202
+  number: 203
   skip: True  # [win]
   features:
     - blas_{{ variant }}
@@ -22,11 +22,11 @@ requirements:
     - toolchain
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
 
 test:
   requires:
