@@ -13,7 +13,7 @@ source:
     - gzip.patch
 
 build:
-  number: 200
+  number: 201
   skip: True  # [win]
   features:
     - blas_{{ variant }}
@@ -24,11 +24,11 @@ requirements:
     - cython
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.19|0.2.19.*
+    - openblas 0.2.20|0.2.20.*
 
 test:
   requires:
