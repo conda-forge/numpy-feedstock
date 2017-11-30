@@ -1,0 +1,85 @@
+From 609f6730cb037447308f44cf79beeaa9d05b3bd2 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Sun, 5 Nov 2017 13:33:30 -0600
+Subject: [PATCH 1/3] [core:setup] disable whole program opt on win32
+
+---
+ numpy/core/setup.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index f56e705ab81..fa1d4173712 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -685,10 +685,13 @@ def get_mathlib_info(*args):
+                        join('src', 'npymath', 'npy_math_complex.c.src'),
+                        join('src', 'npymath', 'halffloat.c')
+                        ]
++    npymath_build_info = {'include_dirs' : []} # empty list required for creating npy_math_internal.h
++    if sys.platform == 'win32':
++        npymath_build_info.update({'extra_compile_args': '/GL-'})
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
+-            build_info={'include_dirs' : []})  # empty list required for creating npy_math_internal.h
++            build_info=npymath_build_info)  
+     config.add_npy_pkg_config("npymath.ini.in", "lib/npy-pkg-config",
+             subst_dict)
+     config.add_npy_pkg_config("mlib.ini.in", "lib/npy-pkg-config",
+
+From 55b6be5e5598613e3c8beb1449c040e70d027a39 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Sun, 5 Nov 2017 13:56:32 -0600
+Subject: [PATCH 2/3] [core:setup] move npymath extra_compile to kwarg
+
+---
+ numpy/core/setup.py | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index fa1d4173712..b65cdb09df1 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -685,13 +685,11 @@ def get_mathlib_info(*args):
+                        join('src', 'npymath', 'npy_math_complex.c.src'),
+                        join('src', 'npymath', 'halffloat.c')
+                        ]
+-    npymath_build_info = {'include_dirs' : []} # empty list required for creating npy_math_internal.h
+-    if sys.platform == 'win32':
+-        npymath_build_info.update({'extra_compile_args': '/GL-'})
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
+-            build_info=npymath_build_info)  
++            extra_compile_args=(['/GL-'] if sys.platform == 'win32' else []),
++            build_info={'include_dirs' : []})  # empty list required for creating npy_math_internal.h
+     config.add_npy_pkg_config("npymath.ini.in", "lib/npy-pkg-config",
+             subst_dict)
+     config.add_npy_pkg_config("mlib.ini.in", "lib/npy-pkg-config",
+
+From 94f32f9819af9d6afdb05fb8938ee5dd1c0c65cc Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Sun, 5 Nov 2017 14:06:44 -0600
+Subject: [PATCH 3/3] [core:setup] fix compile arguments name
+
+---
+ numpy/core/setup.py | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index b65cdb09df1..275fdca8702 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -688,8 +688,10 @@ def get_mathlib_info(*args):
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
+-            extra_compile_args=(['/GL-'] if sys.platform == 'win32' else []),
+-            build_info={'include_dirs' : []})  # empty list required for creating npy_math_internal.h
++            build_info={
++                'include_dirs' : [],
++                'extra_compiler_args' : (['/GL-'] if sys.platform == 'win32' else []),
++            })  # empty list required for creating npy_math_internal.h
+     config.add_npy_pkg_config("npymath.ini.in", "lib/npy-pkg-config",
+             subst_dict)
+     config.add_npy_pkg_config("mlib.ini.in", "lib/npy-pkg-config",
