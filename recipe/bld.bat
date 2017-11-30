@@ -4,11 +4,11 @@ echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
 echo.
 echo [atlas]
-echo atlas_libs = openblas
-echo libraries = openblas
+echo atlas_libs = libopenblas
+echo libraries = libopenblas
 echo.
 echo [openblas]
-echo libraries = openblas
+echo libraries = libopenblas
 echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
 ) > site.cfg
