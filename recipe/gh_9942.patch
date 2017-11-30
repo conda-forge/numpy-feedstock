@@ -1,0 +1,304 @@
+From bc9dc649157dd426202c86d41ce50091243a88b6 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Tue, 7 Nov 2017 14:15:08 -0600
+Subject: [PATCH 1/2] ENH: distutils: improve windows autoconfiguration
+
+Autoconfigure libraries and headers when conda is detected
+on the path. Also support copenblas and clapack when found.
+---
+ numpy/distutils/system_info.py | 51 +++++++++++++++++++++++++++++++++---------
+ 1 file changed, 40 insertions(+), 11 deletions(-)
+
+diff --git a/numpy/distutils/system_info.py b/numpy/distutils/system_info.py
+index 19723c29c65..bea120cf96c 100644
+--- a/numpy/distutils/system_info.py
++++ b/numpy/distutils/system_info.py
+@@ -212,13 +212,28 @@ def libpaths(paths, bits):
+     default_src_dirs = ['.']
+     default_x11_lib_dirs = []
+     default_x11_include_dirs = []
+-    vcpkg_include_dirs = [
++    _include_dirs = [
+         'include',
+         'include/suitesparse',
+     ]
+-    vcpkg_lib_dirs = [
++    _lib_dirs = [
+         'lib',
+     ]
++    
++    _include_dirs = [d.replace('/', os.sep) for d in _include_dirs]
++    _lib_dirs = [d.replace('/', os.sep) for d in _lib_dirs]
++    def add_system_root(library_root):
++        """Add a package manager root to the include directories"""
++        global default_lib_dirs
++        global default_include_dirs
++        
++        library_root = os.path.normpath(library_root)
++ 
++        default_lib_dirs.extend(
++            os.path.join(library_root, d) for d in _lib_dirs)
++        default_include_dirs.extend(
++            os.path.join(library_root, d) for d in _include_dirs)
++    
+     if sys.version_info >= (3, 3):
+         # VCpkg is the de-facto package manager on windows for C/C++
+         # libraries. If it is on the PATH, then we append its paths here.
+@@ -231,15 +246,21 @@ def libpaths(paths, bits):
+                 specifier = 'x86'
+             else:
+                 specifier = 'x64'
+-            vcpkg_root = os.path.join(
+-                vcpkg_dir, 'installed', specifier + '-windows')
+-
+-            default_lib_dirs.extend(
+-                os.path.join(
+-                    vcpkg_root, d.replace('/', os.sep)) for d in vcpkg_lib_dirs)
+-            default_include_dirs.extend(
+-                os.path.join(
+-                    vcpkg_root, d.replace('/', os.sep)) for d in vcpkg_include_dirs)
++
++            vcpkg_installed = os.path.join(vcpkg_dir, 'installed') 
++            for vcpkg_root in [
++                os.path.join(vcpkg_installed, specifier + '-windows'),
++                os.path.join(vcpkg_installed, specifier + '-windows-static'),
++            ]:
++                add_system_root(vcpkg_root)
++
++        # Conda is another popular package manager that provides libraries
++        conda = shutil.which('conda')
++        if conda:
++            conda_dir = os.path.dirname(conda)
++            add_system_root(os.path.join(conda_dir, '..', 'Library'))
++            add_system_root(os.path.join(conda_dir, 'Library'))
++                        
+ else:
+     default_lib_dirs = libpaths(['/usr/local/lib', '/opt/lib', '/usr/lib',
+                                  '/opt/local/lib', '/sw/lib'], platform_bits)
+@@ -360,6 +381,7 @@ def get_info(name, notfound_action=0):
+           'openblas': openblas_info,          # use blas_opt instead
+           # openblas with embedded lapack
+           'openblas_lapack': openblas_lapack_info, # use blas_opt instead
++          'openblas_clapack': openblas_clapack_info, # use blas_opt instead
+           'blis': blis_info,                  # use blas_opt instead
+           'lapack_mkl': lapack_mkl_info,      # use lapack_opt instead
+           'blas_mkl': blas_mkl_info,          # use blas_opt instead
+@@ -1514,6 +1536,11 @@ def calc_info(self):
+             self.set_info(**openblas_info)
+             return
+ 
++        openblas_info = get_info('openblas_clapack')
++        if openblas_info:
++            self.set_info(**openblas_info)
++            return
++
+         atlas_info = get_info('atlas_3_10_threads')
+         if not atlas_info:
+             atlas_info = get_info('atlas_3_10')
+@@ -1879,6 +1906,8 @@ def check_embedded_lapack(self, info):
+             shutil.rmtree(tmpdir)
+         return res
+ 
++class openblas_clapack_info(openblas_lapack_info):
++    _lib_names = ['openblas', 'lapack']
+ 
+ class blis_info(blas_info):
+     section = 'blis'
+
+From 3ff922786efcfbee29ae2636be8b381f5e376f69 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Tue, 7 Nov 2017 14:16:18 -0600
+Subject: [PATCH 2/2] ENH: disutils: add the flang compiler
+
+Flang is the first CRT-compatbile compiler for windows.
+It's added for Python versions with a compatible ABI.
+Future work may include adding it for other platforms.
+---
+ numpy/distutils/fcompiler/__init__.py |   4 +-
+ numpy/distutils/fcompiler/pg.py       | 118 ++++++++++++++++++++++++++++------
+ 2 files changed, 102 insertions(+), 20 deletions(-)
+
+diff --git a/numpy/distutils/fcompiler/__init__.py b/numpy/distutils/fcompiler/__init__.py
+index b087512260d..c926e737829 100644
+--- a/numpy/distutils/fcompiler/__init__.py
++++ b/numpy/distutils/fcompiler/__init__.py
+@@ -735,7 +735,7 @@ def wrap_unlinkable_objects(self, objects, output_dir, extra_dll_dir):
+ _default_compilers = (
+     # sys.platform mappings
+     ('win32', ('gnu', 'intelv', 'absoft', 'compaqv', 'intelev', 'gnu95', 'g95',
+-               'intelvem', 'intelem')),
++               'intelvem', 'intelem', 'flang')),
+     ('cygwin.*', ('gnu', 'intelv', 'absoft', 'compaqv', 'intelev', 'gnu95', 'g95')),
+     ('linux.*', ('gnu95', 'intel', 'lahey', 'pg', 'absoft', 'nag', 'vast', 'compaq',
+                  'intele', 'intelem', 'gnu', 'g95', 'pathf95', 'nagfor')),
+@@ -838,6 +838,8 @@ def get_default_fcompiler(osname=None, platform=None, requiref90=False,
+     platform."""
+     matching_compiler_types = available_fcompilers_for_platform(osname,
+                                                                 platform)
++    log.info("get_default_fcompiler: matching types: '%s'",
++             matching_compiler_types)
+     compiler_type =  _find_existing_fcompiler(matching_compiler_types,
+                                               osname=osname,
+                                               platform=platform,
+diff --git a/numpy/distutils/fcompiler/pg.py b/numpy/distutils/fcompiler/pg.py
+index 477ce3d3f81..e6c816baaf6 100644
+--- a/numpy/distutils/fcompiler/pg.py
++++ b/numpy/distutils/fcompiler/pg.py
+@@ -1,49 +1,55 @@
+ # http://www.pgroup.com
+ from __future__ import division, absolute_import, print_function
+ 
+-from numpy.distutils.fcompiler import FCompiler
++import sys
++import os
++
++from numpy.distutils.fcompiler import FCompiler, dummy_fortran_file
+ from sys import platform
++from os.path import join, dirname, normpath
++
++compilers = ['PGroupFCompiler', 'PGroupFlangCompiler']
+ 
+-compilers = ['PGroupFCompiler']
+ 
+ class PGroupFCompiler(FCompiler):
+ 
+     compiler_type = 'pg'
+     description = 'Portland Group Fortran Compiler'
+-    version_pattern =  r'\s*pg(f77|f90|hpf|fortran) (?P<version>[\d.-]+).*'
++    version_pattern = r'\s*pg(f77|f90|hpf|fortran) (?P<version>[\d.-]+).*'
+ 
+     if platform == 'darwin':
+         executables = {
+-        'version_cmd'  : ["<F77>", "-V"],
+-        'compiler_f77' : ["pgfortran", "-dynamiclib"],
+-        'compiler_fix' : ["pgfortran", "-Mfixed", "-dynamiclib"],
+-        'compiler_f90' : ["pgfortran", "-dynamiclib"],
+-        'linker_so'    : ["libtool"],
+-        'archiver'     : ["ar", "-cr"],
+-        'ranlib'       : ["ranlib"]
++            'version_cmd': ["<F77>", "-V"],
++            'compiler_f77': ["pgfortran", "-dynamiclib"],
++            'compiler_fix': ["pgfortran", "-Mfixed", "-dynamiclib"],
++            'compiler_f90': ["pgfortran", "-dynamiclib"],
++            'linker_so': ["libtool"],
++            'archiver': ["ar", "-cr"],
++            'ranlib': ["ranlib"]
+         }
+         pic_flags = ['']
+     else:
+         executables = {
+-        'version_cmd'  : ["<F77>", "-V"],
+-        'compiler_f77' : ["pgfortran"],
+-        'compiler_fix' : ["pgfortran", "-Mfixed"],
+-        'compiler_f90' : ["pgfortran"],
+-        'linker_so'    : ["pgfortran", "-shared", "-fpic"],
+-        'archiver'     : ["ar", "-cr"],
+-        'ranlib'       : ["ranlib"]
++            'version_cmd': ["<F77>", "-V"],
++            'compiler_f77': ["pgfortran"],
++            'compiler_fix': ["pgfortran", "-Mfixed"],
++            'compiler_f90': ["pgfortran"],
++            'linker_so': ["pgfortran", "-shared", "-fpic"],
++            'archiver': ["ar", "-cr"],
++            'ranlib': ["ranlib"]
+         }
+         pic_flags = ['-fpic']
+ 
+-
+     module_dir_switch = '-module '
+     module_include_switch = '-I'
+ 
+     def get_flags(self):
+         opt = ['-Minform=inform', '-Mnosecond_underscore']
+         return self.pic_flags + opt
++
+     def get_flags_opt(self):
+         return ['-fast']
++
+     def get_flags_debug(self):
+         return ['-g']
+ 
+@@ -54,8 +60,82 @@ def get_flags_linker_so(self):
+     def runtime_library_dir_option(self, dir):
+         return '-R"%s"' % dir
+ 
++
++if sys.version_info >= (3, 5):
++    import subprocess
++    import shlex
++    import functools
++
++    class PGroupFlangCompiler(FCompiler):
++        compiler_type = 'flang'
++        description = 'Portland Group Fortran LLVM Compiler'
++        version_pattern = r'\s*(flang|clang) version (?P<version>[\d.-]+).*'
++
++        ar_exe = 'lib.exe'
++        possible_executables = ['flang']
++
++        executables = {
++            'version_cmd': ["<F77>", "--version"],
++            'compiler_f77': ["flang"],
++            'compiler_fix': ["flang"],
++            'compiler_f90': ["flang"],
++            'linker_so': [None],
++            'archiver': [ar_exe, "/verbose", "/OUT:"],
++            'ranlib': None
++        }
++
++        library_switch = '/OUT:'  # No space after /OUT:!
++        module_dir_switch = '-module '  # Don't remove ending space!
++
++        def get_libraries(self):
++            opt = FCompiler.get_libraries(self)
++            opt.extend(['flang', 'flangrti', 'ompstub'])
++            return opt
++
++        @functools.lru_cache(maxsize=128)
++        def get_library_dirs(self):
++            """List of compiler library directories."""
++            opt = FCompiler.get_library_dirs(self)
++            flang_dir = dirname(self.executables['compiler_f77'][0])
++            opt.append(normpath(join(flang_dir, '..', 'lib')))
++
++            return opt
++
++        def get_flags(self):
++            return []
++
++        def get_flags_free(self):
++            return []
++
++        def get_flags_debug(self):
++            return ['-g']
++
++        def get_flags_opt(self):
++            return ['-O3']
++
++        def get_flags_arch(self):
++            return []
++
++        def runtime_library_dir_option(self, dir):
++            raise NotImplementedError
++
++else:
++    from numpy.distutils.fcompiler import CompilerNotFound
++
++    # No point in supporting on older Pythons because not ABI compatible
++    class PGroupFlangCompiler(FCompiler):
++        compiler_type = 'flang'
++        description = 'Portland Group Fortran LLVM Compiler'
++
++        def get_version(self):
++            raise CompilerNotFound('Flang unsupported on Python < 3.5')
++
++
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+     from numpy.distutils import customized_fcompiler
+-    print(customized_fcompiler(compiler='pg').get_version())
++    if 'flang' in sys.argv:
++        print(customized_fcompiler(compiler='flang').get_version())
++    else:
++        print(customized_fcompiler(compiler='pg').get_version())

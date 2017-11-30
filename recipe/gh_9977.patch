@@ -1,0 +1,367 @@
+From 1229545f8998940b8bfaf0556103e4bdf266b5e1 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Mon, 6 Nov 2017 16:22:10 -0600
+Subject: [PATCH 1/4] MAINT: distutils: trivial cleanups
+
+---
+ numpy/distutils/__init__.py               | 12 ++++++++++++
+ numpy/distutils/fcompiler/absoft.py       |  6 ++----
+ numpy/distutils/fcompiler/compaq.py       |  6 ++----
+ numpy/distutils/fcompiler/g95.py          |  5 ++---
+ numpy/distutils/fcompiler/gnu.py          | 13 ++++---------
+ numpy/distutils/fcompiler/hpux.py         |  6 ++----
+ numpy/distutils/fcompiler/ibm.py          |  5 ++---
+ numpy/distutils/fcompiler/intel.py        |  6 ++----
+ numpy/distutils/fcompiler/lahey.py        |  6 ++----
+ numpy/distutils/fcompiler/mips.py         |  6 ++----
+ numpy/distutils/fcompiler/none.py         |  5 ++---
+ numpy/distutils/fcompiler/pathf95.py      |  7 ++-----
+ numpy/distutils/fcompiler/pg.py           |  6 ++----
+ numpy/distutils/fcompiler/sun.py          |  6 ++----
+ numpy/distutils/fcompiler/vast.py         |  6 ++----
+ numpy/distutils/system_info.py            | 13 +++++--------
+ 18 files changed, 53 insertions(+), 77 deletions(-)
+
+diff --git a/numpy/distutils/__init__.py b/numpy/distutils/__init__.py
+index 602a3d1170d..0450334ffd4 100644
+--- a/numpy/distutils/__init__.py
++++ b/numpy/distutils/__init__.py
+@@ -21,3 +21,15 @@
+     test = _numpy_tester().test
+ except ImportError:
+     pass
++
++
++def customized_fcompiler(plat=None, compiler=None):
++    from numpy.distutils.fcompiler import new_fcompiler
++    c = new_fcompiler(plat=plat, compiler=compiler)
++    c.customize() 
++    return c
++
++def customized_ccompiler(plat=None, compiler=None):
++    c = ccompiler.new_compiler(plat=plat, compiler=compiler)
++    c.customize('')
++    return c
+diff --git a/numpy/distutils/fcompiler/absoft.py b/numpy/distutils/fcompiler/absoft.py
+index bde0529bea0..2c3edfe0239 100644
+--- a/numpy/distutils/fcompiler/absoft.py
++++ b/numpy/distutils/fcompiler/absoft.py
+@@ -154,7 +154,5 @@ def get_flags_opt(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='absoft')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='absoft').get_version())
+diff --git a/numpy/distutils/fcompiler/compaq.py b/numpy/distutils/fcompiler/compaq.py
+index 1510ca9d890..07d50270697 100644
+--- a/numpy/distutils/fcompiler/compaq.py
++++ b/numpy/distutils/fcompiler/compaq.py
+@@ -122,7 +122,5 @@ def get_flags_debug(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='compaq')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='compaq').get_version())
+diff --git a/numpy/distutils/fcompiler/g95.py b/numpy/distutils/fcompiler/g95.py
+index 26f73b530e8..e7c659b332c 100644
+--- a/numpy/distutils/fcompiler/g95.py
++++ b/numpy/distutils/fcompiler/g95.py
+@@ -39,7 +39,6 @@ def get_flags_debug(self):
+ 
+ if __name__ == '__main__':
+     from distutils import log
++    from numpy.distutils import customized_fcompiler
+     log.set_verbosity(2)
+-    compiler = G95FCompiler()
+-    compiler.customize()
+-    print(compiler.get_version())
++    print(customized_fcompiler('g95').get_version())
+diff --git a/numpy/distutils/fcompiler/gnu.py b/numpy/distutils/fcompiler/gnu.py
+index 10c60dc6fec..ccd73ad5879 100644
+--- a/numpy/distutils/fcompiler/gnu.py
++++ b/numpy/distutils/fcompiler/gnu.py
+@@ -504,16 +504,11 @@ def _can_target(cmd, arch):
+ 
+ if __name__ == '__main__':
+     from distutils import log
++    from numpy.distutils import customized_fcompiler
+     log.set_verbosity(2)
+ 
+-    compiler = GnuFCompiler()
+-    compiler.customize()
+-    print(compiler.get_version())
+-
++    print(customized_fcompiler('gnu').get_version())
+     try:
+-        compiler = Gnu95FCompiler()
+-        compiler.customize()
+-        print(compiler.get_version())
++        print(customized_fcompiler('g95').get_version())
+     except Exception:
+-        msg = get_exception()
+-        print(msg)
++        print(get_exception())
+diff --git a/numpy/distutils/fcompiler/hpux.py b/numpy/distutils/fcompiler/hpux.py
+index 9004961e1de..51bad548a12 100644
+--- a/numpy/distutils/fcompiler/hpux.py
++++ b/numpy/distutils/fcompiler/hpux.py
+@@ -39,7 +39,5 @@ def get_version(self, force=0, ok_status=[256, 0, 1]):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(10)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='hpux')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='hpux').get_version())
+diff --git a/numpy/distutils/fcompiler/ibm.py b/numpy/distutils/fcompiler/ibm.py
+index 388ec99b160..d0c2202d4d5 100644
+--- a/numpy/distutils/fcompiler/ibm.py
++++ b/numpy/distutils/fcompiler/ibm.py
+@@ -90,7 +90,6 @@ def get_flags_opt(self):
+         return ['-O3']
+ 
+ if __name__ == '__main__':
++    from numpy.distutils import customized_fcompiler
+     log.set_verbosity(2)
+-    compiler = IBMFCompiler()
+-    compiler.customize()
+-    print(compiler.get_version())
++    print(customized_fcompiler(compiler='ibm').get_version())
+diff --git a/numpy/distutils/fcompiler/intel.py b/numpy/distutils/fcompiler/intel.py
+index e3b922edcdd..217eac8fbea 100644
+--- a/numpy/distutils/fcompiler/intel.py
++++ b/numpy/distutils/fcompiler/intel.py
+@@ -215,7 +215,5 @@ def get_flags_arch(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='intel')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='intel').get_version())
+diff --git a/numpy/distutils/fcompiler/lahey.py b/numpy/distutils/fcompiler/lahey.py
+index 7a33b4b63ce..1beb662f4e9 100644
+--- a/numpy/distutils/fcompiler/lahey.py
++++ b/numpy/distutils/fcompiler/lahey.py
+@@ -43,7 +43,5 @@ def get_libraries(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='lahey')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='lahey').get_version())
+diff --git a/numpy/distutils/fcompiler/mips.py b/numpy/distutils/fcompiler/mips.py
+index 6a8d2309922..da337b24a3f 100644
+--- a/numpy/distutils/fcompiler/mips.py
++++ b/numpy/distutils/fcompiler/mips.py
+@@ -52,7 +52,5 @@ def get_flags_arch_f90(self):
+         return r
+ 
+ if __name__ == '__main__':
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='mips')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='mips').get_version())
+diff --git a/numpy/distutils/fcompiler/none.py b/numpy/distutils/fcompiler/none.py
+index 6f602d734d5..bdeea1560e9 100644
+--- a/numpy/distutils/fcompiler/none.py
++++ b/numpy/distutils/fcompiler/none.py
+@@ -1,6 +1,7 @@
+ from __future__ import division, absolute_import, print_function
+ 
+ from numpy.distutils.fcompiler import FCompiler
++from numpy.distutils import customized_fcompiler
+ 
+ compilers = ['NoneFCompiler']
+ 
+@@ -26,6 +27,4 @@ def find_executables(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    compiler = NoneFCompiler()
+-    compiler.customize()
+-    print(compiler.get_version())
++    print(customized_fcompiler(compiler='none').get_version())
+diff --git a/numpy/distutils/fcompiler/pathf95.py b/numpy/distutils/fcompiler/pathf95.py
+index 1902bbc242c..5de86f63aee 100644
+--- a/numpy/distutils/fcompiler/pathf95.py
++++ b/numpy/distutils/fcompiler/pathf95.py
+@@ -31,8 +31,5 @@ def get_flags_debug(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    #compiler = PathScaleFCompiler()
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='pathf95')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='pathf95').get_version())
+diff --git a/numpy/distutils/fcompiler/pg.py b/numpy/distutils/fcompiler/pg.py
+index ee357c6d089..477ce3d3f81 100644
+--- a/numpy/distutils/fcompiler/pg.py
++++ b/numpy/distutils/fcompiler/pg.py
+@@ -57,7 +57,5 @@ def runtime_library_dir_option(self, dir):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='pg')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='pg').get_version())
+diff --git a/numpy/distutils/fcompiler/sun.py b/numpy/distutils/fcompiler/sun.py
+index 76ce1cabc61..d477d33087b 100644
+--- a/numpy/distutils/fcompiler/sun.py
++++ b/numpy/distutils/fcompiler/sun.py
+@@ -49,7 +49,5 @@ def runtime_library_dir_option(self, dir):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='sun')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='sun').get_version())
+diff --git a/numpy/distutils/fcompiler/vast.py b/numpy/distutils/fcompiler/vast.py
+index df3469dff5b..adc1591bde9 100644
+--- a/numpy/distutils/fcompiler/vast.py
++++ b/numpy/distutils/fcompiler/vast.py
+@@ -50,7 +50,5 @@ def get_flags_arch(self):
+ if __name__ == '__main__':
+     from distutils import log
+     log.set_verbosity(2)
+-    from numpy.distutils.fcompiler import new_fcompiler
+-    compiler = new_fcompiler(compiler='vast')
+-    compiler.customize()
+-    print(compiler.get_version())
++    from numpy.distutils import customized_fcompiler
++    print(customized_fcompiler(compiler='vast').get_version())
+From 5de0cfd610a543b8483b5fe2d54d000ec4c19bd6 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Mon, 6 Nov 2017 16:24:01 -0600
+Subject: [PATCH 2/4] BUG: core: fix setup handling
+
+Check the compiler directly rather than platform
+for determining compiler arguments.
+---
+ numpy/core/setup.py | 10 ++++++----
+ 1 file changed, 6 insertions(+), 4 deletions(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index b87070d77ed..25efebad79b 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -7,7 +7,7 @@
+ import sysconfig
+ import warnings
+ from os.path import join
+-from numpy.distutils import log
++from numpy.distutils import log, customized_ccompiler
+ from distutils.dep_util import newer
+ from distutils.sysconfig import get_config_var
+ from numpy._build_utils.apple_accelerate import (
+@@ -685,13 +685,15 @@ def get_mathlib_info(*args):
+                        join('src', 'npymath', 'npy_math_complex.c.src'),
+                        join('src', 'npymath', 'halffloat.c')
+                        ]
++    
++    is_msvc = customized_ccompiler().compiler_type == 'msvc'
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
+             build_info={
+-                'include_dirs' : [],
+-                'extra_compiler_args' : (['/GL-'] if sys.platform == 'win32' else []),
+-            })  # empty list required for creating npy_math_internal.h
++                'include_dirs' : [],  # empty list required for creating npy_math_internal.h
++                'extra_compiler_args' : (['/GL-'] if is_msvc else []),
++            })
+     config.add_npy_pkg_config("npymath.ini.in", "lib/npy-pkg-config",
+             subst_dict)
+     config.add_npy_pkg_config("mlib.ini.in", "lib/npy-pkg-config",
+
+From 41bae1ed7fa47213b45abacdf7ed19abdb58c7b3 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 8 Nov 2017 17:03:37 -0600
+Subject: [PATCH 3/4] BUG: distutils: kill npymath LTCG on clang, intel
+
+Disable link-time code generation for intel and clang compilers
+if the platform is win32.
+---
+ numpy/core/setup.py | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index 25efebad79b..b3013d29985 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -686,7 +686,10 @@ def get_mathlib_info(*args):
+                        join('src', 'npymath', 'halffloat.c')
+                        ]
+     
+-    is_msvc = customized_ccompiler().compiler_type == 'msvc'
++    compiler_type = customized_ccompiler().compiler_type
++    is_msvc = compiler_type == 'msvc'
++    is_msvc = is_msvc or (sys.platform == 'win32' and compiler_type in ('clang', 'intel'))
++
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
+
+From 2a26477c67bf319428ddcb78a5b6a8777754b845 Mon Sep 17 00:00:00 2001
+From: xoviat <xoviat@users.noreply.github.com>
+Date: Wed, 8 Nov 2017 18:58:58 -0600
+Subject: [PATCH 4/4] BUG: core: check platform.system for npymath
+
+---
+ numpy/core/setup.py | 9 ++++-----
+ 1 file changed, 4 insertions(+), 5 deletions(-)
+
+diff --git a/numpy/core/setup.py b/numpy/core/setup.py
+index b3013d29985..df2d41aa159 100644
+--- a/numpy/core/setup.py
++++ b/numpy/core/setup.py
+@@ -6,8 +6,9 @@
+ import copy
+ import sysconfig
+ import warnings
++import platform
+ from os.path import join
+-from numpy.distutils import log, customized_ccompiler
++from numpy.distutils import log
+ from distutils.dep_util import newer
+ from distutils.sysconfig import get_config_var
+ from numpy._build_utils.apple_accelerate import (
+@@ -686,10 +687,8 @@ def get_mathlib_info(*args):
+                        join('src', 'npymath', 'halffloat.c')
+                        ]
+     
+-    compiler_type = customized_ccompiler().compiler_type
+-    is_msvc = compiler_type == 'msvc'
+-    is_msvc = is_msvc or (sys.platform == 'win32' and compiler_type in ('clang', 'intel'))
+-
++    # Must be true for CRT compilers but not MinGW/cygwin. See gh-9977.
++    is_msvc = platform.system() == 'Windows'
+     config.add_installed_library('npymath',
+             sources=npymath_sources + [get_mathlib_info],
+             install_dir='lib',
