@@ -1,4 +1,4 @@
-{% set version = "1.14.0" %}
+{% set version = "1.14.1" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: c45d99134bb07600e916537c51c22e87f9e0c44b05d71018ab4907e195f007ce
+  sha256: 8708a775be9a9a457b80a49193c57bd9d51a8a195ed1f1c4b8e89eaf3aa646ee
 
 build:
   number: 200
@@ -33,8 +33,8 @@ test:
     - nose
   commands:
     - f2py -h
-    - conda inspect linkages -p $PREFIX numpy  # [not win]
-    - conda inspect objects -p $PREFIX numpy  # [osx]
+    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
+    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
