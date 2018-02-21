@@ -17,6 +17,6 @@ include_dirs = $PREFIX/include
 EOF
 
 
-$PYTHON setup.py config
-$PYTHON setup.py build
-$PYTHON setup.py install --single-version-externally-managed --record=record.txt
+# $PYTHON setup.py config
+# $PYTHON setup.py build
+$PYTHON -m pip install --no-deps --ignore-installed .
