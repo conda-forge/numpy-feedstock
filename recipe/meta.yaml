@@ -10,7 +10,7 @@ source:
   sha256: ddbcda194f49e0cf0663fa8131cb9d7a3b876d14dea0047d3c5fdfaf20adbb40
 
 build:
-  number: 201
+  number: 200
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
