@@ -44,6 +44,8 @@ about:
   license: BSD 3-Clause
   license_file: LICENSE.txt
   summary: 'Array processing for numbers, strings, records, and objects.'
+  doc_url: https://docs.scipy.org/doc/numpy/reference/
+  dev_url: https://github.com/numpy/numpy
 
 extra:
   recipe-maintainers:
