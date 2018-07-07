@@ -1,0 +1,19 @@
+diff --git a/numpy/distutils/environment.py b/numpy/distutils/environment.py
+index 3798e16..25569d4 100644
+--- a/numpy/distutils/environment.py
++++ b/numpy/distutils/environment.py
+@@ -52,7 +52,13 @@ class EnvironmentConfig(object):
+         hook, envvar, confvar, convert = conf_desc
+         var = self._hook_handler(name, hook)
+         if envvar is not None:
+-            var = os.environ.get(envvar, var)
++            if os.environ.get('CONDA_BUILD') and envvar in ['LDFLAGS', 'LDSHARED']:
++                try:
++                    var = ' '.join(var + [os.environ.get(envvar, var)])
++                except TypeError:
++                    var = ' '.join([var] + [os.environ.get(envvar, var)])
++            else:
++                var = os.environ.get(envvar, var)
+         if confvar is not None and self._conf:
+             var = self._conf.get(confvar, (None, var))[1]
+         if convert is not None:
