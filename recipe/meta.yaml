@@ -1,5 +1,5 @@
 {% set version = "1.14.5" %}
-{% set build_number = 0 %}
+{% set build_number = 1 %}
 
 {% set variant = "openblas" %}
 {% set build_number = build_number + 200 %}
@@ -11,6 +11,8 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: 1b4a02758fb68a65ea986d808867f1d6383219c234aef553a8741818e795b529
+  patches:
+    - numpy_distutils_ldflags.diff
 
 build:
   number: {{ build_number }}
