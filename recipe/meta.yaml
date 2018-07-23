@@ -38,7 +38,7 @@ requirements:
 
 test:
   requires:
-    - nose
+    - pytest
   commands:
     - f2py -h
     - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
