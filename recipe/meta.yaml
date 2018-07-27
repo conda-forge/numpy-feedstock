@@ -12,24 +12,25 @@ source:
     - numpy_distutils_ldflags.diff
 
 build:
-  number: 203
+  number: 204
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+  host:
     - cython
     - python
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
 
 test:
   requires:
@@ -39,8 +40,6 @@ test:
     - numpy.linalg.lapack_lite
   commands:
     - f2py -h
-    - conda inspect linkages -p $PREFIX numpy  # [not win]
-    - conda inspect objects -p $PREFIX numpy  # [osx]
 
 about:
   home: http://numpy.scipy.org/
@@ -55,3 +54,4 @@ extra:
     - pelson
     - rgommers
     - ocefpaf
+    - mvanniekerk
