@@ -12,8 +12,10 @@ source:
     - 11525.patch
 
 build:
-  number: 204
+  number: 205
   skip: True  # [win]
+  features:
+    - blas_{{ variant }}
 
 requirements:
   build:
