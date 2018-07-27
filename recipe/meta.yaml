@@ -12,9 +12,11 @@ source:
     - 11525.patch
 
 build:
-  number: 204
+  number: 205
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
+  features:
+    - blas_{{ variant }}
 
 requirements:
   build:
@@ -54,4 +56,4 @@ extra:
     - pelson
     - rgommers
     - ocefpaf
-    - mvanniekerk
+    - mariusvniekerk
