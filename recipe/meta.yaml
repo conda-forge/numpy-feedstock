@@ -8,33 +8,35 @@ package:
 source:
   url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
   sha256: 956afdeb9b5600e873326e410e9379684dac8f8f47ea569151a417984e7799cf
+  patches:
+    - 11525.patch
 
 build:
-  number: 203
+  number: 204
   skip: True  # [win]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
+  host:
     - python
     - cython
     - toolchain
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
 
 test:
   requires:
     - nose
   commands:
     - f2py -h
-    - conda inspect linkages -p $PREFIX numpy  # [not win]
-    - conda inspect objects -p $PREFIX numpy  # [osx]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
@@ -52,3 +54,4 @@ extra:
     - pelson
     - rgommers
     - ocefpaf
+    - mariusvniekerk

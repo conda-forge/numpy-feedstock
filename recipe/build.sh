@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mv numpy/distutils/environment.py numpy/distutils/fcompiler/environment.py
+
 cat > site.cfg <<EOF
 [DEFAULT]
 library_dirs = $PREFIX/lib
