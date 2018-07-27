@@ -1,53 +1,41 @@
-diff --git a/numpy/distutils/environment.py b/numpy/distutils/environment.py
-index 3798e16..01b5f9b 100644
---- a/numpy/distutils/environment.py
-+++ b/numpy/distutils/environment.py
-@@ -14,7 +14,7 @@ class EnvironmentConfig(object):
- 
-     def dump_variable(self, name):
-         conf_desc = self._conf_keys[name]
--        hook, envvar, confvar, convert = conf_desc
-+        hook, envvar, confvar, convert, append = conf_desc
-         if not convert:
-             convert = lambda x : x
-         print('%s.%s:' % (self._distutils_section, name))
-@@ -49,10 +49,20 @@ class EnvironmentConfig(object):
-         return var
- 
-     def _get_var(self, name, conf_desc):
--        hook, envvar, confvar, convert = conf_desc
-+        hook, envvar, confvar, convert, append = conf_desc
-         var = self._hook_handler(name, hook)
-         if envvar is not None:
--            var = os.environ.get(envvar, var)
-+            envvar_contents = os.environ.get(envvar)
-+            if envvar_contents is not None:
-+                if append and os.environ.get('NPY_DISTUTILS_APPEND_FLAGS', '1') == '1':
-+                    if var is None:
-+                        var = ''
-+                    try:
-+                        var = ' '.join(var + [envvar_contents])
-+                    except TypeError:
-+                        var = ' '.join([var] + [envvar_contents])
-+                else:
-+                    var = envvar_contents
-         if confvar is not None and self._conf:
-             var = self._conf.get(confvar, (None, var))[1]
-         if convert is not None:
+From edcca034e19819e12fee7013d6546f527f5458e4 Mon Sep 17 00:00:00 2001
+From: Isuru Fernando <isuruf@gmail.com>
+Date: Sat, 7 Jul 2018 10:18:45 -0600
+Subject: [PATCH] Append *FLAGS instead of overriding
+
+---
+ numpy/distutils/fcompiler/__init__.py          | 63 +++++++++++++-------------
+ numpy/distutils/{ => fcompiler}/environment.py | 11 +++--
+ 2 files changed, 40 insertions(+), 34 deletions(-)
+ rename numpy/distutils/{ => fcompiler}/environment.py (83%)
+
 diff --git a/numpy/distutils/fcompiler/__init__.py b/numpy/distutils/fcompiler/__init__.py
-index c926e73..1a3559f 100644
+index 0b1b1ee6d..2aeda200c 100644
 --- a/numpy/distutils/fcompiler/__init__.py
 +++ b/numpy/distutils/fcompiler/__init__.py
-@@ -91,7 +91,7 @@ class FCompiler(CCompiler):
+@@ -39,10 +39,11 @@ from numpy.distutils.ccompiler import CCompiler, gen_lib_options
+ from numpy.distutils import log
+ from numpy.distutils.misc_util import is_string, all_strings, is_sequence, \
+     make_temp_file, get_shared_lib_extension
+-from numpy.distutils.environment import EnvironmentConfig
+ from numpy.distutils.exec_command import find_executable
+ from numpy.distutils.compat import get_exception
+ 
++from .environment import EnvironmentConfig
++
+ __metaclass__ = type
+ 
+ class CompilerNotFound(Exception):
+@@ -95,7 +96,7 @@ class FCompiler(CCompiler):
  
      # These are the environment variables and distutils keys used.
-     # Each configuration description is
+     # Each configuration descripition is
 -    # (<hook name>, <environment variable>, <key in distutils.cfg>, <convert>)
 +    # (<hook name>, <environment variable>, <key in distutils.cfg>, <convert>, <append>)
      # The hook names are handled by the self._environment_hook method.
      #  - names starting with 'self.' call methods in this class
      #  - names starting with 'exe.' return the key in the executables dict
-@@ -101,43 +101,43 @@ class FCompiler(CCompiler):
+@@ -105,43 +106,43 @@ class FCompiler(CCompiler):
  
      distutils_vars = EnvironmentConfig(
          distutils_section='config_fc',
@@ -75,7 +63,7 @@ index c926e73..1a3559f 100644
 +        compiler_f90 = ('exe.compiler_f90', 'F90', 'f90exec', None, False),
 +        compiler_fix = ('exe.compiler_fix', 'F90', 'f90exec', None, False),
 +        version_cmd = ('exe.version_cmd', None, None, None, False),
-+        linker_so = ('exe.linker_so', 'LDSHARED', 'ldshared', None, True),
++        linker_so = ('exe.linker_so', 'LDSHARED', 'ldshared', None, False),
 +        linker_exe = ('exe.linker_exe', 'LD', 'ld', None, False),
 +        archiver = (None, 'AR', 'ar', None, False),
 +        ranlib = (None, 'RANLIB', 'ranlib', None, False),
@@ -120,3 +108,40 @@ index c926e73..1a3559f 100644
      )
  
      language_map = {'.f': 'f77',
+diff --git a/numpy/distutils/environment.py b/numpy/distutils/fcompiler/environment.py
+similarity index 83%
+rename from numpy/distutils/environment.py
+rename to numpy/distutils/fcompiler/environment.py
+index 3798e16f5..489784580 100644
+--- a/numpy/distutils/environment.py
++++ b/numpy/distutils/fcompiler/environment.py
+@@ -14,7 +14,7 @@ class EnvironmentConfig(object):
+ 
+     def dump_variable(self, name):
+         conf_desc = self._conf_keys[name]
+-        hook, envvar, confvar, convert = conf_desc
++        hook, envvar, confvar, convert, append = conf_desc
+         if not convert:
+             convert = lambda x : x
+         print('%s.%s:' % (self._distutils_section, name))
+@@ -49,10 +49,15 @@ class EnvironmentConfig(object):
+         return var
+ 
+     def _get_var(self, name, conf_desc):
+-        hook, envvar, confvar, convert = conf_desc
++        hook, envvar, confvar, convert, append = conf_desc
+         var = self._hook_handler(name, hook)
+         if envvar is not None:
+-            var = os.environ.get(envvar, var)
++            envvar_contents = os.environ.get(envvar)
++            if envvar_contents is not None:
++                if var and append and os.environ.get('NPY_DISTUTILS_APPEND_FLAGS', '0') == '1':
++                    var = var + [envvar_contents]
++                else:
++                    var = envvar_contents
+         if confvar is not None and self._conf:
+             var = self._conf.get(confvar, (None, var))[1]
+         if convert is not None:
+-- 
+2.14.1
+
