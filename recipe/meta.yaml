@@ -1,8 +1,5 @@
-{% set version = "1.14.5" %}
-{% set build_number = 1 %}
-
+{% set version = "1.15.0" %}
 {% set variant = "openblas" %}
-{% set build_number = build_number + 200 %}
 
 package:
   name: numpy
@@ -10,21 +7,21 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 1b4a02758fb68a65ea986d808867f1d6383219c234aef553a8741818e795b529
+  sha256: 259934a941663e93fdd5d28ce3f6aa2a81ce7dda85c395dd07b1f1edff2e0236
   patches:
     - numpy_distutils_ldflags.diff
 
 build:
-  number: {{ build_number }}
+  number: 200
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
 
 requirements:
   build:
-    - {{ compiler('fortran') }}
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
+    - {{ compiler('fortran') }}
   host:
     - python
     - pip
@@ -38,11 +35,9 @@ requirements:
 
 test:
   requires:
-    - nose
+    - pytest
   commands:
     - f2py -h
-    - conda inspect linkages -p $PREFIX $PKG_NAME  # [not win]
-    - conda inspect objects -p $PREFIX $PKG_NAME  # [osx]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
