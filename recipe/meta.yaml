@@ -60,7 +60,7 @@ about:
     NumPy is the fundamental package needed for scientific computing with Python.
   doc_url: https://docs.scipy.org/doc/numpy-1.9.0/reference/
   dev_url: https://github.com/numpy/numpy
-  dev_source_url: https://github.com/numpy/numpy/tree/master/doc
+  doc_source_url: https://github.com/numpy/numpy/tree/master/doc
 
 extra:
   recipe-maintainers:
