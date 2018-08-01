@@ -6,13 +6,21 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/n/numpy/numpy-{{ version }}.tar.gz
-  sha256: c3b74d3b9da4ceb11f66abd21e117da8cf584b63a0efbd01a9b7e91b693fbbd6
+  url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
+  sha256: c678dc4f7f4801a25c139c1131a97d9187cf645de276e1b3c74e2eadb5b5c961
   patches:
     - 11525.patch
+    # customize gfortran executable that gets looked for to use our GFORTRAN env var
+    - gfortran_alias.patch    # [linux]
+    # fix fortran regex for ctng compilers
+    - fortran_regex.patch     # [linux]
+    # backport https://github.com/numpy/numpy/pull/7634 to support $CC
+    - correct-c-compiler-customization-in-system_info.py.patch
+    # port https://github.com/numpy/numpy/commit/e552922fe6c8854541337a10970ff1b62caffc70
+    - fix-arrayterator-back_port_e552922.patch  # [py>=35]
 
 build:
-  number: 205
+  number: 206
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
   features:
@@ -48,6 +56,11 @@ about:
   license: BSD 3-Clause
   license_file: LICENSE.txt
   summary: 'Array processing for numbers, strings, records, and objects.'
+  description: |
+    NumPy is the fundamental package needed for scientific computing with Python.
+  doc_url: https://docs.scipy.org/doc/numpy-1.9.0/reference/
+  dev_url: https://github.com/numpy/numpy
+  doc_source_url: https://github.com/numpy/numpy/tree/master/doc
 
 extra:
   recipe-maintainers:

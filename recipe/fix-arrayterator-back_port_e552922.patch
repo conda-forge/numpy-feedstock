@@ -1,0 +1,17 @@
+--- numpy-1.9.3.orig/numpy/lib/arrayterator.py	2015-09-21 14:22:25.000000000 -0300
++++ numpy-1.9.3/numpy/lib/arrayterator.py	2018-08-01 16:54:44.010392810 -0300
+@@ -182,7 +182,7 @@
+     def __iter__(self):
+         # Skip arrays with degenerate dimensions
+         if [dim for dim in self.shape if dim <= 0]:
+-            raise StopIteration
++            return
+ 
+         start = self.start[:]
+         stop = self.stop[:]
+@@ -223,4 +223,4 @@
+                     start[i] = self.start[i]
+                     start[i-1] += self.step[i-1]
+             if start[0] >= self.stop[0]:
+-                raise StopIteration
++                return

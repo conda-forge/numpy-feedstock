@@ -1,0 +1,25 @@
+From 5efe70bb8d9f5e8741b306011589766866ed44f8 Mon Sep 17 00:00:00 2001
+From: Jonathan Helmus <jjhelmus@gmail.com>
+Date: Tue, 31 Oct 2017 11:44:32 -0500
+Subject: [PATCH] correct c compiler customization in system_info.py
+
+Backport https://github.com/numpy/numpy/pull/7634
+---
+ numpy/distutils/system_info.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/numpy/distutils/system_info.py b/numpy/distutils/system_info.py
+index a050430..22bdaac 100644
+--- a/numpy/distutils/system_info.py
++++ b/numpy/distutils/system_info.py
+@@ -1672,6 +1672,7 @@ class openblas_lapack_info(openblas_info):
+     def check_embedded_lapack(self, info):
+         res = False
+         c = distutils.ccompiler.new_compiler()
++        c.customize('')
+         tmpdir = tempfile.mkdtemp()
+         s = """void zungqr();
+         int main(int argc, const char *argv[])
+-- 
+2.11.1
+
