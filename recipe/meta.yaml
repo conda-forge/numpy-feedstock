@@ -10,6 +10,8 @@ source:
   sha256: 956afdeb9b5600e873326e410e9379684dac8f8f47ea569151a417984e7799cf
   patches:
     - 11525.patch
+    # https://github.com/numpy/numpy/issues/11460
+    - backport_dce7f20.patch
 
 build:
   number: 205
@@ -48,6 +50,11 @@ about:
   license: BSD 3-Clause
   license_file: LICENSE.txt
   summary: 'Array processing for numbers, strings, records, and objects.'
+  description: |
+    NumPy is the fundamental package needed for scientific computing with Python.
+  doc_url: https://docs.scipy.org/doc/numpy-1.11.0/reference/
+  dev_url: https://github.com/numpy/numpy
+  doc_source_url: https://github.com/numpy/numpy/tree/master/doc
 
 extra:
   recipe-maintainers:
