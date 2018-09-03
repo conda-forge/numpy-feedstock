@@ -1,15 +1,17 @@
 c_compiler:
-- vs2015
+- toolchain_c
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- vs2015
+- toolchain_cxx
+docker_image:
+- condaforge/linux-anvil
 fortran_compiler:
-- flang
+- toolchain_fort
 numpy:
-- '1.14'
+- '1.9'
 openblas:
 - 0.2.20
 pin_run_as_build:
@@ -19,8 +21,4 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.5'
-zip_keys:
-- - python
-  - c_compiler
-  - cxx_compiler
+- '3.7'
