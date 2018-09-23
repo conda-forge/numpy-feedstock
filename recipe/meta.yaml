@@ -1,4 +1,4 @@
-{% set version = "1.14.5" %}
+{% set version = "1.14.6" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 1b4a02758fb68a65ea986d808867f1d6383219c234aef553a8741818e795b529
+  sha256: 61b01b87d1e76df9a1e43fff727c1e0289c4cd2bc7be9f806e97b45aed3682cc
   patches:
     - numpy_distutils_ldflags.diff
     # https://github.com/numpy/numpy/issues/11460
     - backport_dce7f20.patch
 
 build:
-  number: 202
+  number: 200
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
