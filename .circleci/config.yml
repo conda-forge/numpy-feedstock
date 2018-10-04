@@ -18,11 +18,11 @@ jobs:
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_python3.5:
+  build_linux_python3.6:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_python3.5"
+      - CONFIG: "linux_python3.6"
     steps:
       - checkout
       - run:
@@ -35,11 +35,11 @@ jobs:
       - run:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: ./.circleci/run_docker_build.sh
-  build_linux_python3.6:
+  build_linux_python3.7:
     working_directory: ~/test
     machine: true
     environment:
-      - CONFIG: "linux_python3.6"
+      - CONFIG: "linux_python3.7"
     steps:
       - checkout
       - run:
@@ -58,5 +58,5 @@ workflows:
   build_and_test:
     jobs:
       - build_linux_python2.7
-      - build_linux_python3.5
       - build_linux_python3.6
+      - build_linux_python3.7
