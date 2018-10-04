@@ -10,9 +10,11 @@ source:
   sha256: 6a1e96568332fd8974b355a422b397288e214746715a7fa6abc10b34d06bad76
   patches:
     - numpy_distutils_ldflags.diff
+    # can probably be dropped next release
+    - backport_12062.patch
 
 build:
-  number: 0
+  number: 2
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
