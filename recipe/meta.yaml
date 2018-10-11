@@ -20,7 +20,7 @@ source:
     - fix-arrayterator-back_port_e552922.patch  # [py>=35]
 
 build:
-  number: 206
+  number: 1006
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
   features:
