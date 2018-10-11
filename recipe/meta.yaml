@@ -14,7 +14,7 @@ source:
     - backport_dce7f20.patch
 
 build:
-  number: 205
+  number: 1205
   skip: True  # [win]
   features:
     - blas_{{ variant }}
