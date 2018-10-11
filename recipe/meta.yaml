@@ -18,16 +18,19 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - cython
     - python
     - setuptools
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
   run:
     - python
     - blas 1.1 {{ variant }}
-    - openblas 0.2.20|0.2.20.*
+    - openblas
 
 test:
   requires:
