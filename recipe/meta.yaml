@@ -10,7 +10,7 @@ source:
   sha256: 71253c0db5df2d0a925090b0804aa1070e9c336d891217bda5701f455d8141f7
 
 build:
-  number: 201
+  number: 1001
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
   features:
