@@ -1,0 +1,13 @@
+diff --git a/numpy/distutils/system_info.py b/numpy/distutils/system_info.py
+index a050430..b929762 100644
+--- a/numpy/distutils/system_info.py
++++ b/numpy/distutils/system_info.py
+@@ -1659,7 +1659,7 @@ class openblas_info(blas_info):
+         if not self.check_embedded_lapack(info):
+             return None
+ 
+-        info['language'] = 'f77'  # XXX: is it generally true?
++        info['language'] = 'c'  # XXX: is it generally true?
+         self.set_info(**info)
+ 
+ 
