@@ -22,7 +22,7 @@ source:
     - treat-openblas-as-c.patch  # [linux]
 
 build:
-  number: 1007
+  number: 1207
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
   features:
