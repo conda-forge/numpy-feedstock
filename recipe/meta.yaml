@@ -14,7 +14,7 @@ source:
     - backport_12062.patch
 
 build:
-  number: 1001
+  number: 1201
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
