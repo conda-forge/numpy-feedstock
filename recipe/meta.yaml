@@ -10,8 +10,6 @@ source:
   sha256: 4656ea0d66a3724fd88aafa39a0c5cef216d1257a71b40534fe589abd46ba77b
   patches:
     - numpy_distutils_ldflags.diff
-    # can probably be dropped next release
-    - backport_12062.patch
 
 build:
   number: 1000
