@@ -1,4 +1,4 @@
-{% set version = "1.15.3" %}
+{% set version = "1.15.4" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 4656ea0d66a3724fd88aafa39a0c5cef216d1257a71b40534fe589abd46ba77b
+  sha256: 766e09248298e3ad4ae4a805159f358610bbe7dcc7b4a14e5df2128c05655b80
   patches:
     - numpy_distutils_ldflags.diff
 
