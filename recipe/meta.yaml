@@ -18,7 +18,10 @@ build:
 
 requirements:
   build:
-    - toolchain
+    - {{ compiler('fortran') }}
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+  host:
     - cython
     - python
     - setuptools
