@@ -1,4 +1,4 @@
-{% set version = "1.15.4" %}
+{% set version = "1.16.0" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,15 +7,15 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 766e09248298e3ad4ae4a805159f358610bbe7dcc7b4a14e5df2128c05655b80
-  patches:
-    - numpy_distutils_ldflags.diff
+  sha256: 9b98898687b5dd05c4ac7bcf7e8669a50dd2bb19591b772e045e5806c23e0ca4
 
 build:
   number: 1000
   skip: true  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
+  entry_points:
+    - f2py = numpy.f2py.f2py2e:main  # [win]
 
 requirements:
   build:
