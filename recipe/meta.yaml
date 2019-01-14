@@ -8,8 +8,6 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: 9b98898687b5dd05c4ac7bcf7e8669a50dd2bb19591b772e045e5806c23e0ca4
-  patches:
-    - numpy_distutils_ldflags.diff
 
 build:
   number: 1000
