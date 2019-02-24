@@ -8,6 +8,11 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: 4c6b4eef790528bebb7ec9590d74cc193868940fe68e4109a91c196df72d8094
+  patches:
+    # Apparently there is are a few bugs in terms of the reported
+    # precision for long doubles on aarch64.
+    - skip_test_longdouble.patch  # [aarch64]
+    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
   number: 1201
