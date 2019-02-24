@@ -12,6 +12,10 @@ source:
     - 11525.patch
     # https://github.com/numpy/numpy/issues/11460
     - backport_dce7f20.patch
+    # Apparently there is are a few bugs in terms of the reported
+    # precision for long doubles on aarch64.
+    - skip_test_longdouble.patch  # [aarch64]
+    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
   number: 1207
