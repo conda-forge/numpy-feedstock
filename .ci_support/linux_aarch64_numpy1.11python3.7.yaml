@@ -1,0 +1,30 @@
+BUILD:
+- aarch64-conda_cos7-linux-gnu
+c_compiler:
+- gcc
+cdt_arch:
+- aarch64
+cdt_name:
+- cos7
+channel_sources:
+- conda-forge,c4aarch64,defaults
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- gxx
+docker_image:
+- condaforge/linux-anvil-aarch64
+fortran_compiler:
+- gfortran
+numpy:
+- '1.11'
+openblas:
+- 0.3.5
+pin_run_as_build:
+  openblas:
+    max_pin: x.x.x
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- '3.7'
