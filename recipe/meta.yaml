@@ -10,6 +10,10 @@ source:
   sha256: 61b01b87d1e76df9a1e43fff727c1e0289c4cd2bc7be9f806e97b45aed3682cc
   patches:
     - numpy_distutils_ldflags.diff
+    # Apparently there is are a few bugs in terms of the reported
+    # precision for long doubles on aarch64.
+    - skip_test_longdouble.patch  # [aarch64]
+    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
   number: 1201
