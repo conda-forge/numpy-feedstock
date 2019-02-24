@@ -20,6 +20,10 @@ source:
     - fix-arrayterator-back_port_e552922.patch  # [py>=35]
     # fix needed to compile downstream packages on Linux with newer openblas
     - treat-openblas-as-c.patch  # [linux]
+    # Apparently there is are a few bugs in terms of the reported
+    # precision for long doubles on aarch64.
+    - skip_test_longdouble.patch  # [aarch64]
+    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
   number: 1207

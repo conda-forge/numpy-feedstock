@@ -1,0 +1,13 @@
+diff --git a/numpy/core/tests/test_umath.py b/numpy/core/tests/test_umath.py
+index da52e0dde..5945685ec 100644
+--- a/numpy/core/tests/test_umath.py
++++ b/numpy/core/tests/test_umath.py
+@@ -1797,7 +1797,7 @@ class TestComplexFunctions(object):
+         for dtype in [np.complex64, np.complex_]:
+             yield self.check_loss_of_precision, dtype
+ 
+-    @dec.knownfailureif(is_longdouble_finfo_bogus(), "Bogus long double finfo")
++    @dec.knownfailureif(True, "Bogus long double finfo")
+     def test_loss_of_precision_longcomplex(self):
+         self.check_loss_of_precision(np.longcomplex)
+ 
