@@ -15,7 +15,7 @@ source:
     - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
-  number: 1201
+  number: 1202
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win or py37]
   features:
