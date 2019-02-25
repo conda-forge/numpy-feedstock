@@ -14,8 +14,8 @@ source:
     - backport_dce7f20.patch
 
 build:
-  number: 1206
-  skip: True  # [win and py2k]
+  number: 1205
+  skip: True  # [win32 or (win and py27)]
   features:
     - blas_{{ variant }}
 
