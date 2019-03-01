@@ -32,10 +32,13 @@ requirements:
     - python
 
 test:
+  source_files:
+    - runtests.py  
   requires:
     - nose
   commands:
     - f2py -h
+    - python runtests.py --no-build
   imports:
     - numpy
     - numpy.linalg.lapack_lite
