@@ -13,6 +13,7 @@ source:
     # precision for long doubles on aarch64.
     - skip_test_longdouble.patch  # [aarch64]
     - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
+    - skip_NaT_tests_aarch64.patch  # [aarch64]
 
 build:
   number: 202
