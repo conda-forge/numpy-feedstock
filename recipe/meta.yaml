@@ -6,12 +6,12 @@ package:
   version: {{ version }}
 
 source:
-  # url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  # sha256: 4c6b4eef790528bebb7ec9590d74cc193868940fe68e4109a91c196df72d8094
+  url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
+  sha256: 4c6b4eef790528bebb7ec9590d74cc193868940fe68e4109a91c196df72d8094
   
   # since we want to run the test suite we need some files that are not in the sdist
-  url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
-  sha256: 1db97b12ea8f2ae5a8b847505f634dcd8c670ee311057ff5412a126becca45b8
+  # url: https://github.com/numpy/numpy/archive/v{{ version }}.tar.gz
+  # sha256: 1db97b12ea8f2ae5a8b847505f634dcd8c670ee311057ff5412a126becca45b8
   patches:
     # Apparently there is are a few bugs in terms of the reported
     # precision for long doubles on aarch64.
@@ -42,13 +42,11 @@ requirements:
     - openblas
 
 test:
-  source_files:
-    - runtests.py  
   requires:
     - nose
   commands:
     - f2py -h
-    - python runtests.py --no-build
+    - python runtests_numpy.py --no-build
   imports:
     - numpy
     - numpy.linalg.lapack_lite
