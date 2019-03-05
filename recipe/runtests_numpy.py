@@ -243,7 +243,7 @@ def main(argv):
             ret = subprocess.call(cmd, cwd=os.path.join(ROOT_DIR, 'benchmarks'))
             sys.exit(ret)
 
-    test_dir = os.path.join(ROOT_DIR, 'build', 'test')
+    test_dir = ROOT_DIR
 
     if args.build_only:
         sys.exit(0)
@@ -275,27 +275,16 @@ def main(argv):
         __import__(PROJECT_MODULE)
         test = sys.modules[PROJECT_MODULE].test
 
-    # Run the tests under build/test
-    try:
-        shutil.rmtree(test_dir)
-    except OSError:
-        pass
-    try:
-        os.makedirs(test_dir)
-    except OSError:
-        pass
 
     cwd = os.getcwd()
-    try:
-        os.chdir(test_dir)
-        result = test(args.mode,
-                      verbose=args.verbose,
-                      extra_argv=extra_argv,
-                      doctests=args.doctests,
-                      raise_warnings=args.raise_warnings,
-                      coverage=args.coverage)
-    finally:
-        os.chdir(cwd)
+
+    os.chdir(test_dir)
+    result = test(args.mode,
+                  verbose=args.verbose,
+                  extra_argv=extra_argv,
+                  doctests=args.doctests,
+                  raise_warnings=args.raise_warnings,
+                  coverage=args.coverage)
 
     if result.wasSuccessful():
         sys.exit(0)
