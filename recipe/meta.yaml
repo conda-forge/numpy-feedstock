@@ -46,7 +46,8 @@ test:
     - nose
   commands:
     - f2py -h
-    - python runtests_numpy.py --no-build
+    - ls -lah
+    - python {{ RECIPE_DIR }}/runtests_numpy.py --no-build
   imports:
     - numpy
     - numpy.linalg.lapack_lite
