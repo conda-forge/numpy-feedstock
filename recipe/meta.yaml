@@ -22,7 +22,7 @@ source:
 build:
   number: 1202
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: True  # [win or py37]
+  skip: True  # [win]
   features:
     - blas_{{ variant }}
 
@@ -47,7 +47,6 @@ test:
     - nose
   commands:
     - f2py -h
-    - ls -lah
     - python {{ RECIPE_DIR }}/runtests_numpy.py --no-build
   imports:
     - numpy
