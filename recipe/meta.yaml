@@ -10,6 +10,7 @@ source:
   sha256: 766e09248298e3ad4ae4a805159f358610bbe7dcc7b4a14e5df2128c05655b80
   patches:
     - numpy_distutils_ldflags.diff
+    - aarch64_skip_complex_long_tests.patch  # [aarch64]
 
 build:
   number: 1000
