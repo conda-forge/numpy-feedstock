@@ -11,9 +11,6 @@ source:
 
 build:
   number: 0
-  skip: true  # [win32 or (win and py27)]
-  features:
-    - blas_{{ variant }}
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
@@ -26,12 +23,10 @@ requirements:
     - python
     - pip
     - cython
-    - blas 1.1 {{ variant }}
-    - openblas
+    - libblas
+    - libcblas
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
