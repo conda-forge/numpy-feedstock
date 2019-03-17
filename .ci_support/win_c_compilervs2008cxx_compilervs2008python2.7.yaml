@@ -1,26 +1,24 @@
 c_compiler:
-- gcc
-c_compiler_version:
-- '7'
+- vs2008
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- gxx
-cxx_compiler_version:
-- '7'
-docker_image:
-- condaforge/linux-anvil-comp7
+- vs2008
 libblas:
 - 3.8 *netlib
 libcblas:
 - 3.8 *netlib
 numpy:
-- '1.9'
+- '1.11'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.6'
+- '2.7'
+zip_keys:
+- - python
+  - c_compiler
+  - cxx_compiler
