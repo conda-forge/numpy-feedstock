@@ -2,6 +2,7 @@
 echo [DEFAULT]
 echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
+echo libraries = blas,cblas,lapack
 ) > site.cfg
 
 REM Let cython re-generate this file.
