@@ -2,16 +2,17 @@
 echo [DEFAULT]
 echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
-echo.
-echo [atlas]
-echo atlas_libs = openblas
-echo libraries = openblas
-echo.
-echo [openblas]
-echo libraries = openblas
-echo library_dirs = %LIBRARY_LIB%
-echo include_dirs = %LIBRARY_INC%
 ) > site.cfg
 
-python setup.py build install --single-version-externally-managed --record=record.txt
+REM Let cython re-generate this file.
+del /f numpy/random/mtrand/mtrand.c
+del /f PKG-INFO
+
+python -m pip install --no-deps --ignore-installed -v .
+if errorlevel 1 exit 1
+
+XCOPY %RECIPE_DIR%\f2py.bat %SCRIPTS% /s /e
+if errorlevel 1 exit 1
+
+del %SCRIPTS%\f2py.exe
 if errorlevel 1 exit 1
