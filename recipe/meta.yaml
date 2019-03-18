@@ -10,27 +10,18 @@ source:
   sha256: 4c6b4eef790528bebb7ec9590d74cc193868940fe68e4109a91c196df72d8094
 
 build:
-  number: 1201
-  # We lack openblas on Windows, and therefore can't build numpy there either currently.
-  skip: true  # [win]
-  features:
-    - blas_{{ variant }}
+  number: 1202
 
 requirements:
   build:
-    - {{ compiler('fortran') }}
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   host:
+    - libblas
     - cython
     - python
-    - setuptools
-    - blas 1.1 {{ variant }}
-    - openblas
+    - pip
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
