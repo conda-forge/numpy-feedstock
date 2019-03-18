@@ -14,7 +14,7 @@ source:
     - backport_dce7f20.patch
 
 build:
-  number: 1206
+  number: 1207
 
 requirements:
   build:
@@ -25,6 +25,7 @@ requirements:
     - cython
     - libblas
     - libcblas
+    - liblapack
   run:
     - python
 
