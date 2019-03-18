@@ -12,7 +12,7 @@ source:
     - numpy_distutils_ldflags.diff
 
 build:
-  number: 1001
+  number: 1002
 
 requirements:
   build:
@@ -20,6 +20,7 @@ requirements:
   host:
     - libblas
     - libcblas
+    - liblapack
     - python
     - pip
     - cython
