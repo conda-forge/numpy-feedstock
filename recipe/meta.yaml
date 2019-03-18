@@ -14,26 +14,19 @@ source:
     - backport_dce7f20.patch
 
 build:
-  number: 1205
-  skip: True  # [win]
-  features:
-    - blas_{{ variant }}
+  number: 1206
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
   host:
     - python
+    - pip
     - cython
-    - setuptools
-    - blas 1.1 {{ variant }}
-    - openblas
+    - libblas
+    - libcblas
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
