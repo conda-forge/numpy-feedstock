@@ -25,7 +25,6 @@ build:
   number: 1208
 
 requirements:
-requirements:
   build:
     - {{ compiler('c') }}
   host:
