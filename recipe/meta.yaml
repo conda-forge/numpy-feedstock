@@ -22,27 +22,20 @@ source:
     - treat-openblas-as-c.patch  # [linux]
 
 build:
-  number: 1207
-  # We lack openblas on Windows, and therefore can't build numpy there either currently.
+  number: 1208
   skip: True  # [win]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
   host:
-    - cython
     - python
-    - setuptools
-    - blas 1.1 {{ variant }}
-    - openblas
+    - pip
+    - cython
+    - libblas
+    - libcblas
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
