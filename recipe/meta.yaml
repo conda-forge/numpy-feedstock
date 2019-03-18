@@ -12,26 +12,20 @@ source:
     - numpy_distutils_ldflags.diff
 
 build:
-  number: 1200
-  skip: true  # [win32 or (win and py27)]
-  features:
-    - blas_{{ variant }}
+  number: 1201
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
   host:
+    - libblas
+    - libcblas
+    - liblapack
+    - cython
     - python
     - pip
-    - cython
-    - blas 1.1 {{ variant }}
-    - openblas
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
