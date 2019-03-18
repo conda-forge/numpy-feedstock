@@ -4,6 +4,10 @@ echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
 ) > site.cfg
 
+REM Let cython re-generate this file.
+del /f numpy/random/mtrand/mtrand.c
+del /f PKG-INFO
+
 python -m pip install --no-deps --ignore-installed -v .
 if errorlevel 1 exit 1
 

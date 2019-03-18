@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Let cython re-generate this file.
+rm -f numpy/random/mtrand/mtrand.c
+rm -f PKG-INFO
+
 cat > site.cfg <<EOF
 [DEFAULT]
 library_dirs = $PREFIX/lib
