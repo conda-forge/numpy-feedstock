@@ -10,20 +10,20 @@ source:
   sha256: 8088221e6e27da8d5907729f0bfe798f526836f22cc59ae83a0f867e67416a3e
 
 build:
-  number: 0
+  number: 1
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
   host:
     - python
     - pip
     - cython
     - libblas
     - libcblas
+    - liblapack
   run:
     - python
 
