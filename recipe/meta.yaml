@@ -22,7 +22,7 @@ source:
     - treat-openblas-as-c.patch  # [linux]
 
 build:
-  number: 1208
+  number: 1209
   skip: True  # [win]
 
 requirements:
@@ -34,6 +34,7 @@ requirements:
     - cython
     - libblas
     - libcblas
+    - liblapack
   run:
     - python
 
