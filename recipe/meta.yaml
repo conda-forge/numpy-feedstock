@@ -19,6 +19,8 @@ requirements:
     - {{ compiler('c') }}
   host:
     - libblas
+    - libcblas
+    - liblapack
     - cython
     - python
     - pip
