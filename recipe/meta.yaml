@@ -13,26 +13,20 @@ source:
     - aarch64_skip_complex_long_tests.patch  # [aarch64]
 
 build:
-  number: 1000
-  skip: true  # [win32 or (win and py27)]
-  features:
-    - blas_{{ variant }}
+  number: 1002
 
 requirements:
   build:
     - {{ compiler('c') }}
-    - {{ compiler('cxx') }}
-    - {{ compiler('fortran') }}
   host:
+    - libblas
+    - libcblas
+    - liblapack
     - python
     - pip
     - cython
-    - blas 1.1 {{ variant }}
-    - openblas
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   requires:
