@@ -16,6 +16,13 @@ Current build status
 
 
 <table><tr>
+    <td>Travis</td>
+    <td>
+      <a href="https://travis-ci.org/conda-forge/numpy-feedstock">
+        <img alt="macOS" src="https://img.shields.io/travis/conda-forge/numpy-feedstock/master.svg?label=macOS">
+      </a>
+    </td>
+  </tr><tr>
     <td>Appveyor</td>
     <td>
       <a href="https://ci.appveyor.com/project/conda-forge/numpy-feedstock/branch/master">
