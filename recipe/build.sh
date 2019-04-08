@@ -11,7 +11,7 @@ EOF
 
 # Internal compiler error with gcc 7 and -O3
 if [[ "${target_platform}" == "linux-aarch64" ]]; then
-    export CFLAGS="$CFLAGS -O2"
+    export CFLAGS="$CFLAGS -fno-tree-vectorize -O2"
     export CPPFLAGS="$CPPFLAGS -O2"
 fi
 
