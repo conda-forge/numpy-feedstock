@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -ex
+
 cat > site.cfg <<EOF
 [DEFAULT]
 libraries = blas,cblas,lapack
@@ -11,3 +13,5 @@ EOF
 export CFLAGS=-I$PREFIX/include -fdebug-prefix-map=${SRC_DIR}=/usr/local/src/conda/${PKG_NAME}-${PKG_VERSION} -fdebug-prefix-map=${PREFIX}=/usr/local/src/conda-prefix
 
 $PYTHON -m pip install --no-deps --ignore-installed -v .
+
+set +ex
