@@ -43,7 +43,7 @@ test:
     - nose
   commands:
     - f2py -h
-    - python runtests.py --no-build
+    - python runtests.py --no-build -v --verbose
   imports:
     - numpy
     - numpy.linalg.lapack_lite
