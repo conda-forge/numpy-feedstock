@@ -22,13 +22,15 @@ fortran_compiler:
 - gfortran
 fortran_compiler_version:
 - '7'
+libblas:
+- 3.8 *netlib
+libcblas:
+- 3.8 *netlib
+liblapack:
+- 3.8.0 *netlib
 numpy:
 - '1.11'
-openblas:
-- 0.3.5
 pin_run_as_build:
-  openblas:
-    max_pin: x.x.x
   python:
     min_pin: x.x
     max_pin: x.x
