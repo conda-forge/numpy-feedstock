@@ -14,7 +14,7 @@ source:
     - backport_dce7f20.patch
     # Apparently there is are a few bugs in terms of the reported
     # precision for long doubles on aarch64.
-    - skip_test_longdouble.patch  # [aarch64]
+    - skip_test_longdouble.patch  # [aarch64 or ppc64le]
     - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
 
 build:
