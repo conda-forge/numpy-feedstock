@@ -17,11 +17,9 @@ source:
     - skip_test_suppress_python37.patch  # [py==37]
 
 build:
-  number: 202
+  number: 203
   # We lack openblas on Windows, and therefore can't build numpy there either currently.
   skip: True  # [win]
-  features:
-    - blas_{{ variant }}
 
 requirements:
   build:
@@ -32,16 +30,15 @@ requirements:
     - cython
     - python
     - setuptools
-    - blas 1.1 {{ variant }}
-    - openblas
+    - libblas
+    - libcblas
+    - liblapack
   run:
     - python
-    - blas 1.1 {{ variant }}
-    - openblas
 
 test:
   source_files:
-    - runtests.py  
+    - runtests.py
   requires:
     - nose
   commands:
