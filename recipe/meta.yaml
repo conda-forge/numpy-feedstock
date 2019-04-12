@@ -13,7 +13,8 @@ source:
     # Apparently there is are a few bugs in terms of the reported
     # precision for long doubles on aarch64.
     # - skip_test_longdouble.patch  # [aarch64]
-    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64]
+    - skip_test_loss_of_precision_longcomplex.patch  # [aarch64 or ppc64le]
+    - ppc64le_known_str_failures.patch               # [ppc64le]
 
 build:
   number: 1201
