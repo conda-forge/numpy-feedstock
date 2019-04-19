@@ -35,6 +35,7 @@ test:
     - pytest-timeout
   commands:
     - f2py -h
+    - pytest --timeout=300 -v numpy
   imports:
     - numpy
     - numpy.linalg.lapack_lite
