@@ -32,6 +32,7 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-timeout
   commands:
     - f2py -h
   imports:
