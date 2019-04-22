@@ -1,0 +1,70 @@
+language: none
+
+runtime:
+    nodePool: shippable_shared_aarch64
+    # nodePool: shippable_shared_aarch32
+
+env:
+  global:
+  # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
+    - secure: bkTdATvev7sVFsP62xFV2ck215nXEtH7eWXdhzRRtbzeKquSkNhTGTCoa5FcLDvAVe36w+Sv59/3/oWNyMood8pIWjHLMC5CqqLdc4NRmyyaCKWys4CLhTTurIBPFSWUilxZW1KCKv/WHOe+zQDi2o9R9lf5/MizuwThHSQOIcqeTIn4wtPzbne5MeKSW+mRCsb+l4E/Q1oY2w/mTJ+izDWkxefstZ2t8RqOxH6H20wwNOOj/1WdeztdCOtCAl99r8Aj58odGyfUMAEyw89c5HglAEPurBQs21DZbHp10NmgSLyIbukplulRUm+cQ37loT/hFfTjPUCqLEC3lu6SPw==
+  matrix:
+    - CONFIG=linux_aarch64_python3.6
+    - CONFIG=linux_aarch64_python3.7
+
+
+build:
+  pre_ci_boot:
+    # It really doesn't like the centos image.....
+    # image_name: arm64v8/centos
+    # tag_name: 7
+
+    image_name: arm64v8/ubuntu
+    image_tag: 18.04
+    pull: True
+
+  ci:
+    # - export LANG=en_US.UTF-8
+    # - export LANGUAGE=en_US:en
+    # - export LC_ALL=en_US.UTF-8
+    # - yum install -y file libX11 ibXau libxcb libXdmcp libXext libXrender libXt mesa-libGL mesa-libGLU openssh-clients patch rsync util-linux wget which bzip2 xorg-x11-server-Xvfb curl
+    # Need to install bzip2 for conda
+    - apt-get update
+    # bzip2 is necessary for conda installers to get executed
+    # curl is necessary to download them
+    - apt-get install -y bzip2 curl locales
+
+    - locale-gen en_US en_US.UTF-8
+    - dpkg-reconfigure --frontend=noninteractive locales
+
+    # Remove binutils binaries becuase you can't install centos7 without them.
+    # Ubuntu doesn't seem to have them but this command doesn't hurt
+    - rm -f /usr/bin/{ar,addr2line,as,c++filt,dwp,elfedit,gprof,ld,ld.bfd,ld.gold,nm,objcopy,objdump,ranlib,readlef,size,strings,strip}
+
+    - curl -L -O https://github.com/Archiconda/build-tools/releases/download/0.2.1/Archiconda3-0.2.1-Linux-aarch64.sh
+    - bash Archiconda3*.sh -b -p /root/archiconda3
+    - export PATH="/root/archiconda3/bin:${PATH}"
+    - source /root/archiconda3/bin/activate root
+    - conda install conda conda-build anaconda-client
+
+    # This breaks a circular dependecy between pip and python
+    # https://github.com/ContinuumIO/anaconda-issues/issues/8695
+    # https://github.com/conda-forge/conda-forge-ci-setup-feedstock/blob/master/recipe/run_conda_forge_build_setup_linux#L11
+    - conda config --set add_pip_as_python_dependency false
+    - conda --version
+    - conda config --show
+
+    - conda build -m .ci_support/${CONFIG}.yaml .
+    - export PACKAGE_NAME=`conda build -m .ci_support/${CONFIG}.yaml . --output`
+    - if [[ "$BINSTAR_TOKEN" != "" ]]; then anaconda -t $BINSTAR_TOKEN upload $PACKAGE_NAME ; else echo "BINSTAR_TOKEN not found, package is not being uploaded" ; fi
+
+# disable email notification
+# of CI job result
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_cancel: never
+      on_pull_request: never
