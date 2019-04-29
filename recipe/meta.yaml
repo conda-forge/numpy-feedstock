@@ -12,7 +12,6 @@ source:
     - skip_test_loss_of_precision.diff  # [aarch64]
     - skip_test_mem_overlap.diff        # [aarch64]
     - skip_test_xerbla.diff             # [aarch64]
-    - skiptest_sdot_bug_8577.diff       # [aarch64]
 
 build:
   number: 0
