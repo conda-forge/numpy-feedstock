@@ -8,6 +8,10 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: adf063a3f87ab89393f5eea0eb903293b112fa0a308e8c594a75ffa585d81d4f
+  patches:
+    - skip_test_loss_of_precision.diff  # [aarch64]
+    - skip_test_mem_overlap.diff        # [aarch64]
+    - skip_test_xerbla.diff             # [aarch64]
 
 build:
   number: 0
