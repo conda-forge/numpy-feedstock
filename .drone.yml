@@ -1,12 +1,4 @@
 ---
-
-build_commands: &build_commands
-  - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
-  - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
-  - export CI=drone
-  - . /opt/conda/bin/activate
-  - echo "Done building"
-
 kind: pipeline
 name: linux_aarch64_python2.7
 
@@ -22,8 +14,15 @@ steps:
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     #BINSTAR_TOKEN: ""
-  commands: *build_commands
+  commands:
+    - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - . /opt/conda/bin/activate
+    - ./.drone/build_steps.sh
+    - echo "Done building"
 
+---
 kind: pipeline
 name: linux_aarch64_python3.6
 
@@ -39,8 +38,15 @@ steps:
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     #BINSTAR_TOKEN: ""
-  commands: *build_commands
+  commands:
+    - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - . /opt/conda/bin/activate
+    - ./.drone/build_steps.sh
+    - echo "Done building"
 
+---
 kind: pipeline
 name: linux_aarch64_python3.7
 
@@ -56,6 +62,11 @@ steps:
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     #BINSTAR_TOKEN: ""
-  commands: *build_commands
-
+  commands:
+    - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
+    - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+    - export CI=drone
+    - . /opt/conda/bin/activate
+    - ./.drone/build_steps.sh
+    - echo "Done building"
 
