@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: adf063a3f87ab89393f5eea0eb903293b112fa0a308e8c594a75ffa585d81d4f
+  patches:
+    # I think this is because conda-forge supports an older GCC than what numpy tests with
+    - skip_test_loss_of_precision.diff  # [aarch64]
 
 build:
   number: 0
@@ -31,10 +34,11 @@ requirements:
 test:
   requires:
     - pytest
-    - pytest-timeout
+    - pytest-xdist
+    - pytest-sugar
   commands:
     - f2py -h
-    - pytest --timeout=300 -v --pyargs numpy
+    - pytest -n 16 --pyargs numpy
   imports:
     - numpy
     - numpy.linalg.lapack_lite
