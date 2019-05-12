@@ -35,10 +35,10 @@ test:
   requires:
     - pytest
     - pytest-xdist
-    - pytest-sugar
   commands:
     - f2py -h
-    - pytest -n 16 --pyargs numpy
+    - pytest -n 16 --pyargs numpy  # [aarch64]
+    - pytest -n 2 --pyargs numpy   # [not aarch64]
   imports:
     - numpy
     - numpy.linalg.lapack_lite
