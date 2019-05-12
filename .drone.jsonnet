@@ -7,7 +7,7 @@ local Pipeline(name, image, platform) = {
   }
   steps: [
     {
-      name: "Build using docker",
+      name: "Install and build",
       image: image,
       environment: {
          CONFIG: name
