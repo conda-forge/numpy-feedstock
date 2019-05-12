@@ -14,4 +14,4 @@ import numpy.fft.fftpack_lite
 import numpy.linalg.lapack_lite
 import numpy.random.mtrand
 
-sys.exit(not numpy.test())
+# sys.exit(not numpy.test())

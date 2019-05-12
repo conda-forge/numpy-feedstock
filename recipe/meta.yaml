@@ -17,6 +17,7 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - clangdev    # [aarch64]
   host:
     - python
     - pip
@@ -30,8 +31,10 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-timeout
   commands:
     - f2py -h
+    - pytest --timeout=300 -v --pyargs numpy
   imports:
     - numpy
     - numpy.linalg.lapack_lite
