@@ -14,6 +14,7 @@ source:
     - skip_test_mem_overlap.diff        # [aarch64]
     - skip_test_xerbla.diff             # [aarch64]
     - skip_test_einsum_cfloat64.diff    # [ppc64le]
+    - skip_structured_object.diff       # [win and py27]
 
 build:
   number: 0
