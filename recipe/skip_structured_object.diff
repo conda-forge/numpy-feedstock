@@ -2,37 +2,6 @@ diff --git a/numpy/core/tests/test_dtype.py b/numpy/core/tests/test_dtype.py
 index a33361218..cc57a40a9 100644
 --- a/numpy/core/tests/test_dtype.py
 +++ b/numpy/core/tests/test_dtype.py
-@@ -1,4 +1,4 @@
--from __future__ import division, absolute_import, print_function
-+From __future__ import division, absolute_import, print_function
- 
- import sys
- import operator
-@@ -107,11 +107,11 @@ class TestBuiltin(object):
-                          'offsets':[0, 2]}, align=True)
- 
-     def test_field_order_equality(self):
--        x = np.dtype({'names': ['A', 'B'], 
--                      'formats': ['i4', 'f4'], 
-+        x = np.dtype({'names': ['A', 'B'],
-+                      'formats': ['i4', 'f4'],
-                       'offsets': [0, 4]})
--        y = np.dtype({'names': ['B', 'A'], 
--                      'formats': ['f4', 'i4'], 
-+        y = np.dtype({'names': ['B', 'A'],
-+                      'formats': ['f4', 'i4'],
-                       'offsets': [4, 0]})
-         assert_equal(x == y, False)
- 
-@@ -324,7 +324,7 @@ class TestRecord(object):
-         # 'names' is missing
-         assert_raises(ValueError, np.dtype,
-                 {'formats': ['i4', 'i4'], 'f0': ('i4', 0), 'f1':('i4', 4)})
--        
-+
- 
- class TestSubarray(object):
-     def test_single_subarray(self):
 @@ -489,6 +489,7 @@ def iter_struct_object_dtypes():
      yield pytest.param(dt, p, 12, obj, id="<structured subarray 2>")
  
