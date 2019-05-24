@@ -1,0 +1,42 @@
+language: none
+
+runtime:
+    nodePool: shippable_shared_aarch64
+    # nodePool: shippable_shared_aarch32
+
+env:
+  # TODO: Get conda-forge to generate one of these
+  # global:
+  # The BINSTAR_TOKEN secure variable. This is defined canonically in conda-forge.yml.
+  #   - secure: bkTdATvev7sVFsP62xFV2ck215nXEtH7eWXdhzRRtbzeKquSkNhTGTCoa5FcLDvAVe36w+Sv59/3/oWNyMood8pIWjHLMC5CqqLdc4NRmyyaCKWys4CLhTTurIBPFSWUilxZW1KCKv/WHOe+zQDi2o9R9lf5/MizuwThHSQOIcqeTIn4wtPzbne5MeKSW+mRCsb+l4E/Q1oY2w/mTJ+izDWkxefstZ2t8RqOxH6H20wwNOOj/1WdeztdCOtCAl99r8Aj58odGyfUMAEyw89c5HglAEPurBQs21DZbHp10NmgSLyIbukplulRUm+cQ37loT/hFfTjPUCqLEC3lu6SPw==
+  matrix:
+    - CONFIG=linux_aarch64_python2.7target_platformlinux-aarch64
+    - CONFIG=linux_aarch64_python3.6target_platformlinux-aarch64
+    - CONFIG=linux_aarch64_python3.7target_platformlinux-aarch64
+
+build:
+  pre_ci_boot:
+    image_name: arm64v8/ubuntu
+    image_tag: 18.04
+    pull: True
+
+  ci:
+    - apt-get update
+    - apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+    - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+    - apt-key fingerprint 0EBFCD88
+    - add-apt-repository "deb [arch=arm64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    - apt-get update
+    - apt-get install -y docker-ce docker-ce-cli containerd.io
+    - .azure-pipelines/run_docker_build.sh
+
+# disable email notification
+# of CI job result
+integrations:
+  notifications:
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_cancel: never
+      on_pull_request: never

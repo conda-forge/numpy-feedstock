@@ -8,6 +8,13 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: adf063a3f87ab89393f5eea0eb903293b112fa0a308e8c594a75ffa585d81d4f
+  patches:
+    # Apparently not all glibcs have 128 bit precision floats implemented correctly.
+    - skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
+    - skip_test_mem_overlap.diff        # [aarch64]
+    - skip_test_xerbla.diff             # [aarch64]
+    - skip_test_einsum_cfloat64.diff    # [ppc64le]
+    - skip_structured_object.diff       # [win and py27]
 
 build:
   number: 0
@@ -17,6 +24,8 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    # gcc 7.3 segfaults on aarch64
+    - clangdev    # [aarch64]
   host:
     - python
     - pip
@@ -30,8 +39,10 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-timeout
   commands:
     - f2py -h
+    - pytest --timeout=300 -v --pyargs numpy
   imports:
     - numpy
     - numpy.linalg.lapack_lite
