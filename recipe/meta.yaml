@@ -1,4 +1,4 @@
-{% set version = "1.16.4" %}
+{% set version = "1.17.0" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: a3bccb70ad94091a5b9e2469fabd41ac877c140a6828c2022e35560a2ec0346c
+  sha256: 47b7b6145e7ba5918ce26be25999b6d4b35cf9fbfdf46b7da50090ffdb020445
   patches:
     # Apparently not all glibcs have 128 bit precision floats implemented correctly.
     - skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
