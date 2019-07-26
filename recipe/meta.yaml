@@ -8,12 +8,6 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: 47b7b6145e7ba5918ce26be25999b6d4b35cf9fbfdf46b7da50090ffdb020445
-  patches:
-    # Apparently not all glibcs have 128 bit precision floats implemented correctly.
-    - patches/skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
-    - patches/skip_test_mem_overlap.diff        # [aarch64]
-    - patches/skip_test_xerbla.diff             # [aarch64]
-    - patches/skip_test_einsum_cfloat64.diff    # [ppc64le]
 
 build:
   number: 0
@@ -36,13 +30,29 @@ requirements:
   run:
     - python
 
+{% set skip_tests = [
+        [aarch64 or ppc64le, "test_loss_of_precision", "Seems to fail on aarch64 and ppc64le"],
+        [ppc64le, 'test_einsum_sums_cfloat64', 'expected failure ppc64le'],
+        [aarch64, 'test_may_share_memory_easy_fuzz', 'Times out on qemu+aarch'],
+        [aarch64, 'test_xerbla_override or test_may_share_memory_harder_fuzz or test_large_zip', 'Seems to timeout on aarch64'],
+        [aarch64, 'test_sdot_bug_8577', 'test_sdot_bug_8577'],
+    ]
+%}
+
+{% set SKIP_TESTS = "conda_forge" %}
+{% for skip_test in skip_tests %}
+{% if skip_test[0] %}
+{% set SKIP_TESTS = SKIP_TESTS + " or " + skip_test[1] %}
+{% endif %}
+{% endfor %}
+
 test:
   requires:
     - pytest
     - pytest-timeout
   commands:
     - f2py -h
-    - pytest --timeout=300 -v --pyargs numpy
+    - pytest --timeout=300 -v --pyargs numpy -k "not ({{ SKIP_TESTS }})"
   imports:
     - numpy
     - numpy.linalg.lapack_lite
