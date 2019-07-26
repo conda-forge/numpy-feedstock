@@ -10,11 +10,10 @@ source:
   sha256: 47b7b6145e7ba5918ce26be25999b6d4b35cf9fbfdf46b7da50090ffdb020445
   patches:
     # Apparently not all glibcs have 128 bit precision floats implemented correctly.
-    - skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
-    - skip_test_mem_overlap.diff        # [aarch64]
-    - skip_test_xerbla.diff             # [aarch64]
-    - skip_test_einsum_cfloat64.diff    # [ppc64le]
-    - skip_structured_object.diff       # [win and py27]
+    - patches/skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
+    - patches/skip_test_mem_overlap.diff        # [aarch64]
+    - patches/skip_test_xerbla.diff             # [aarch64]
+    - patches/skip_test_einsum_cfloat64.diff    # [ppc64le]
 
 build:
   number: 0

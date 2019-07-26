@@ -12,5 +12,3 @@ import numpy.core.umath
 import numpy.core._umath_tests
 import numpy.linalg.lapack_lite
 import numpy.random.mtrand
-
-# sys.exit(not numpy.test())
