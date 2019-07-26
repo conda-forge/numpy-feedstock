@@ -10,10 +10,6 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_aarch64_python2.7target_platformlinux-aarch64:
-        CONFIG: linux_aarch64_python2.7target_platformlinux-aarch64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-aarch64
       linux_aarch64_python3.6target_platformlinux-aarch64:
         CONFIG: linux_aarch64_python3.6target_platformlinux-aarch64
         UPLOAD_PACKAGES: True
@@ -22,10 +18,6 @@ jobs:
         CONFIG: linux_aarch64_python3.7target_platformlinux-aarch64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-aarch64
-      linux_python2.7target_platformlinux-64:
-        CONFIG: linux_python2.7target_platformlinux-64
-        UPLOAD_PACKAGES: True
-        DOCKER_IMAGE: condaforge/linux-anvil-comp7
       linux_python3.6target_platformlinux-64:
         CONFIG: linux_python3.6target_platformlinux-64
         UPLOAD_PACKAGES: True
