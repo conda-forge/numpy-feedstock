@@ -10,7 +10,6 @@ import numpy.core._struct_ufunc_tests
 import numpy.core._rational_tests
 import numpy.core.umath
 import numpy.core._umath_tests
-import numpy.fft.fftpack_lite
 import numpy.linalg.lapack_lite
 import numpy.random.mtrand
 
