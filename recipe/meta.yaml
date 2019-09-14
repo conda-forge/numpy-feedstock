@@ -6,8 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 81a4f748dcfa80a7071ad8f3d9f8edb9f8bc1f0a9bdd19bfd44fd42c02bd286c
+  url: https://github.com/numpy/numpy/archive/master.tar.gz
   patches:
     - gh14492.diff
 
