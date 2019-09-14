@@ -1,0 +1,45 @@
+diff --git a/numpy/core/src/multiarray/multiarraymodule.c 
+b/numpy/core/src/multiarray/multiarraymodule.c
+index 441567049..286f8ed5b 100644
+--- a/numpy/core/src/multiarray/multiarraymodule.c
++++ b/numpy/core/src/multiarray/multiarraymodule.c
+@@ -57,6 +57,7 @@ NPY_NO_EXPORT int NPY_NUMUSERTYPES = 0;
+  #include "array_assign.h"
+  #include "common.h"
+  #include "multiarraymodule.h"
++#include "npy_cblas.h"
+  #include "cblasfuncs.h"
+  #include "vdot.h"
+  #include "templ_common.h" /* for npy_mul_with_overflow_intp */
+@@ -4080,6 +4081,19 @@ normalize_axis_index(PyObject *NPY_UNUSED(self), 
+PyObject *args, PyObject *kwds)
+      return PyInt_FromLong(axis);
+  }
+
++
++
++static PyObject *
++_discover_cblas_funcpointer(PyObject *NPY_UNUSED(self), PyObject 
+*NPY_UNUSED(args), PyObject *NPY_UNUSED(kwds))
++{
++#if defined(HAVE_CBLAS)
++    return PyLong_FromSize_t((size_t)&cblas_dgemv);
++#else
++    // Return Python, since it is more interesting:
++    return PyLong_FromSize_t((size_t)&PyLong_FromSize_t);
++#endif
++}
++
+  static struct PyMethodDef array_module_methods[] = {
+      {"_get_implementing_args",
+          (PyCFunction)array__get_implementing_args,
+@@ -4279,6 +4293,8 @@ static struct PyMethodDef array_module_methods[] = 
+{
+          METH_VARARGS, NULL},
+      {"_add_newdoc_ufunc", (PyCFunction)add_newdoc_ufunc,
+          METH_VARARGS, NULL},
++    {"_discover_cblas_funcpointer", 
+(PyCFunction)_discover_cblas_funcpointer,
++        METH_NOARGS, NULL},
+      {NULL, NULL, 0, NULL}                /* sentinel */
+  };
