@@ -10,6 +10,7 @@ source:
   sha256: 61b01b87d1e76df9a1e43fff727c1e0289c4cd2bc7be9f806e97b45aed3682cc
   patches:
     - numpy_distutils_ldflags.diff
+    - backport_13558.patch
 
 build:
   number: 1201
