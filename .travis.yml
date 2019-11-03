@@ -16,6 +16,9 @@ matrix:
     - env: CONFIG=linux_ppc64le_python3.7target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
       os: linux-ppc64le
 
+    - env: CONFIG=linux_ppc64le_python3.8target_platformlinux-ppc64le UPLOAD_PACKAGES=True PLATFORM=linux-ppc64le DOCKER_IMAGE=condaforge/linux-anvil-ppc64le
+      os: linux-ppc64le
+
 script:
   - export CI=travis
   - export GIT_BRANCH="$TRAVIS_BRANCH"
