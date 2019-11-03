@@ -1,0 +1,29 @@
+--- numpy-1.14.6.orig/numpy/random/tests/test_random.py	2018-09-23 10:21:50.000000000 -0400
++++ numpy-1.14.6/numpy/random/tests/test_random.py	2019-11-02 14:41:14.906433824 -0400
+@@ -494,7 +494,7 @@
+ 
+     def test_binomial(self):
+         np.random.seed(self.seed)
+-        actual = np.random.binomial(100.123, .456, size=(3, 2))
++        actual = np.random.binomial(100, .456, size=(3, 2))
+         desired = np.array([[37, 43],
+                             [42, 48],
+                             [46, 45]])
+@@ -591,7 +591,7 @@
+ 
+     def test_hypergeometric(self):
+         np.random.seed(self.seed)
+-        actual = np.random.hypergeometric(10.1, 5.5, 14, size=(3, 2))
++        actual = np.random.hypergeometric(10, 5, 14, size=(3, 2))
+         desired = np.array([[10, 10],
+                             [10, 10],
+                             [9, 9]])
+@@ -896,6 +896,8 @@
+             def __int__(self):
+                 raise TypeError
+ 
++            __index__ = __int__
++
+         throwing_int = np.array(1).view(ThrowingInteger)
+         assert_raises(TypeError, np.random.hypergeometric, throwing_int, 1, 1)
+ 

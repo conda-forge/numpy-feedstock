@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# numpy distutils don't use the env variables.
+ln -s $RANLIB $BUILD_PREFIX/bin/ranlib
+ln -s $AR $BUILD_PREFIX/bin/ar
+
 cat > site.cfg <<EOF
 [DEFAULT]
 libraries = blas,cblas,lapack
