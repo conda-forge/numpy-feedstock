@@ -1,0 +1,23 @@
+From 17c6301d350bb247e17a87001dcfaa83d779fd47 Mon Sep 17 00:00:00 2001
+From: Chris Burr <chrisburr@users.noreply.github.com>
+Date: Sun, 3 Nov 2019 16:18:34 +1030
+Subject: [PATCH] Prevent -flto from optimising long double representation
+ check away
+
+---
+ numpy/core/setup_common.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/numpy/core/setup_common.py b/numpy/core/setup_common.py
+index 84b78b58584..ba183e8b9e7 100644
+--- a/numpy/core/setup_common.py
++++ b/numpy/core/setup_common.py
+@@ -267,7 +267,7 @@ def check_long_double_representation(cmd):
+         # try linking to support CC="gcc -flto" or icc -ipo
+         # struct needs to be volatile so it isn't optimized away
+         body = body.replace('struct', 'volatile struct')
+-        body += "int main(void) { return 0; }\n"
++        body += "int main(void) { return foo.before[1]; }\n"
+         src, obj = cmd._compile(body, None, None, 'c')
+         cmd.temp_files.append("_configtest")
+         cmd.compiler.link_executable([obj], "_configtest")
