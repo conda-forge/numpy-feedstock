@@ -15,6 +15,6 @@ import numpy.linalg.lapack_lite
 import numpy.random.mtrand
 
 if sys.platform.startswith('win'):
-  sys.exit(not numpy.test(extra_argv=["--exclude=test_complex"]).wasSuccessful())
+  sys.exit(not numpy.test(extra_argv=["--exclude=test_path"]).wasSuccessful())
 else:
   sys.exit(not numpy.test().wasSuccessful())
