@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_python3.6target_platformlinux-aarch64
+name: linux_aarch64_python3.6
 
 platform:
   os: linux
@@ -26,7 +26,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_python3.7target_platformlinux-aarch64
+name: linux_aarch64_python3.7
 
 platform:
   os: linux
@@ -52,7 +52,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_python3.8target_platformlinux-aarch64
+name: linux_aarch64_python3.8
 
 platform:
   os: linux
