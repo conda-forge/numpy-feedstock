@@ -14,4 +14,7 @@ import numpy.fft.fftpack_lite
 import numpy.linalg.lapack_lite
 import numpy.random.mtrand
 
-sys.exit(not numpy.test().wasSuccessful())
+if sys.platform.startswith('win'):
+  sys.exit(not numpy.test(extra_argv=["--exclude=test_complex"]).wasSuccessful())
+else:
+  sys.exit(not numpy.test().wasSuccessful())
