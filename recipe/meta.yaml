@@ -1,4 +1,4 @@
-{% set version = "1.17.3" %}
+{% set version = "1.16.5" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,13 +7,18 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: c93733dbebc2599d2747ceac4b18825a73767d289176ed8e02090325656d69aa
+  sha256: 2b63c414fb43a4f0cb69b29b7e9d48275af0dbb5b1ffd2f2de99c4df9967e151
   patches:
+    # Apparently not all glibcs have 128 bit precision floats implemented correctly.
+    - skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
+    - skip_test_mem_overlap.diff        # [aarch64]
+    - skip_test_xerbla.diff             # [aarch64]
+    - skip_test_einsum_cfloat64.diff    # [ppc64le]
+    - skip_structured_object.diff       # [win and py27]
     - macos-lto-check.patch
 
 build:
   number: 0
-  skip: True  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
@@ -53,9 +58,7 @@ test:
     - pytest-timeout
   commands:
     - f2py -h
-    - pytest --timeout=300 -v --pyargs numpy -k "not (test_loss_of_precision or test_einsum_sums_cfloat64)"  # [ppc64le]
-    - pytest --timeout=300 -v --pyargs numpy -k "not (test_loss_of_precision or test_may_share_memory_easy_fuzz or test_xerbla_override or test_may_share_memory_harder_fuzz or test_large_zip or test_sdot_bug_8577 or test_unary_ufunc_call_fuzz)"  # [aarch64]
-    - pytest --timeout=300 -v --pyargs numpy  # [not (aarch64 or ppc64le)]
+    - pytest --timeout=300 -v --pyargs numpy
   imports:
     - numpy
     - numpy.linalg.lapack_lite
