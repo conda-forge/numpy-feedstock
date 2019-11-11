@@ -8,8 +8,6 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: fb0415475e673cb9a6dd816df999e0ab9f86fa3af2b1770944e7288d2bea4ac9
-  patches:
-    - macos-lto-check.patch
 
 build:
   number: 0
