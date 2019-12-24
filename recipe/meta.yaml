@@ -1,4 +1,4 @@
-{% set version = "1.17.3" %}
+{% set version = "1.18.0" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: c93733dbebc2599d2747ceac4b18825a73767d289176ed8e02090325656d69aa
+  sha256: e5eaf340489b76eef91352bf48b36e92ace07f6b0f1c87dcd3b5dbada97df03a
   patches:
     - macos-lto-check.patch
 
