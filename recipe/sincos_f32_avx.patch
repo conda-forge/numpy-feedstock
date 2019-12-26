@@ -1,0 +1,19 @@
+commit 832808acd326770ffe1feccb8bdff1188fd762e3
+Author: Ralf Gommers <ralf.gommers@gmail.com>
+Date:   Thu Dec 26 07:48:57 2019 +0100
+
+    TST: bump test for float32 AVX sin from 2 to 3 ULP
+
+diff --git a/numpy/core/tests/test_umath.py b/numpy/core/tests/test_umath.py
+index ae1090c23e..57106481cf 100644
+--- a/numpy/core/tests/test_umath.py
++++ b/numpy/core/tests/test_umath.py
+@@ -798,7 +798,7 @@ class TestAVXFloat32Transcendental(object):
+         # test coverage for elements > 117435.992f for which glibc is used
+         x_f32[index] = np.float32(10E+10*np.random.rand(M))
+         x_f64 = np.float64(x_f32)
+-        assert_array_max_ulp(np.sin(x_f32), np.float32(np.sin(x_f64)), maxulp=2)
++        assert_array_max_ulp(np.sin(x_f32), np.float32(np.sin(x_f64)), maxulp=3)
+         assert_array_max_ulp(np.cos(x_f32), np.float32(np.cos(x_f64)), maxulp=2)
+ 
+     def test_strided_float32(self):

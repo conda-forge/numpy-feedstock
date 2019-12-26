@@ -1,0 +1,26 @@
+commit 48089a72d6f4c3805ce0a53618cc9652287c5018
+Author: Ralf Gommers <ralf.gommers@gmail.com>
+Date:   Thu Dec 26 07:21:59 2019 +0100
+
+    TST: improve assert message of assert_array_max_ulp
+    
+    It was not showing the max difference before, which makes it
+    hard to judge whether something is seriously wrong, or the test
+    precision simply needs to be bumped by a little.
+
+diff --git a/numpy/testing/_private/utils.py b/numpy/testing/_private/utils.py
+index 23267a9e1f..870671d05c 100644
+--- a/numpy/testing/_private/utils.py
++++ b/numpy/testing/_private/utils.py
+@@ -1636,8 +1636,9 @@ def assert_array_max_ulp(a, b, maxulp=1, dtype=None):
+     import numpy as np
+     ret = nulp_diff(a, b, dtype)
+     if not np.all(ret <= maxulp):
+-        raise AssertionError("Arrays are not almost equal up to %g ULP" %
+-                             maxulp)
++        raise AssertionError("Arrays are not almost equal up to %g "
++                             "ULP (max difference is %g ULP)" %
++                             (maxulp, np.max(ret)))
+     return ret
+ 
+ 

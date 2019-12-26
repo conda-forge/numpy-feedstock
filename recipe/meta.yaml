@@ -8,6 +8,9 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: e5eaf340489b76eef91352bf48b36e92ace07f6b0f1c87dcd3b5dbada97df03a
+  patches:
+    - maxulp_assertmsg.patch
+    - sincos_f32_avx.patch
 
 build:
   number: 0
