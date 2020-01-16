@@ -5,7 +5,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.zip
+  url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: e37802868ba5f389bf4e3f4c40c16e1b031814f0585ac122637de219de6279cb
 
 build:
