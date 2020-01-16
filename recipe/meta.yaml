@@ -42,8 +42,8 @@ requirements:
 # Only the complex256 system is failing, but I don't know how to skip it on its own
 # # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
-# Probably needs too much memory on ppc64le and aarch64
-#{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le or aarch64]
+# Probably needs too much memory on ppc64le, it sometimes fails on travis
+{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
 
 test:
   requires:
