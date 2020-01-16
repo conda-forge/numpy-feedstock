@@ -31,14 +31,14 @@ requirements:
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # Slow tests, aarch64 doesn't have too much time on drone, skip
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}    # [aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}  # [aarch64]
+#{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}    # [aarch64]
+#{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}  # [aarch64]
 # Likely bugs in openblas????
 # https://github.com/numpy/numpy/issues/14438#issuecomment-560940664
-{% set tests_to_skip = tests_to_skip + " or test_einsum_sums_cfloat64" %}  # [ppc64le]
+#{% set tests_to_skip = tests_to_skip + " or test_einsum_sums_cfloat64" %}  # [ppc64le]
 # Only the complex256 system is failing, but I don't know how to skip it on its own
 # # https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
+#{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
 # Probably needs too much memory on ppc64le and aarch64
 {% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le or aarch64]
 
