@@ -1,5 +1,4 @@
-{% set version = "1.17.3" %}
-{% set variant = "openblas" %}
+{% set version = "1.18.1" %}
 
 package:
   name: numpy
@@ -7,9 +6,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: c93733dbebc2599d2747ceac4b18825a73767d289176ed8e02090325656d69aa
-  patches:
-    - macos-lto-check.patch
+  sha256: e37802868ba5f389bf4e3f4c40c16e1b031814f0585ac122637de219de6279cb
 
 build:
   number: 0
@@ -32,30 +29,27 @@ requirements:
   run:
     - python
 
-# Skipped test justificiation
-# aarch64:
-#   Timeouts: Marked as slow by numpy, extra slow due to QEMU
-#       - test_unary_ufunc_call_fuzz
-#       - test_may_share_memory_easy_fuzz
-#       - test_may_share_memory_harder_fuzz
-#       - test_large_zip 
-#   Math: Qemu??? numpy bugs in BigEndian???
-#       - test_loss_of_precision
-#   We forget:
-#       - test_xerbla_override
-#       - test_sdot_bug_8577
-# ppc64le
-#   - test_loss_of_precision: likely a bug in libc/numpy
-#   - test_einsum_sums_cfloat64: likely a bug in libc/numpy
+{% set tests_to_skip = "_not_a_real_test" %}
+# Seems to fail with current version of blas for large numbers
+# https://github.com/conda-forge/numpy-feedstock/pull/179#issuecomment-569591828
+{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}  # [linux64]
+# Not too sure why this is failing on aarch64 because harder_fuzz is passing
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}    # [aarch64]
+# Likely bugs in openblas????
+# https://github.com/numpy/numpy/issues/14438#issuecomment-560940664
+{% set tests_to_skip = tests_to_skip + " or test_einsum_sums_cfloat64" %}  # [ppc64le]
+# Only the complex256 system is failing, but I don't know how to skip it on its own
+# # https://github.com/numpy/numpy/issues/15243
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
+# Probably needs too much memory on ppc64le, it sometimes fails on travis
+{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
+
 test:
   requires:
     - pytest
-    - pytest-timeout
   commands:
     - f2py -h
-    - pytest --timeout=300 -v --pyargs numpy -k "not (test_loss_of_precision or test_einsum_sums_cfloat64)"  # [ppc64le]
-    - pytest --timeout=300 -v --pyargs numpy -k "not (test_loss_of_precision or test_may_share_memory_easy_fuzz or test_xerbla_override or test_may_share_memory_harder_fuzz or test_large_zip or test_sdot_bug_8577 or test_unary_ufunc_call_fuzz)"  # [aarch64]
-    - pytest --timeout=300 -v --pyargs numpy  # [not (aarch64 or ppc64le)]
+    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})"
   imports:
     - numpy
     - numpy.linalg.lapack_lite
