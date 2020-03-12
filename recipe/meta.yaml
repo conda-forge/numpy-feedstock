@@ -47,9 +47,10 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-xdist
   commands:
     - f2py -h
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})"
+    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" -n{{ os.environ.get('CPU_COUNT', '1') }}
   imports:
     - numpy
     - numpy.linalg.lapack_lite
