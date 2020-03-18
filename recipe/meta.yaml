@@ -1,4 +1,4 @@
-{% set version = "1.18.1" %}
+{% set version = "1.18.2" %}
 
 package:
   name: numpy
@@ -6,11 +6,11 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: e37802868ba5f389bf4e3f4c40c16e1b031814f0585ac122637de219de6279cb
+  sha256: da204ce460aa4247e595b7c7189d2fb2ed5f796bc03197055de01dac61d0125e
 
 build:
   number: 0
-  skip: True  # [py27]
+  skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
@@ -58,7 +58,7 @@ about:
   home: http://numpy.scipy.org/
   license: BSD 3-Clause
   license_file: LICENSE.txt
-  summary: 'Array processing for numbers, strings, records, and objects.'
+  summary: Array processing for numbers, strings, records, and objects.
   doc_url: https://docs.scipy.org/doc/numpy/reference/
   dev_url: https://github.com/numpy/numpy
 
