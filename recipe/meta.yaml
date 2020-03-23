@@ -60,7 +60,7 @@ test:
     - f2py -h
     - export OPENBLAS_NUM_THREADS=1  # [unix]
     - set OPENBLAS_NUM_THREADS=1  # [win]
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})"
+    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0
   imports:
     - numpy
     - numpy.linalg.lapack_lite
