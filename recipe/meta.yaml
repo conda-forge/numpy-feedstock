@@ -9,7 +9,7 @@ source:
   sha256: e37802868ba5f389bf4e3f4c40c16e1b031814f0585ac122637de219de6279cb
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
@@ -28,6 +28,8 @@ requirements:
     - liblapack
   run:
     - python
+  run_constrained:
+    - libopenblas 0.3.7  # [ppc64le]
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of blas for large numbers
@@ -43,20 +45,31 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
 {% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
+# Extra slow tests on aarch64 and ppc64le
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_unary_ufunc_call_fuzz" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_count_nonzero_all" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_diophantine_fuzz" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_generalized_sq_cases" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le or aarch64]
 
 test:
   requires:
     - pytest
   commands:
     - f2py -h
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})"
+    - export OPENBLAS_NUM_THREADS=1  # [unix]
+    - set OPENBLAS_NUM_THREADS=1  # [win]
+    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0
   imports:
     - numpy
     - numpy.linalg.lapack_lite
 
 about:
   home: http://numpy.scipy.org/
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_file: LICENSE.txt
   summary: 'Array processing for numbers, strings, records, and objects.'
   doc_url: https://docs.scipy.org/doc/numpy/reference/

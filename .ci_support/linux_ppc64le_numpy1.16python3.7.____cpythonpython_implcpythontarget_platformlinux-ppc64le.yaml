@@ -1,9 +1,13 @@
 c_compiler:
-- vs2015
+- gcc
+c_compiler_version:
+- '8'
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+docker_image:
+- condaforge/linux-anvil-ppc64le
 libblas:
 - 3.8 *netlib
 libcblas:
@@ -11,15 +15,18 @@ libcblas:
 liblapack:
 - 3.8.0 *netlib
 numpy:
-- '1.14'
+- '1.16'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.8'
+- 3.7.* *_cpython
+python_impl:
+- cpython
 target_platform:
-- win-64
+- linux-ppc64le
 zip_keys:
-- - python
-  - c_compiler
+- - numpy
+  - python
+  - python_impl

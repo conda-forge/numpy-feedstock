@@ -10,16 +10,20 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      linux_python3.6target_platformlinux-64:
-        CONFIG: linux_python3.6target_platformlinux-64
+      linux_numpy1.14python3.6.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_numpy1.14python3.6.____cpythonpython_implcpythontarget_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      linux_python3.7target_platformlinux-64:
-        CONFIG: linux_python3.7target_platformlinux-64
+      linux_numpy1.14python3.7.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_numpy1.14python3.7.____cpythonpython_implcpythontarget_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
-      linux_python3.8target_platformlinux-64:
-        CONFIG: linux_python3.8target_platformlinux-64
+      linux_numpy1.14python3.8.____cpythonpython_implcpythontarget_platformlinux-64:
+        CONFIG: linux_numpy1.14python3.8.____cpythonpython_implcpythontarget_platformlinux-64
+        UPLOAD_PACKAGES: True
+        DOCKER_IMAGE: condaforge/linux-anvil-comp7
+      linux_numpy1.18python3.6.____73_pypypython_implpypytarget_platformlinux-64:
+        CONFIG: linux_numpy1.18python3.6.____73_pypypython_implpypytarget_platformlinux-64
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   steps:
