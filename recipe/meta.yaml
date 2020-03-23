@@ -45,6 +45,13 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
 {% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
+# Extra slow tests on pypy
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
+{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
+{% set tests_to_skip = tests_to_skip + " or test_unary_ufunc_call_fuzz" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
+{% set tests_to_skip = tests_to_skip + " or test_count_nonzero_all" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
+{% set tests_to_skip = tests_to_skip + " or test_diophantine_fuzz" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
+{% set tests_to_skip = tests_to_skip + " or test_generalized_sq_cases" %}   # [(ppc64le or aarch64) and python_impl=="pypy"]
 
 test:
   requires:
