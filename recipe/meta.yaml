@@ -51,6 +51,8 @@ test:
     - pytest
   commands:
     - f2py -h
+    - export OPENBLAS_NUM_THREADS=1  # [unix]
+    - set OPENBLAS_NUM_THREADS=1  # [win]
     - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})"
   imports:
     - numpy
