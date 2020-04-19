@@ -10,17 +10,17 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_numpy1.14python3.6.____cpythonpython_implcpythontarget_platformosx-64:
-        CONFIG: osx_numpy1.14python3.6.____cpythonpython_implcpythontarget_platformosx-64
+      osx_numpy1.14python3.6.____cpythontarget_platformosx-64:
+        CONFIG: osx_numpy1.14python3.6.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
-      osx_numpy1.14python3.7.____cpythonpython_implcpythontarget_platformosx-64:
-        CONFIG: osx_numpy1.14python3.7.____cpythonpython_implcpythontarget_platformosx-64
+      osx_numpy1.14python3.7.____cpythontarget_platformosx-64:
+        CONFIG: osx_numpy1.14python3.7.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
-      osx_numpy1.14python3.8.____cpythonpython_implcpythontarget_platformosx-64:
-        CONFIG: osx_numpy1.14python3.8.____cpythonpython_implcpythontarget_platformosx-64
+      osx_numpy1.14python3.8.____cpythontarget_platformosx-64:
+        CONFIG: osx_numpy1.14python3.8.____cpythontarget_platformosx-64
         UPLOAD_PACKAGES: True
-      osx_numpy1.18python3.6.____73_pypypython_implpypytarget_platformosx-64:
-        CONFIG: osx_numpy1.18python3.6.____73_pypypython_implpypytarget_platformosx-64
+      osx_numpy1.18python3.6.____73_pypytarget_platformosx-64:
+        CONFIG: osx_numpy1.18python3.6.____73_pypytarget_platformosx-64
         UPLOAD_PACKAGES: True
 
   steps:
