@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.6.___h1b0a193b56
+name: linux_aarch64_numpy1.16python3.6.___h6fee7eb9b1
 
 platform:
   os: linux
@@ -10,10 +10,10 @@ steps:
 - name: Install and build
   image: condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.6.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.6.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
@@ -26,7 +26,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.7.___he65a3c9f78
+name: linux_aarch64_numpy1.16python3.7.___h3e6361d0ce
 
 platform:
   os: linux
@@ -36,10 +36,10 @@ steps:
 - name: Install and build
   image: condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.7.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.7.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
@@ -52,7 +52,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.8.___h4970fb7245
+name: linux_aarch64_numpy1.16python3.8.___h8a9d019a51
 
 platform:
   os: linux
@@ -62,10 +62,10 @@ steps:
 - name: Install and build
   image: condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.8.____cpythonpython_implcpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.8.____cpythontarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"
@@ -78,7 +78,7 @@ steps:
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.18python3.6.___ha99018ed2a
+name: linux_aarch64_numpy1.18python3.6.___ha399c4d162
 
 platform:
   os: linux
@@ -88,10 +88,10 @@ steps:
 - name: Install and build
   image: condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.18python3.6.____73_pypypython_implpypytarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.18python3.6.____73_pypytarget_platformlinux-aarch64
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
-    BINSTAR_TOKEN: 
+    BINSTAR_TOKEN:
       from_secret: BINSTAR_TOKEN
   commands:
     - export FEEDSTOCK_ROOT="$DRONE_WORKSPACE"

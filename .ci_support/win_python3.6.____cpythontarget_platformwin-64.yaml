@@ -1,5 +1,5 @@
 c_compiler:
-- vs2015
+- vs2017
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -18,11 +18,8 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.6.* *_cpython
-python_impl:
-- cpython
 target_platform:
 - win-64
 zip_keys:
 - - numpy
   - python
-  - python_impl
