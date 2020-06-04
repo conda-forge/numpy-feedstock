@@ -6,22 +6,22 @@ jobs:
 - job: osx
   pool:
     vmImage: macOS-10.14
-  timeoutInMinutes: 360
   strategy:
-    maxParallel: 8
     matrix:
       osx_numpy1.14python3.6.____cpythontarget_platformosx-64:
         CONFIG: osx_numpy1.14python3.6.____cpythontarget_platformosx-64
-        UPLOAD_PACKAGES: True
+        UPLOAD_PACKAGES: 'True'
       osx_numpy1.14python3.7.____cpythontarget_platformosx-64:
         CONFIG: osx_numpy1.14python3.7.____cpythontarget_platformosx-64
-        UPLOAD_PACKAGES: True
+        UPLOAD_PACKAGES: 'True'
       osx_numpy1.14python3.8.____cpythontarget_platformosx-64:
         CONFIG: osx_numpy1.14python3.8.____cpythontarget_platformosx-64
-        UPLOAD_PACKAGES: True
+        UPLOAD_PACKAGES: 'True'
       osx_numpy1.18python3.6.____73_pypytarget_platformosx-64:
         CONFIG: osx_numpy1.18python3.6.____73_pypytarget_platformosx-64
-        UPLOAD_PACKAGES: True
+        UPLOAD_PACKAGES: 'True'
+    maxParallel: 8
+  timeoutInMinutes: 360
 
   steps:
   # TODO: Fast finish on azure pipelines?
@@ -33,3 +33,5 @@ jobs:
     displayName: Run OSX build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
+      FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
+      STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
