@@ -1,4 +1,4 @@
-{% set version = "1.18.5" %}
+{% set version = "1.19.0" %}
 
 package:
   name: numpy
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 2c095bd1c5290966cceee8b6ef5cd66f13cd0e9d6d0e8d6fc8961abd64a8e51f
+  sha256: 153cf8b0176e57a611931981acfe093d2f7fef623b48f91176efa199798a6b90
 
 build:
   number: 0
