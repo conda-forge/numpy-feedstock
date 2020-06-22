@@ -58,6 +58,7 @@ requirements:
 test:
   requires:
     - pytest
+    - hypothesis
   commands:
     - f2py -h
     - export OPENBLAS_NUM_THREADS=1  # [unix]
