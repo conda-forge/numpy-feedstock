@@ -68,6 +68,8 @@ test:
     - setuptools <60.0.0
     # some linux tests need a compiler
     - {{ compiler('c') }}  # [linux]
+    # make sure we test with all blas implementations
+    - blas =*=*{{ blas_impl }}
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
