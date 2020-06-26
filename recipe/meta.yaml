@@ -53,11 +53,14 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le or aarch64]
 
 test:
+  # this section will execute run_test.py
   requires:
     - pytest
     - pytest-xdist  # [aarch64]
     - hypothesis
     - setuptools
+    # make sure we test with all blas implementations
+    - blas * *{{ blas_impl }}
   commands:
     - f2py -h
     - export OPENBLAS_NUM_THREADS=1  # [unix]
