@@ -52,12 +52,15 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                   # [build_platform != target_platform]
 
 test:
+  # this section will execute run_test.py
   requires:
     - pytest
     - pytest-timeout
     - pytest-xdist
     - hypothesis
     - setuptools
+    # make sure we test with all blas implementations
+    - blas =*=*{{ blas_impl }}
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
