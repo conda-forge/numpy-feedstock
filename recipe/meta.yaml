@@ -117,6 +117,8 @@ test:
     - {{ compiler('fortran') }}  # [linux]
     # For some cython tests
     - pkg-config
+    # make sure we test with all blas implementations
+    - libblas =*=*{{ blas_impl }}
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
