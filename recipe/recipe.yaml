@@ -139,6 +139,8 @@ tests:
           then: ${{ compiler('fortran') }}
         # For some cython tests
         - pkg-config
+        # make sure we test with all blas implementations
+        - libblas =*=*${{ blas_impl }}
     script:
       interpreter: python
       content:
