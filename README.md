@@ -5,7 +5,7 @@ Home: http://numpy.scipy.org/
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: Array processing for numbers, strings, records, and objects.
 

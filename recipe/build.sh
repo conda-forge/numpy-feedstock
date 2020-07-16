@@ -3,8 +3,10 @@
 set -x
 
 # numpy distutils don't use the env variables.
-ln -s $RANLIB $BUILD_PREFIX/bin/ranlib
-ln -s $AR $BUILD_PREFIX/bin/ar
+if [[ ! -f $BUILD_PREFIX/bin/ranlib ]]; then
+    ln -s $RANLIB $BUILD_PREFIX/bin/ranlib
+    ln -s $AR $BUILD_PREFIX/bin/ar
+fi
 
 cat > site.cfg <<EOF
 [DEFAULT]
