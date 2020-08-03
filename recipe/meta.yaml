@@ -31,14 +31,12 @@ requirements:
 # Seems to fail with current version of blas for large numbers
 # https://github.com/conda-forge/numpy-feedstock/pull/179#issuecomment-569591828
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}  # [linux64]
-# Not too sure why this is failing on aarch64 because harder_fuzz is passing
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}    # [aarch64]
 # Likely bugs in openblas????
 # https://github.com/numpy/numpy/issues/14438#issuecomment-560940664
 {% set tests_to_skip = tests_to_skip + " or test_einsum_sums_cfloat64" %}  # [ppc64le]
 # Only the complex256 system is failing, but I don't know how to skip it on its own
 # # https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
 {% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
 # Extra slow tests on aarch64 and ppc64le
