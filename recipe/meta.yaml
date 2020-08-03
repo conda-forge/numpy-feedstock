@@ -17,8 +17,6 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    # gcc 7.3 segfaults on aarch64
-    - clangdev    # [aarch64]
   host:
     - python
     - pip
