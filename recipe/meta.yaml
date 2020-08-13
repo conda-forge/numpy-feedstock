@@ -20,7 +20,6 @@ requirements:
   host:
     - python
     - pip
-    - setuptools !=49.*
     - cython
     - libblas
     - libcblas
@@ -54,6 +53,7 @@ test:
   requires:
     - pytest
     - hypothesis
+    - setuptools
   commands:
     - f2py -h
     - export OPENBLAS_NUM_THREADS=1  # [unix]
