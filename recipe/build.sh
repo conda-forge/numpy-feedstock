@@ -10,9 +10,17 @@ fi
 
 cat > site.cfg <<EOF
 [DEFAULT]
-libraries = blas,cblas,lapack
 library_dirs = $PREFIX/lib
 include_dirs = $PREFIX/include
+
+[lapack]
+libraries = lapack,blas
+
+[blas]
+libraries = cblas,blas
 EOF
+
+export NPY_LAPACK_ORDER=lapack
+export NPY_BLAS_ORDER=blas
 
 $PYTHON -m pip install --no-deps --ignore-installed -v .
