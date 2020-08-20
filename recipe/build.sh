@@ -14,10 +14,10 @@ library_dirs = $PREFIX/lib
 include_dirs = $PREFIX/include
 
 [lapack]
-libraries = blas,cblas,lapack
+libraries = lapack,blas
 
 [blas]
-libraries = blas,cblas
+libraries = cblas,blas
 EOF
 
 export NPY_LAPACK_ORDER=lapack

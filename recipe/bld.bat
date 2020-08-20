@@ -3,9 +3,9 @@ echo [DEFAULT]
 echo library_dirs = %LIBRARY_LIB%
 echo include_dirs = %LIBRARY_INC%
 echo [lapack]
-echo libraries = blas,cblas,lapack
+echo libraries = lapack,blas
 echo [blas]
-echo libraries = blas,cblas
+echo libraries = cblas,blas
 ) > site.cfg
 
 set "NPY_LAPACK_ORDER=lapack"
