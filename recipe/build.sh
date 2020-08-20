@@ -10,10 +10,18 @@ fi
 
 cat > site.cfg <<EOF
 [DEFAULT]
-libraries = blas,cblas,lapack
 library_dirs = $PREFIX/lib
 include_dirs = $PREFIX/include
+
+[lapack]
+libraries = blas,cblas,lapack
+
+[blas]
+libraries = blas,cblas
 EOF
+
+export NPY_LAPACK_ORDER=lapack
+export NPY_BLAS_ORDER=blas
 
 # Internal compiler error with gcc 7
 if [[ "${target_platform}" == "linux-aarch64" ]]; then
