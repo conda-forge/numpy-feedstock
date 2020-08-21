@@ -4,7 +4,7 @@ cp $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py .
 rm -rf $PREFIX/lib/python$PY_VER/_sysconfigdata*
 rm -rf $PREFIX/lib/python$PY_VER/__pycache__/_sysconfigdata*
 cp ${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py $PREFIX/lib/python$PY_VER/
-$BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python --sysroot $CONDA_BUILD_SYSROOT $BUILD_PREFIX/venv
+$BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python --sysroot $CONDA_BUILD_SYSROOT --without-pip $BUILD_PREFIX/venv
 cp venv/cross/bin/python $PREFIX/bin/python
 rm -rf venv/cross
 
