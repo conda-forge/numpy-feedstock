@@ -2,4 +2,6 @@ provider: {linux_aarch64: default, linux_ppc64le: default, win: azure}
 conda_forge_output_validation: true
 build_platform:
   osx_64: linux_64
+  linux_ppc64le: linux_64
+  linux_aarch64: linux_64
 test_on_native_only: true
