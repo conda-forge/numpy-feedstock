@@ -1,5 +1,9 @@
 #!/bin/bash
 
+$BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python --sysroot $CONDA_BUILD_SYSROOT $BUILD_PREFIX/venv
+cp venv/cross/bin/python $PREFIX/bin/python
+rm -rf venv/cross
+
 set -x
 
 # numpy distutils don't use the env variables.

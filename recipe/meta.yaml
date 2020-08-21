@@ -17,10 +17,12 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-  host:
+    - crossenv
     - python
     - pip
     - cython
+  host:
+    - python
     - libblas
     - libcblas
     - liblapack
