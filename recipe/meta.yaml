@@ -23,6 +23,9 @@ requirements:
     - cython
   host:
     - python
+    - pip
+    - cython
+    - python
     - libblas
     - libcblas
     - liblapack
