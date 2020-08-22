@@ -17,15 +17,14 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
-    - crossenv
-    - python
-    - pip
-    - cython
+    - crossenv                 # [build_platform != target_platform]
+    - python                   # [build_platform != target_platform]
+    - pip                      # [build_platform != target_platform]
+    - cython                   # [build_platform != target_platform]
   host:
     - python
-    - pip
-    - cython
-    - python
+    - pip                      # [build_platform == target_platform]
+    - cython                   # [build_platform == target_platform]
     - libblas
     - libcblas
     - liblapack
