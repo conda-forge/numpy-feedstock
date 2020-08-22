@@ -1,9 +1,11 @@
 #!/bin/bash
 
-cp $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py .
-rm -rf $PREFIX/lib/python$PY_VER/_sysconfigdata*
-rm -rf $PREFIX/lib/python$PY_VER/__pycache__/_sysconfigdata*
-cp ${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py $PREFIX/lib/python$PY_VER/
+if [[ "$python_impl" != "pypy" ]]; then
+  cp $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py .
+  rm -rf $PREFIX/lib/python$PY_VER/_sysconfigdata*
+  rm -rf $PREFIX/lib/python$PY_VER/__pycache__/_sysconfigdata*
+  cp ${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py $PREFIX/lib/python$PY_VER/
+fi
 $BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python --sysroot $CONDA_BUILD_SYSROOT --without-pip $BUILD_PREFIX/venv
 cp $BUILD_PREFIX/venv/cross/bin/python $PREFIX/bin/python
 rm -rf $BUILD_PREFIX/venv/cross
