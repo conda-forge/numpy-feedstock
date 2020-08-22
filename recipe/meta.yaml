@@ -23,8 +23,8 @@ requirements:
     - cython                   # [build_platform != target_platform]
   host:
     - python
-    - pip                      # [build_platform == target_platform]
-    - cython                   # [build_platform == target_platform]
+    - pip
+    - cython
     - libblas
     - libcblas
     - liblapack
