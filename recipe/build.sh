@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "build_platform: $build_platform"
+echo "target_platform: $target_platform"
+
 if [[ "$python_impl" != "pypy" ]]; then
   cp $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py .
   rm -rf $PREFIX/lib/python$PY_VER/_sysconfigdata*
