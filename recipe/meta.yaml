@@ -17,6 +17,10 @@ build:
 requirements:
   build:
     - {{ compiler('c') }}
+    - crossenv                 # [build_platform != target_platform]
+    - python                   # [build_platform != target_platform]
+    - pip                      # [build_platform != target_platform]
+    - cython                   # [build_platform != target_platform]
   host:
     - python
     - pip

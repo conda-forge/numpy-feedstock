@@ -15,21 +15,7 @@ Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://travis-ci.com/conda-forge/numpy-feedstock">
-        <img alt="macOS" src="https://img.shields.io/travis/com/conda-forge/numpy-feedstock/master.svg?label=macOS">
-      </a>
-    </td>
-  </tr><tr>
-    <td>Drone</td>
-    <td>
-      <a href="https://cloud.drone.io/conda-forge/numpy-feedstock">
-        <img alt="linux" src="https://img.shields.io/drone/build/conda-forge/numpy-feedstock/master.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -275,6 +261,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@isuruf](https://github.com/isuruf/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@msarahan](https://github.com/msarahan/)
 * [@ocefpaf](https://github.com/ocefpaf/)

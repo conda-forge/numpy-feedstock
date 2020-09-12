@@ -1,5 +1,14 @@
 #!/bin/bash
 
+if [[ -f $BUILD_PREFIX/bin/python ]]; then
+  $BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python \
+      --sysroot $CONDA_BUILD_SYSROOT \
+      --without-pip $BUILD_PREFIX/venv \
+      --sysconfigdata-file $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py
+  cp $BUILD_PREFIX/venv/cross/bin/python $PREFIX/bin/python
+  rm -rf $BUILD_PREFIX/venv/cross
+fi
+
 set -x
 
 # numpy distutils don't use the env variables.
