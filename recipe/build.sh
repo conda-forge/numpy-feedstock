@@ -1,13 +1,10 @@
 #!/bin/bash
 
 if [[ -f $BUILD_PREFIX/bin/python ]]; then
-  if [[ ! -f $PREFIX/bin/pypy3 ]]; then
-    cp $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py .
-    rm -rf $PREFIX/lib/python$PY_VER/_sysconfigdata*
-    rm -rf $PREFIX/lib/python$PY_VER/__pycache__/_sysconfigdata*
-    cp ${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py $PREFIX/lib/python$PY_VER/
-  fi
-  $BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python --sysroot $CONDA_BUILD_SYSROOT --without-pip $BUILD_PREFIX/venv
+  $BUILD_PREFIX/bin/python -m crossenv $PREFIX/bin/python \
+      --sysroot $CONDA_BUILD_SYSROOT \
+      --without-pip $BUILD_PREFIX/venv \
+      --sysconfigdata-file $PREFIX/lib/python$PY_VER/${_CONDA_PYTHON_SYSCONFIGDATA_NAME}.py
   cp $BUILD_PREFIX/venv/cross/bin/python $PREFIX/bin/python
   rm -rf $BUILD_PREFIX/venv/cross
 fi
