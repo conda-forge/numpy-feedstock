@@ -5,11 +5,13 @@ Home: http://numpy.scipy.org/
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD-3-Clause
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/numpy-feedstock/blob/master/LICENSE.txt)
 
 Summary: Array processing for numbers, strings, records, and objects.
 
+Development: https://github.com/numpy/numpy
 
+Documentation: https://docs.scipy.org/doc/numpy/reference/
 
 Current build status
 ====================
@@ -275,6 +277,7 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
+* [@isuruf](https://github.com/isuruf/)
 * [@jakirkham](https://github.com/jakirkham/)
 * [@msarahan](https://github.com/msarahan/)
 * [@ocefpaf](https://github.com/ocefpaf/)
