@@ -9,7 +9,7 @@ source:
   sha256: 74d0cf50aa28af81874aca3e67560945afd783b2a006913577d6cddc35a824a6
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
