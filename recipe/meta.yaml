@@ -27,7 +27,7 @@ requirements:
   build:
     - {{ compiler('c') }}
     # gcc 7.3 segfaults on aarch64
-    - clangdev    # [aarch64]
+    - clangdev    # [aarch64 and fortan_compiler_version == 7]
   host:
     - python
     - pip
