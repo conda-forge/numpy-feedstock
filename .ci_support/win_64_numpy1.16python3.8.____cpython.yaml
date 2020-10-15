@@ -10,8 +10,6 @@ liblapack:
 - 3.8.0 *netlib
 m2w64_c_compiler:
 - m2w64-toolchain
-m2w64_fortran_compiler:
-- m2w64-toolchain
 numpy:
 - '1.16'
 pin_run_as_build:
