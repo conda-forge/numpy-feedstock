@@ -25,14 +25,12 @@ requirements:
     - python
     - pip
     - cython
-    - openblas  # [win]
-    - libblas   # [not win]
-    - libcblas  # [not win]
-    - liblapack  # [not win]
+    #- openblas  # [win]
+    - libblas
+    - libcblas
+    - liblapack
   run:
     - python
-    - libblas * *openblas  # [win]
-    - openblas             # [win]
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of blas for large numbers
