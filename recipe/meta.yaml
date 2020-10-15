@@ -9,23 +9,27 @@ source:
   sha256: 74d0cf50aa28af81874aca3e67560945afd783b2a006913577d6cddc35a824a6
 
 build:
-  number: 1
+  number: 2
   skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
 requirements:
   build:
-    - {{ compiler('c') }}
+    - {{ compiler('c') }}        # [not win]
+    - m2w64-toolchain            # [win]
   host:
     - python
     - pip
     - cython
-    - libblas
-    - libcblas
-    - liblapack
+    - openblas  # [win]
+    - libblas   # [not win]
+    - libcblas  # [not win]
+    - liblapack  # [not win]
   run:
     - python
+    - libblas * *openblas  # [win]
+    - openblas             # [win]
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of blas for large numbers
