@@ -2,14 +2,18 @@ channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
+libblas:
+- 3.8 *netlib
+libcblas:
+- 3.8 *netlib
+liblapack:
+- 3.8.0 *netlib
 m2w64_c_compiler:
 - m2w64-toolchain
 m2w64_fortran_compiler:
 - m2w64-toolchain
 numpy:
 - '1.16'
-openblas:
-- 0.3.*
 pin_run_as_build:
   python:
     min_pin: x.x
