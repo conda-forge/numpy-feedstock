@@ -1,19 +1,15 @@
 c_compiler:
-- gcc
-c_compiler_version:
-- '8'
+- vs2017
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
-docker_image:
-- condaforge/linux-anvil-ppc64le
 libblas:
 - 3.8 *netlib
 libcblas:
 - 3.8 *netlib
 liblapack:
-- 3.8.0 *netlib
+- 3.8 *netlib
 numpy:
 - '1.16'
 pin_run_as_build:
@@ -23,7 +19,7 @@ pin_run_as_build:
 python:
 - 3.6.* *_cpython
 target_platform:
-- linux-ppc64le
+- win-64
 zip_keys:
 - - numpy
   - python
