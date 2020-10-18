@@ -19,7 +19,7 @@ libblas:
 libcblas:
 - 3.8 *netlib
 liblapack:
-- 3.8.0 *netlib
+- 3.8 *netlib
 numpy:
 - '1.18'
 pin_run_as_build:
