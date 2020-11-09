@@ -26,7 +26,7 @@ index c3bd6347c..8de5a86fe 100644
 +            cblas_opt = cblas_info_obj.get_option_single('cblas_libs', 'libraries')
 +            cblas_libs = cblas_info_obj.get_libs(cblas_opt, None)
 +            if cblas_libs:
-+                info['libraries'] = blas_libs + cblas_libs
++                info['libraries'] = cblas_libs + blas_libs
 +                info['define_macros'] = [('HAVE_CBLAS', None)]
          else:
              lib = self.get_cblas_libs(info)
