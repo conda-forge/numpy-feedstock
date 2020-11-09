@@ -6,6 +6,8 @@ echo [lapack]
 echo libraries = lapack,blas
 echo [blas]
 echo libraries = cblas,blas
+echo [cblas]
+echo libraries = cblas,blas
 ) > site.cfg
 
 set "NPY_LAPACK_ORDER=lapack"
