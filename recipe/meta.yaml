@@ -7,9 +7,11 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: fe836a685d6838dbb3f603caef01183ea98e88febf4ce956a2ea484a75378413
+  patches:
+    - cblas.diff
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
