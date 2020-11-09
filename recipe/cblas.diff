@@ -1,5 +1,5 @@
 diff --git a/numpy/distutils/system_info.py b/numpy/distutils/system_info.py
-index c3bd6347c..8de5a86fe 100644
+index c3bd6347c..5e0d92826 100644
 --- a/numpy/distutils/system_info.py
 +++ b/numpy/distutils/system_info.py
 @@ -2019,6 +2019,14 @@ class blas64__opt_info(blas_ilp64_opt_info):
@@ -17,7 +17,7 @@ index c3bd6347c..8de5a86fe 100644
  class blas_info(system_info):
      section = 'blas'
      dir_env_var = 'BLAS'
-@@ -2040,6 +2048,13 @@ class blas_info(system_info):
+@@ -2040,6 +2048,16 @@ class blas_info(system_info):
              # often not installed when mingw is being used. This rough
              # treatment is not desirable, but windows is tricky.
              info['language'] = 'f77'  # XXX: is it generally true?
@@ -28,7 +28,9 @@ index c3bd6347c..8de5a86fe 100644
 +            if cblas_libs:
 +                info['libraries'] = cblas_libs + blas_libs
 +                info['define_macros'] = [('HAVE_CBLAS', None)]
++            else:
++                warnings.warn('Assuming no cblas libraries', stacklevel=1)
++
          else:
              lib = self.get_cblas_libs(info)
              if lib is not None:
-
