@@ -1,4 +1,4 @@
-{% set version = "1.16.5" %}
+{% set version = "1.16.6" %}
 {% set variant = "openblas" %}
 
 package:
@@ -19,7 +19,7 @@ source:
     - backport_13558.patch
 
 build:
-  number: 1
+  number: 0
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
@@ -79,3 +79,4 @@ extra:
     - pelson
     - rgommers
     - ocefpaf
+    - xhochy
