@@ -1,5 +1,5 @@
 c_compiler:
-- vs2015
+- vs2017
 channel_sources:
 - conda-forge,defaults
 channel_targets:
@@ -9,17 +9,17 @@ libblas:
 libcblas:
 - 3.8 *netlib
 liblapack:
-- 3.8.0 *netlib
+- 3.8 *netlib
 numpy:
-- '1.14'
+- '1.16'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.7'
+- 3.6.* *_cpython
 target_platform:
 - win-64
 zip_keys:
 - - python
-  - c_compiler
+  - numpy

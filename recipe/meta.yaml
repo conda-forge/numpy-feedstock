@@ -9,7 +9,7 @@ source:
   sha256: 16507ba6617f62ae3c6ab1725ae6f550331025d4d9a369b83f6d5a470446c342
 
 build:
-  number: 0
+  number: 1
   skip: True  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
@@ -57,7 +57,7 @@ test:
 
 about:
   home: http://numpy.scipy.org/
-  license: BSD 3-Clause
+  license: BSD-3-Clause
   license_file: LICENSE.txt
   summary: 'Array processing for numbers, strings, records, and objects.'
   doc_url: https://docs.scipy.org/doc/numpy/reference/
