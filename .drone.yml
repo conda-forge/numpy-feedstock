@@ -1,6 +1,6 @@
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.6.___h6fee7eb9b1
+name: linux_aarch64_numpy1.16python3.6.____cpython
 
 platform:
   os: linux
@@ -8,9 +8,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.6.____cpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.6.____cpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -24,13 +24,14 @@ steps:
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
     - export GIT_BRANCH="$DRONE_BRANCH"
+    - export FEEDSTOCK_NAME=$(basename ${DRONE_REPO_NAME})
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.7.___h3e6361d0ce
+name: linux_aarch64_numpy1.16python3.7.____cpython
 
 platform:
   os: linux
@@ -38,9 +39,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.7.____cpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.7.____cpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -54,13 +55,14 @@ steps:
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
     - export GIT_BRANCH="$DRONE_BRANCH"
+    - export FEEDSTOCK_NAME=$(basename ${DRONE_REPO_NAME})
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.16python3.8.___h8a9d019a51
+name: linux_aarch64_numpy1.16python3.8.____cpython
 
 platform:
   os: linux
@@ -68,9 +70,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.16python3.8.____cpythontarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.16python3.8.____cpython
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -84,13 +86,14 @@ steps:
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
     - export GIT_BRANCH="$DRONE_BRANCH"
+    - export FEEDSTOCK_NAME=$(basename ${DRONE_REPO_NAME})
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
 
 ---
 kind: pipeline
-name: linux_aarch64_numpy1.18python3.6.___ha399c4d162
+name: linux_aarch64_numpy1.18python3.6.____73_pypy
 
 platform:
   os: linux
@@ -98,9 +101,9 @@ platform:
 
 steps:
 - name: Install and build
-  image: condaforge/linux-anvil-aarch64
+  image: quay.io/condaforge/linux-anvil-aarch64
   environment:
-    CONFIG: linux_aarch64_numpy1.18python3.6.____73_pypytarget_platformlinux-aarch64
+    CONFIG: linux_aarch64_numpy1.18python3.6.____73_pypy
     UPLOAD_PACKAGES: True
     PLATFORM: linux-aarch64
     BINSTAR_TOKEN:
@@ -114,6 +117,7 @@ steps:
     - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
     - export CI=drone
     - export GIT_BRANCH="$DRONE_BRANCH"
+    - export FEEDSTOCK_NAME=$(basename ${DRONE_REPO_NAME})
     - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
     - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
     - echo "Done building"
