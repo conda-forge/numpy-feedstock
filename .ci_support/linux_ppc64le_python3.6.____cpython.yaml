@@ -1,19 +1,21 @@
 c_compiler:
 - gcc
 c_compiler_version:
-- '8'
+- '9'
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge,defaults
 channel_targets:
 - conda-forge main
 docker_image:
-- condaforge/linux-anvil-ppc64le
+- quay.io/condaforge/linux-anvil-ppc64le
 libblas:
 - 3.8 *netlib
 libcblas:
 - 3.8 *netlib
 liblapack:
-- 3.8.0 *netlib
+- 3.8 *netlib
 numpy:
 - '1.16'
 pin_run_as_build:
@@ -21,6 +23,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- '3.7'
+- 3.6.* *_cpython
 target_platform:
 - linux-ppc64le
+zip_keys:
+- - python
+  - numpy
