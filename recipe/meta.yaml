@@ -1,4 +1,4 @@
-{% set version = "1.16.5" %}
+{% set version = "1.16.6" %}
 {% set variant = "openblas" %}
 
 package:
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 2b63c414fb43a4f0cb69b29b7e9d48275af0dbb5b1ffd2f2de99c4df9967e151
+  sha256: 61562ddac78765969959500b0da9c6f9ba7d77eeb12ec3927afae5303df08777
   patches:
     # Apparently not all glibcs have 128 bit precision floats implemented correctly.
     - skip_test_loss_of_precision.diff  # [aarch64 or ppc64le]
@@ -15,11 +15,10 @@ source:
     - skip_test_xerbla.diff             # [aarch64]
     - skip_test_einsum_cfloat64.diff    # [ppc64le]
     - skip_structured_object.diff       # [win and py27]
-    - macos-lto-check.patch
     - backport_13558.patch
 
 build:
-  number: 1
+  number: 0
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
@@ -79,3 +78,4 @@ extra:
     - pelson
     - rgommers
     - ocefpaf
+    - xhochy
