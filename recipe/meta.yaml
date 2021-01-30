@@ -7,8 +7,6 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: 67b630745a71b541ff6517d6f3d62b00690dc8ba0684cad0d7b0ac55aec1de53
-  patches:
-    - cblas.diff
 
 build:
   number: 0
