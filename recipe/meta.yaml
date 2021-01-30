@@ -1,4 +1,4 @@
-{% set version = "1.19.5" %}
+{% set version = "1.20.0" %}
 
 package:
   name: numpy
@@ -6,12 +6,12 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: d1654047d75fb9d55cc3d46f312d5247eec5f4999039874d2f571bb8021d8f0b
+  sha256: 67b630745a71b541ff6517d6f3d62b00690dc8ba0684cad0d7b0ac55aec1de53
   patches:
     - cblas.diff
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
