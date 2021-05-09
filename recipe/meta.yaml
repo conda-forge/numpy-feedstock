@@ -58,7 +58,16 @@ test:
     - pytest -nauto --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0  # [aarch64]
   imports:
     - numpy
+    - numpy.core.multiarray
+    - numpy.core._multiarray_tests
+    - numpy.core.numeric
+    - numpy.core._operand_flag_tests
+    - numpy.core._struct_ufunc_tests
+    - numpy.core._rational_tests
+    - numpy.core.umath
+    - numpy.core._umath_tests
     - numpy.linalg.lapack_lite
+    - numpy.random.mtrand
 
 about:
   home: http://numpy.scipy.org/
