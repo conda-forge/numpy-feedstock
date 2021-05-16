@@ -36,6 +36,9 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                 # [linux64]
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
+# behaviour change in lapack 3.9.1 / openblas 0.3.15
+# https://github.com/numpy/numpy/issues/18914
+{% set tests_to_skip = tests_to_skip + " or test_nan" %}
 
 test:
   requires:
