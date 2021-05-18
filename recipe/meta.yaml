@@ -38,6 +38,7 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
 {% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [ppc64le]
+{% set tests_to_skip = tests_to_skip + " or test_big_arrays" %}                     # [ppc64le]
 # behaviour change in lapack 3.9.1 / openblas 0.3.15
 # https://github.com/numpy/numpy/issues/18914
 {% set tests_to_skip = tests_to_skip + " or test_nan" %}
