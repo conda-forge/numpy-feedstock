@@ -54,8 +54,8 @@ test:
     - f2py -h
     - export OPENBLAS_NUM_THREADS=1  # [unix]
     - set OPENBLAS_NUM_THREADS=1  # [win]
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0         # [not aarch64]
-    - pytest -nauto --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0  # [aarch64]
+    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=100         # [not aarch64]
+    - pytest -nauto --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=100  # [aarch64]
   imports:
     - numpy
     - numpy.core.multiarray
