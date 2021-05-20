@@ -52,10 +52,10 @@ test:
     - setuptools
   commands:
     - f2py -h
+    {% set numproc = "-nauto" if aarch64 else "" %}
     - export OPENBLAS_NUM_THREADS=1  # [unix]
     - set OPENBLAS_NUM_THREADS=1  # [win]
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=100         # [not aarch64]
-    - pytest -nauto --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=100  # [aarch64]
+    - pytest {{ numproc }} --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=100
   imports:
     - numpy
     - numpy.core.multiarray
