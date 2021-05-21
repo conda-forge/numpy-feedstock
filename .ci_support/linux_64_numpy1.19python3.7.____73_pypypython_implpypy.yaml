@@ -23,7 +23,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.7.* *_73_pypy
+python_impl:
+- pypy
 target_platform:
 - linux-64
 zip_keys:
@@ -31,3 +33,4 @@ zip_keys:
   - docker_image
 - - python
   - numpy
+  - python_impl
