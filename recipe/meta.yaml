@@ -53,8 +53,6 @@ test:
   commands:
     - f2py -h
     {% set numproc = "-nauto" if aarch64 else "" %}
-    - export OPENBLAS_NUM_THREADS=1  # [unix]
-    - set OPENBLAS_NUM_THREADS=1  # [win]
     - pytest --pyargs numpy -k "not ({{ tests_to_skip }})" {{ numproc }} --durations=100 -v
   imports:
     - numpy
