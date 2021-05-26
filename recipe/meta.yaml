@@ -31,7 +31,7 @@ requirements:
     - python
   run_constrained:
     # enforce eviction of package from anaconda defaults
-    - numpy-base 9999
+    - numpy-base <0a0
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of glibc for large numbers
