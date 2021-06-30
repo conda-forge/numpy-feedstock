@@ -51,7 +51,7 @@ requirements:
     {% set tests_to_skip = tests_to_skip + " or test_big_arrays or test_large_archive or test_large_zip" %}
     {% set tests_to_skip = tests_to_skip + " or test_closing_fid or test_iter_buffered_reduce_reuse" %}
     {% set tests_to_skip = tests_to_skip + " or test_count_nonzero_all or test_divmod_128_64" %}
-    {% set tests_to_skip = tests_to_skip + " or (test_generalized_sq_cases and (TestCond or TestDet))" %}
+    {% set tests_to_skip = tests_to_skip + " or (test_generalized_sq_cases and (TestCond or TestDet or TestInv or TestSolve))" %}
 {% endif %}
 
 test:
