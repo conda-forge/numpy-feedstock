@@ -65,11 +65,9 @@ test:
     - setuptools
   commands:
     - f2py -h
-    # show SIMD features (some failures occur depending on presence/absence of e.g. AVX512)
-    # change to np.show_config() for v>=1.22.0, cf. numpy/numpy#19130
-    - python -c "import numpy; numpy._pytesttester._show_numpy_info()"
     {% set numproc = "-nauto" if aarch64 else "" %}
-    - pytest --pyargs numpy -k "not ({{ tests_to_skip }})" {{ numproc }} --durations=100 -v
+    # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
+    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})', '{{ numproc }}'])"
   imports:
     - numpy
     - numpy.core.multiarray
