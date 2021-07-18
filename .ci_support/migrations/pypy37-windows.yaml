@@ -28,3 +28,5 @@ python:                # [win]
 # additional entries to add for zip_keys
 numpy:                 # [win]
   - 1.19               # [win]
+python_impl:           # [win]
+  - pypy               # [win]
