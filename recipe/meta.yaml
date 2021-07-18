@@ -7,6 +7,9 @@ package:
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
   sha256: b662c841b29848c04d9134f31dbaa7d4c8e673f45bb3a5f28d02f49c424d558a
+  patches:
+    # carry numpy/numpy#19450 to help with flaky hypothesis errors
+    - patches/0001-TST-Simplify-property-test.patch
 
 build:
   number: 0
@@ -36,22 +39,22 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
-{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                 # [linux64]
+{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
 # https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [ppc64le]
-{% set tests_to_skip = tests_to_skip + " or test_big_arrays" %}                     # [ppc64le]
+{% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
 # the following skips are the longest running tests at time of writing; all over 45sec, up to 750sec
 # skipping is done purely to stop pypy jobs from regularly timing out on drone/travis
 {% if (aarch64 or ppc64le) and (python_impl == "pypy") %}
-    {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz" %}
-    {% set tests_to_skip = tests_to_skip + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz" %}
-    {% set tests_to_skip = tests_to_skip + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz" %}
-    {% set tests_to_skip = tests_to_skip + " or test_big_arrays or test_large_archive or test_large_zip" %}
-    {% set tests_to_skip = tests_to_skip + " or test_closing_fid or test_iter_buffered_reduce_reuse" %}
-    {% set tests_to_skip = tests_to_skip + " or test_count_nonzero_all or test_divmod_128_64" %}
-    {% set tests_to_skip = tests_to_skip + " or (test_generalized_sq_cases and (TestCond or TestDet))" %}
+    {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz"
+                                         + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz"
+                                         + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz"
+                                         + " or test_big_arrays or test_large_archive or test_large_zip"
+                                         + " or test_closing_fid or test_iter_buffered_reduce_reuse"
+                                         + " or test_count_nonzero_all or test_divmod_128_64"
+                                         + " or (test_generalized_sq_cases "
+                                         + "     and (TestCond or TestDet or TestInv or TestSolve))" %}
 {% endif %}
 
 test:
@@ -63,7 +66,8 @@ test:
   commands:
     - f2py -h
     {% set numproc = "-nauto" if aarch64 else "" %}
-    - pytest --pyargs numpy -k "not ({{ tests_to_skip }})" {{ numproc }} --durations=100 -v
+    # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
+    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})', '{{ numproc }}'])"
   imports:
     - numpy
     - numpy.core.multiarray
@@ -94,3 +98,4 @@ extra:
     - ocefpaf
     - isuruf
     - xhochy
+    - h-vetinari
