@@ -11,7 +11,7 @@ source:
     - cblas.diff
 
 build:
-  number: 1
+  number: 2
   skip: true  # [py27]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
@@ -33,26 +33,25 @@ requirements:
     - python
 
 {% set tests_to_skip = "_not_a_real_test" %}
-# Seems to fail with current version of blas for large numbers
-# https://github.com/conda-forge/numpy-feedstock/pull/179#issuecomment-569591828
-{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}  # [linux64]
-# Likely bugs in openblas????
-# https://github.com/numpy/numpy/issues/14438#issuecomment-560940664
-{% set tests_to_skip = tests_to_skip + " or test_einsum_sums_cfloat64" %}  # [ppc64le]
-# Only the complex256 system is failing, but I don't know how to skip it on its own
-# # https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision" %}     # [ppc64le]
+# Seems to fail with current version of glibc for large numbers
+# https://github.com/numpy/numpy/issues/15179
+{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
+# https://github.com/numpy/numpy/issues/15243
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
-{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le]
-# Extra slow tests on aarch64 and ppc64le
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_unary_ufunc_call_fuzz" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_count_nonzero_all" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_diophantine_fuzz" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_generalized_sq_cases" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_may_share_memory_harder_fuzz" %}   # [ppc64le or aarch64]
-{% set tests_to_skip = tests_to_skip + " or test_large_zip" %}   # [ppc64le or aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
+# the following skips are the longest running tests at time of writing; all over 45sec, up to 750sec
+# skipping is done purely to stop pypy jobs from regularly timing out on drone/travis
+{% if (aarch64 or ppc64le) and (python_impl == "pypy") %}
+    {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz"
+                                         + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz"
+                                         + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz"
+                                         + " or test_big_arrays or test_large_archive or test_large_zip"
+                                         + " or test_closing_fid or test_iter_buffered_reduce_reuse"
+                                         + " or test_count_nonzero_all or test_divmod_128_64"
+                                         + " or (test_generalized_sq_cases "
+                                         + "     and (TestCond or TestDet or TestInv or TestSolve))" %}
+{% endif %}
 
 test:
   requires:
@@ -62,13 +61,22 @@ test:
     - setuptools
   commands:
     - f2py -h
-    - export OPENBLAS_NUM_THREADS=1  # [unix]
-    - set OPENBLAS_NUM_THREADS=1  # [win]
-    - pytest --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0         # [not aarch64]
-    - pytest -nauto --verbose --pyargs numpy -k "not ({{ tests_to_skip }})" --durations=0  # [aarch64]
+    {% set numproc = "-nauto" if aarch64 else "" %}
+    # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
+    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})', '{{ numproc }}'])"
   imports:
     - numpy
+    - numpy.core.multiarray
+    - numpy.core._multiarray_tests
+    - numpy.core.numeric
+    - numpy.core._operand_flag_tests
+    - numpy.core._struct_ufunc_tests
+    - numpy.core._rational_tests
+    - numpy.core.umath
+    - numpy.core._umath_tests
     - numpy.linalg.lapack_lite
+    - numpy.random.mtrand
+
 
 about:
   home: http://numpy.scipy.org/
