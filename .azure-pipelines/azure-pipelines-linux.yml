@@ -24,6 +24,10 @@ jobs:
         CONFIG: linux_64_numpy1.19python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
+      linux_64_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.21python3.10.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-comp7
       linux_ppc64le_numpy1.18python3.7.____cpythonpython_implcpython:
         CONFIG: linux_ppc64le_numpy1.18python3.7.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
@@ -38,6 +42,10 @@ jobs:
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
       linux_ppc64le_numpy1.19python3.9.____cpythonpython_implcpython:
         CONFIG: linux_ppc64le_numpy1.19python3.9.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+      linux_ppc64le_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_numpy1.21python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
   timeoutInMinutes: 360
