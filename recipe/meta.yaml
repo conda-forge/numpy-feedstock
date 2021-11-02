@@ -42,11 +42,9 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
-# Probably needs too much memory on ppc64le, it sometimes fails on travis
-{% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
 # the following skips are the longest running tests at time of writing; all over 45sec, up to 750sec
-# skipping is done purely to stop pypy jobs from regularly timing out on drone/travis
-{% if (aarch64 or ppc64le) and (python_impl == "pypy") %}
+# skipping is done purely to stop pypy jobs from regularly timing out on drone
+{% if aarch64 and (python_impl == "pypy") %}
     {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz"
                                          + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz"
                                          + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz"
