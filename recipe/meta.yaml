@@ -12,7 +12,7 @@ source:
     - patches/0001-TST-Simplify-property-test.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<37]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
