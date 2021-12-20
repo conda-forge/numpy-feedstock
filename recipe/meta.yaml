@@ -1,4 +1,4 @@
-{% set version = "1.21.4" %}
+{% set version = "1.21.5" %}
 
 package:
   name: numpy
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 5d412381aa489b8be82ac5c6a9e99c3eb3f754245ad3f90ab5c339d92f25fb47
+  sha256: 1a7ee0ffb35dc7489aebe5185a483f4c43b0d2cf784c3c9940f975a7dde56506
   patches:
     # carry numpy/numpy#19450 to help with flaky hypothesis errors
     - patches/0001-TST-Simplify-property-test.patch
