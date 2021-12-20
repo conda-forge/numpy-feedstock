@@ -1,9 +1,15 @@
 c_compiler:
-- vs2017
+- gcc
+c_compiler_version:
+- '9'
+cdt_name:
+- cos7
 channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+docker_image:
+- quay.io/condaforge/linux-anvil-cos7-x86_64
 libblas:
 - 3.8 *netlib
 libcblas:
@@ -11,18 +17,15 @@ libcblas:
 liblapack:
 - 3.8 *netlib
 numpy:
-- '1.21'
+- '1.19'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
-python_impl:
-- cpython
+- 3.9.* *_cpython
 target_platform:
-- win-64
+- linux-ppc64le
 zip_keys:
 - - python
   - numpy
-  - python_impl
