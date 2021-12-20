@@ -41,8 +41,6 @@ requirements:
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
-# https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or TestF77Mismatch" %}    # [build_platform != target_platform]
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}  # [build_platform != target_platform]
@@ -56,7 +54,9 @@ test:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
     # failures that occured depending on presence/absence of e.g. AVX512)
-    - python -c "import numpy, sys; sys.exit(not numpy.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})']))"
+    - python -c "import numpy, sys; sys.exit(not numpy.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})']))"  # [not ppc64le]
+    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
+    # CI to fail, even though the tests should run through on native hardware
   imports:
     - numpy
     - numpy.core.multiarray
