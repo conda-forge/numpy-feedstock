@@ -10,11 +10,13 @@ source:
     patches:
       # backport fix for https://github.com/numpy/numpy/issues/20448
       - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
-  # include submodule (not in github tarball due to dear-github/dear-github#214), c.f.
+  # the sources by upstream themselves (as opposed to automated by github) contains the
+  # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
+  # keep this for reference & debugging when necessary; for exact commit, see:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/core/src/umath
-  - git_url: https://github.com/numpy/SVML.git
-    git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
-    folder: numpy/core/src/umath/svml
+  # - git_url: https://github.com/numpy/SVML.git
+  #   git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
+  #   folder: numpy/core/src/umath/svml
 
 build:
   number: 0
