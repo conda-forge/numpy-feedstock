@@ -1,4 +1,4 @@
-{% set version = "1.21.4" %}
+{% set version = "1.21.5" %}
 
 package:
   name: numpy
@@ -6,7 +6,7 @@ package:
 
 source:
   url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: 5d412381aa489b8be82ac5c6a9e99c3eb3f754245ad3f90ab5c339d92f25fb47
+  sha256: 1a7ee0ffb35dc7489aebe5185a483f4c43b0d2cf784c3c9940f975a7dde56506
   patches:
     # carry numpy/numpy#19450 to help with flaky hypothesis errors
     - patches/0001-TST-Simplify-property-test.patch
@@ -23,6 +23,7 @@ requirements:
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
   host:
     - python
     - pip
@@ -39,9 +40,12 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
-{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
-# https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
+{% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                             # [linux64]
+# failure to raise FloatingPointError on osx for reciprocal
+{% set tests_to_skip = tests_to_skip + " or test_unary_PyUFunc_O_O_method_full[reciprocal]" %}  # [osx]
+# there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
+{% set tests_to_skip = tests_to_skip + " or TestF77Mismatch" %}    # [build_platform != target_platform]
+{% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}  # [build_platform != target_platform]
 
 test:
   requires:
@@ -50,8 +54,11 @@ test:
     - setuptools
   commands:
     - f2py -h
-    # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
-    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})'])"
+    # numpy.test will show SIMD features of agent (in the past, there have been
+    # failures that occured depending on presence/absence of e.g. AVX512)
+    - python -c "import numpy, sys; sys.exit(not numpy.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})']))"  # [not ppc64le]
+    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
+    # CI to fail, even though the tests should run through on native hardware
   imports:
     - numpy
     - numpy.core.multiarray
