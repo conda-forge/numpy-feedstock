@@ -7,6 +7,9 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: f2be14ba396780a6f662b8ba1a24466c9cf18a6a386174f614668e58387a13d7
+    patches:
+      # backport fix for https://github.com/numpy/numpy/issues/20448
+      - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
