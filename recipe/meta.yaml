@@ -7,6 +7,9 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: 2a61da0dc062655097cefa5ae47712317b677f22bf3f20cf397c52fae57dea8a
+    patches:
+      # backport fix for https://github.com/numpy/numpy/issues/20448
+      - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
   # include submodule (not in github tarball due to dear-github/dear-github#214), c.f.
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/core/src/umath
   - git_url: https://github.com/numpy/SVML.git
