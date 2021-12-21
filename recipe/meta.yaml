@@ -5,15 +5,19 @@ package:
   version: {{ version }}
 
 source:
-  url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-  sha256: f2be14ba396780a6f662b8ba1a24466c9cf18a6a386174f614668e58387a13d7
-  patches:
-    # carry numpy/numpy#19450 to help with flaky hypothesis errors
-    - patches/0001-TST-Simplify-property-test.patch
+  - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
+    sha256: f2be14ba396780a6f662b8ba1a24466c9cf18a6a386174f614668e58387a13d7
+  # the sources by upstream themselves (as opposed to automated by github) contain the
+  # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
+  # keep this for reference & debugging when necessary; for exact commit, see:
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/core/src/umath
+  # - git_url: https://github.com/numpy/SVML.git
+  #   git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
+  #   folder: numpy/core/src/umath/svml
 
 build:
   number: 0
-  skip: true  # [py<37]
+  skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
 
