@@ -10,6 +10,7 @@ source:
     patches:
       # backport fix for https://github.com/numpy/numpy/issues/20448
       - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
+      - patches/0001-Restore-vc141-support.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
