@@ -20,7 +20,7 @@ source:
   #   folder: numpy/core/src/umath/svml
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
@@ -30,6 +30,7 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
+    - setuptools <60.0.0
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
@@ -53,7 +54,7 @@ test:
   requires:
     - pytest
     - hypothesis
-    - setuptools
+    - setuptools <60.0.0
     # some linux tests need a compiler
     - {{ compiler('c') }}  # [linux]
   commands:
