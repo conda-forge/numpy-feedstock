@@ -45,7 +45,6 @@ requirements:
   run_constrained:
     # enforce eviction of package from anaconda defaults
     - numpy-base <0a0
-    - setuptools <60.0.0
 
 {% set tests_to_skip = "_not_a_real_test" %}
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
@@ -55,7 +54,7 @@ test:
   requires:
     - pytest
     - hypothesis
-    - setuptools
+    - setuptools <60.0.0
     # some linux tests need a compiler
     - {{ compiler('c') }}  # [linux]
   commands:
