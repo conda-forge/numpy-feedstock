@@ -1,4 +1,4 @@
-{% set version = "1.22.0" %}
+{% set version = "1.22.1" %}
 
 package:
   name: numpy
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: f2be14ba396780a6f662b8ba1a24466c9cf18a6a386174f614668e58387a13d7
+    sha256: dd1968402ae20dfd59b34acd799b494be340c774f6295e9bf1c2b9842a5e416d
     patches:
       # backport fix for https://github.com/numpy/numpy/issues/20448
       - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
@@ -20,7 +20,7 @@ source:
   #   folder: numpy/core/src/umath/svml
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
