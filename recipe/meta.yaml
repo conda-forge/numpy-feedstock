@@ -1,4 +1,4 @@
-{% set version = "1.22.1" %}
+{% set version = "1.22.2" %}
 
 package:
   name: numpy
@@ -6,7 +6,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: dd1968402ae20dfd59b34acd799b494be340c774f6295e9bf1c2b9842a5e416d
+    sha256: 093d513a460fd94f94c16193c3ef29b2d69a33e482071e3d6d6e561a700587a6
     patches:
       # backport fix for https://github.com/numpy/numpy/issues/20448
       - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
