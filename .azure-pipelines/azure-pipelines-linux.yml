@@ -5,27 +5,30 @@
 jobs:
 - job: linux
   pool:
-    vmImage: ubuntu-16.04
-  timeoutInMinutes: 240
+    vmImage: ubuntu-latest
   strategy:
-    maxParallel: 8
     matrix:
-      linux_python2.7:
-        CONFIG: linux_python2.7
-        UPLOAD_PACKAGES: False
-      linux_python3.6:
-        CONFIG: linux_python3.6
-        UPLOAD_PACKAGES: False
-      linux_python3.7:
-        CONFIG: linux_python3.7
-        UPLOAD_PACKAGES: False
+      linux_64_numpy1.18python3.7.____cpython:
+        CONFIG: linux_64_numpy1.18python3.7.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_numpy1.18python3.8.____cpython:
+        CONFIG: linux_64_numpy1.18python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_numpy1.19python3.9.____cpython:
+        CONFIG: linux_64_numpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+  timeoutInMinutes: 360
+
   steps:
   - script: |
-      sudo pip install --upgrade pip
-      sudo pip install setuptools shyaml
-    displayName: Install dependencies
+         rm -rf /opt/ghc
+         df -h
+    displayName: Manage disk space
 
-  # configure qemu binfmt-misc running.  This allows us to run docker containers 
+  # configure qemu binfmt-misc running.  This allows us to run docker containers
   # embedded qemu-static
   - script: |
       docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
@@ -33,7 +36,18 @@ jobs:
     condition: not(startsWith(variables['CONFIG'], 'linux_64'))
     displayName: Configure binfmt_misc
 
-  - script: .azure-pipelines/run_docker_build.sh
+  - script: |
+        export CI=azure
+        export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
+        export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
+        if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
+          export IS_PR_BUILD="True"
+        else
+          export IS_PR_BUILD="False"
+        fi
+        .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
+      FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
+      STAGING_BINSTAR_TOKEN: $(STAGING_BINSTAR_TOKEN)
