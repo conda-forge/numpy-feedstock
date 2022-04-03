@@ -14,6 +14,8 @@ build:
   number: 3
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
+  run_exports:
+    - {{ pin_subpackage("numpy") }}
 
 requirements:
   build:
