@@ -44,10 +44,6 @@ requirements:
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
-# https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
-# Probably needs too much memory on ppc64le, it sometimes fails on travis
-{% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
 
 test:
   requires:
