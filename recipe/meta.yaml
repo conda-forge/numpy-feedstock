@@ -75,7 +75,9 @@ test:
     # https://github.com/numpy/numpy/blob/maintenance/1.20.x/numpy/_pytesttester.py#L93-L94
     {% set param = "verbose=1, label='full', tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
-    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
+    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
+    # CI to fail, even though the tests would run through on native hardware
   imports:
     - numpy
     - numpy.core.multiarray
