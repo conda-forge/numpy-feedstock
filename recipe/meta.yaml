@@ -61,14 +61,13 @@ requirements:
 test:
   requires:
     - pytest
-    - pytest-xdist  # [aarch64]
+    - pytest-xdist
     - hypothesis
     - setuptools
   commands:
     - f2py -h
-    {% set numproc = "-nauto" if aarch64 else "" %}
     # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
-    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})', '{{ numproc }}'])"
+    - python -c "import numpy, sys; sys.exit(not numpy.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})']))"
   imports:
     - numpy
     - numpy.core.multiarray
