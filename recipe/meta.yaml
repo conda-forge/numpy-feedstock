@@ -48,18 +48,6 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
 # Probably needs too much memory on ppc64le, it sometimes fails on travis
 {% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
-# the following skips are the longest running tests at time of writing; all over 45sec, up to 750sec
-# skipping is done purely to stop pypy jobs from regularly timing out on drone/travis
-{% if (aarch64 or ppc64le) and (python_impl == "pypy") %}
-    {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz"
-                                         + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz"
-                                         + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz"
-                                         + " or test_big_arrays or test_large_archive or test_large_zip"
-                                         + " or test_closing_fid or test_iter_buffered_reduce_reuse"
-                                         + " or test_count_nonzero_all or test_divmod_128_64"
-                                         + " or (test_generalized_sq_cases "
-                                         + "     and (TestCond or TestDet or TestInv or TestSolve))" %}
-{% endif %}
 
 test:
   requires:
