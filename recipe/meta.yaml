@@ -11,10 +11,12 @@ source:
     - cblas.diff
 
 build:
-  number: 2
-  skip: true  # [py27]
+  number: 3
+  skip: true  # [py>39]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
+  run_exports:
+    - {{ pin_subpackage("numpy") }}
 
 requirements:
   build:
@@ -31,39 +33,51 @@ requirements:
     - liblapack
   run:
     - python
+  run_constrained:
+    # enforce eviction of package from anaconda defaults
+    - numpy-base <0a0
 
 {% set tests_to_skip = "_not_a_real_test" %}
+# behaviour change in lapack/openblas, see
+# https://github.com/numpy/numpy/issues/18914
+{% set tests_to_skip = tests_to_skip + " or (test_linalg and TestCond and test_nan)" %}
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
-# https://github.com/numpy/numpy/issues/15243
-{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}     # [ppc64le]
-# Probably needs too much memory on ppc64le, it sometimes fails on travis
-{% set tests_to_skip = tests_to_skip + " or test_large_archive or test_big_arrays" %}  # [ppc64le]
-# the following skips are the longest running tests at time of writing; all over 45sec, up to 750sec
-# skipping is done purely to stop pypy jobs from regularly timing out on drone/travis
-{% if (aarch64 or ppc64le) and (python_impl == "pypy") %}
-    {% set tests_to_skip = tests_to_skip + " or test_may_share_memory_easy_fuzz or test_may_share_memory_harder_fuzz"
-                                         + " or test_binary_ufunc_1d_manual or test_diophantine_fuzz"
-                                         + " or test_unary_ufunc_call_fuzz or test_unary_gufunc_fuzz"
-                                         + " or test_big_arrays or test_large_archive or test_large_zip"
-                                         + " or test_closing_fid or test_iter_buffered_reduce_reuse"
-                                         + " or test_count_nonzero_all or test_divmod_128_64"
-                                         + " or (test_generalized_sq_cases "
-                                         + "     and (TestCond or TestDet or TestInv or TestSolve))" %}
-{% endif %}
+# skip tests that can fail to allocate array on windows
+{% set tests_to_skip = tests_to_skip + " or test_big_arrays or test_to_ctypes" %}      # [win]
+# skip a test on pypy that expects GC behaviour
+{% set tests_to_skip = tests_to_skip + " or (TestPickling and test_roundtrip)" %}      # [python_impl == "pypy"]
+# skip tests for windows + pypy + memmap
+{% set tests_to_skip = tests_to_skip + " or memmap or test_empty_npz" %}               # [python_impl == "pypy" and win]
+{% set tests_to_skip = tests_to_skip + " or test_metadata_dtype" %}                    # [python_impl == "pypy" and win]
+# skip a test on pypy where an old file handle is still hot
+{% set tests_to_skip = tests_to_skip + " or test_unicode_field_names" %}               # [python_impl == "pypy" and win]
+# there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
+{% set tests_to_skip = tests_to_skip + " or TestF77Mismatch" %}                        # [build_platform != target_platform]
+{% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                      # [build_platform != target_platform]
+# spurious hypothesis failure in emulation
+{% set tests_to_skip = tests_to_skip + " or test_clip_property" %}                     # [build_platform != target_platform or (python_impl == "pypy" and win)]
 
 test:
   requires:
     - pytest
-    - pytest-xdist  # [aarch64]
+    - pytest-timeout
+    - pytest-xdist
     - hypothesis
     - setuptools
   commands:
     - f2py -h
-    {% set numproc = "-nauto" if aarch64 else "" %}
-    # np.test will show SIMD features of agent (some failures occur depending on presence/absence of e.g. AVX512)
-    - python -c "import numpy as np; np.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})', '{{ numproc }}'])"
+    # numpy.test will show SIMD features of agent (in the past, there have been
+    # failures that occured depending on presence/absence of e.g. AVX512);
+    # for signature of numpy.test see the following (note default: label='fast'),
+    # https://github.com/numpy/numpy/blob/maintenance/1.19.x/numpy/_pytesttester.py#L78-L79
+    {% set label = "'fast'" if aarch64 else "'full'" %}
+    {% set param = "verbose=1, label=" + label + ", tests=None" %}
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
+    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
+    # CI to fail, even though the tests would run through on native hardware
   imports:
     - numpy
     - numpy.core.multiarray
