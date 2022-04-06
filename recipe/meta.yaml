@@ -44,6 +44,8 @@ requirements:
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
+# skip a test on pypy that expects GC behaviour
+{% set tests_to_skip = tests_to_skip + " or (TestPickling and test_roundtrip)" %}      # [python_impl == "pypy"]
 
 test:
   requires:
