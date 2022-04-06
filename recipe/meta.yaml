@@ -63,13 +63,19 @@ requirements:
 test:
   requires:
     - pytest
-    - pytest-xdist  # [aarch64]
+    - pytest-timeout
+    - pytest-xdist
     - hypothesis
     - setuptools
   commands:
     - f2py -h
-    {% set numproc = "-nauto" if aarch64 else "" %}
-    - pytest --pyargs numpy -k "not ({{ tests_to_skip }})" {{ numproc }} --durations=100 -v
+    # numpy.test will show SIMD features of agent (in the past, there have been
+    # failures that occured depending on presence/absence of e.g. AVX512);
+    # for signature of numpy.test see the following (note default: label='fast'),
+    # https://github.com/numpy/numpy/blob/maintenance/1.20.x/numpy/_pytesttester.py#L93-L94
+    {% set param = "verbose=1, label='full', tests=None" %}
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
     - numpy.core.multiarray
