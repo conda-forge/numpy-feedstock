@@ -44,16 +44,20 @@ requirements:
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
+# skip tests that can fail to allocate array on windows
+{% set tests_to_skip = tests_to_skip + " or test_big_arrays or test_to_ctypes" %}      # [win]
 # skip a test on pypy that expects GC behaviour
 {% set tests_to_skip = tests_to_skip + " or (TestPickling and test_roundtrip)" %}      # [python_impl == "pypy"]
 # skip tests for windows + pypy + memmap
 {% set tests_to_skip = tests_to_skip + " or memmap" %}                                 # [python_impl == "pypy" and win]
 {% set tests_to_skip = tests_to_skip + " or test_metadata_dtype" %}                    # [python_impl == "pypy" and win]
+# skip a test on pypy where an old file handle is still hot
+{% set tests_to_skip = tests_to_skip + " or test_unicode_field_names" %}               # [python_impl == "pypy" and win]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or TestF77Mismatch" %}                        # [build_platform != target_platform]
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                      # [build_platform != target_platform]
 # spurious hypothesis failure in emulation
-{% set tests_to_skip = tests_to_skip + " or test_clip_property" %}                     # [build_platform != target_platform]
+{% set tests_to_skip = tests_to_skip + " or test_clip_property" %}                     # [build_platform != target_platform or (python_impl == "pypy" and win)]
 
 test:
   requires:
