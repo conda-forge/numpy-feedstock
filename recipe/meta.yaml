@@ -38,6 +38,9 @@ requirements:
     - numpy-base <0a0
 
 {% set tests_to_skip = "_not_a_real_test" %}
+# behaviour change in lapack/openblas, see
+# https://github.com/numpy/numpy/issues/18914
+{% set tests_to_skip = tests_to_skip + " or (test_linalg and TestCond and test_nan)" %}
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                    # [linux64]
