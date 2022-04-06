@@ -43,6 +43,9 @@ requirements:
 # https://github.com/numpy/numpy/issues/18914
 # pytest -k "not xxx" filters all occurences of the string; need to link with class name
 {% set tests_to_skip = tests_to_skip + " or (TestCond and test_nan)" %}
+# there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
+{% set tests_to_skip = tests_to_skip + " or TestF77Mismatch" %}                     # [build_platform != target_platform]
+{% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                   # [build_platform != target_platform]
 
 test:
   requires:
