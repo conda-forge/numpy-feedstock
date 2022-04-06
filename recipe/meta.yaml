@@ -49,7 +49,7 @@ requirements:
 # skip a test on pypy that expects GC behaviour
 {% set tests_to_skip = tests_to_skip + " or (TestPickling and test_roundtrip)" %}      # [python_impl == "pypy"]
 # skip tests for windows + pypy + memmap
-{% set tests_to_skip = tests_to_skip + " or memmap" %}                                 # [python_impl == "pypy" and win]
+{% set tests_to_skip = tests_to_skip + " or memmap or test_empty_npz" %}               # [python_impl == "pypy" and win]
 {% set tests_to_skip = tests_to_skip + " or test_metadata_dtype" %}                    # [python_impl == "pypy" and win]
 # skip a test on pypy where an old file handle is still hot
 {% set tests_to_skip = tests_to_skip + " or test_unicode_field_names" %}               # [python_impl == "pypy" and win]
