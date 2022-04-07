@@ -13,7 +13,7 @@ libcblas:
 liblapack:
 - 3.8 *netlib
 numpy:
-- '1.22'
+- '1.19'
 pin_run_as_build:
   python:
     min_pin: x.x
