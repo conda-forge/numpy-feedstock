@@ -72,7 +72,7 @@ test:
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
     {% set label = "'fast'" if aarch64 else "'full'" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
-    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=1800', '--durations=50']" %}
     - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
     # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
     # CI to fail, even though the tests should run through on native hardware
