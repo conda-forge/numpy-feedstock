@@ -55,6 +55,8 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest-timeout
+    - pytest-xdist
     - hypothesis
     - setuptools <60.0.0
     # some linux tests need a compiler
@@ -62,8 +64,12 @@ test:
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
-    # failures that occured depending on presence/absence of e.g. AVX512)
-    - python -c "import numpy, sys; sys.exit(not numpy.test(verbose=3, durations=50, extra_argv=['-k', 'not ({{ tests_to_skip }})']))"  # [not ppc64le]
+    # failures that occured depending on presence/absence of e.g. AVX512);
+    # for signature of numpy.test see the following (note default: label='fast'),
+    # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
+    {% set param = "verbose=1, label='full', tests=None" %}
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
     # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
     # CI to fail, even though the tests should run through on native hardware
   imports:
