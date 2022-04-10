@@ -8,64 +8,76 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_numpy1.18python3.7.____cpython:
-        CONFIG: linux_64_numpy1.18python3.7.____cpython
+      linux_64_numpy1.19python3.7.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.19python3.7.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.18python3.8.____cpython:
-        CONFIG: linux_64_numpy1.18python3.8.____cpython
+      linux_64_numpy1.19python3.8.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.19python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.19python3.7.____73_pypy:
-        CONFIG: linux_64_numpy1.19python3.7.____73_pypy
+      linux_64_numpy1.19python3.9.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.19python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.19python3.9.____cpython:
-        CONFIG: linux_64_numpy1.19python3.9.____cpython
+      linux_64_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_64_numpy1.21python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.21python3.10.____cpython:
-        CONFIG: linux_64_numpy1.21python3.10.____cpython
+      linux_64_numpy1.22python3.8.____73_pypypython_implpypy:
+        CONFIG: linux_64_numpy1.22python3.8.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.18python3.7.____cpython:
-        CONFIG: linux_aarch64_numpy1.18python3.7.____cpython
+      linux_64_numpy1.22python3.9.____73_pypypython_implpypy:
+        CONFIG: linux_64_numpy1.22python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.18python3.8.____cpython:
-        CONFIG: linux_aarch64_numpy1.18python3.8.____cpython
+      linux_aarch64_numpy1.19python3.7.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.19python3.7.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.19python3.7.____73_pypy:
-        CONFIG: linux_aarch64_numpy1.19python3.7.____73_pypy
+      linux_aarch64_numpy1.19python3.8.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.19python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.19python3.9.____cpython:
-        CONFIG: linux_aarch64_numpy1.19python3.9.____cpython
+      linux_aarch64_numpy1.19python3.9.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.19python3.9.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.21python3.10.____cpython:
-        CONFIG: linux_aarch64_numpy1.21python3.10.____cpython
+      linux_aarch64_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_aarch64_numpy1.21python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.18python3.7.____cpython:
-        CONFIG: linux_ppc64le_numpy1.18python3.7.____cpython
+      linux_aarch64_numpy1.22python3.8.____73_pypypython_implpypy:
+        CONFIG: linux_aarch64_numpy1.22python3.8.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.18python3.8.____cpython:
-        CONFIG: linux_ppc64le_numpy1.18python3.8.____cpython
+      linux_aarch64_numpy1.22python3.9.____73_pypypython_implpypy:
+        CONFIG: linux_aarch64_numpy1.22python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.19python3.7.____73_pypy:
-        CONFIG: linux_ppc64le_numpy1.19python3.7.____73_pypy
+      linux_ppc64le_numpy1.19python3.7.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_numpy1.19python3.7.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.19python3.9.____cpython:
-        CONFIG: linux_ppc64le_numpy1.19python3.9.____cpython
+      linux_ppc64le_numpy1.19python3.8.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_numpy1.19python3.8.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.21python3.10.____cpython:
-        CONFIG: linux_ppc64le_numpy1.21python3.10.____cpython
+      linux_ppc64le_numpy1.19python3.9.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_numpy1.19python3.9.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_numpy1.21python3.10.____cpythonpython_implcpython:
+        CONFIG: linux_ppc64le_numpy1.21python3.10.____cpythonpython_implcpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_numpy1.22python3.8.____73_pypypython_implpypy:
+        CONFIG: linux_ppc64le_numpy1.22python3.8.____73_pypypython_implpypy
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_numpy1.22python3.9.____73_pypypython_implpypy:
+        CONFIG: linux_ppc64le_numpy1.22python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
   timeoutInMinutes: 360
