@@ -51,6 +51,8 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
+# Probably needs too much memory on ppc64le, it sometimes crashes on travis
+{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [ppc64le]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}               # [build_platform != target_platform]
 # flaky refcount-based test; already skipped upstream for win+py39
