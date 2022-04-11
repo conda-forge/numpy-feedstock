@@ -72,7 +72,7 @@ test:
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'fast'" if aarch64 else "'full'" %}
+    {% set label = "'fast'" if (aarch64 or ppc64le) else "'full'" %}
     {% set num_proc = "" if ppc64le else "'-nauto', " %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
