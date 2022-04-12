@@ -43,6 +43,8 @@ requirements:
 # Seems to fail with current version of glibc for large numbers
 # https://github.com/numpy/numpy/issues/15179
 {% set tests_to_skip = tests_to_skip + " or test_sincos_float32" %}                             # [linux64]
+# https://github.com/numpy/numpy/issues/15243
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}              # [ppc64le]
 # failure to raise FloatingPointError on osx for reciprocal
 {% set tests_to_skip = tests_to_skip + " or test_unary_PyUFunc_O_O_method_full[reciprocal]" %}  # [osx]
 # skip a test on pypy that expects GC behaviour
@@ -69,9 +71,7 @@ test:
     {% set label = "'fast'" if aarch64 else "'full'" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=600', '--durations=50']" %}
-    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
-    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
-    # CI to fail, even though the tests should run through on native hardware
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
     - numpy.core.multiarray
