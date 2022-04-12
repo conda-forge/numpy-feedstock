@@ -1,0 +1,30 @@
+blas_impl:
+- netlib
+c_compiler:
+- vs2017
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+libblas:
+- 3.8 *netlib
+libcblas:
+- 3.8 *netlib
+liblapack:
+- 3.8 *netlib
+numpy:
+- '1.21'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.7.* *_73_pypy
+python_impl:
+- pypy
+target_platform:
+- win-64
+zip_keys:
+- - python
+  - numpy
+  - python_impl
