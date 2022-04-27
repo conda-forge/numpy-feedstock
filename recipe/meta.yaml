@@ -49,6 +49,10 @@ requirements:
     - numpy-base <0a0
 
 {% set tests_to_skip = "_not_a_real_test" %}
+# https://github.com/numpy/numpy/issues/15243
+{% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
+# Probably needs too much memory on ppc64le, it sometimes crashes on travis
+{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [CI == "travis"]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}               # [build_platform != target_platform]
 # flaky refcount-based test; already skipped upstream for win+py39
@@ -59,7 +63,7 @@ test:
   requires:
     - pytest
     - pytest-timeout
-    - pytest-xdist
+    - pytest-xdist         # [CI != "travis"]
     - hypothesis
     - setuptools <60.0.0
     # some linux tests need a compiler
@@ -70,12 +74,11 @@ test:
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'fast'" if aarch64 else "'full'" %}
+    {% set label = "'fast'" if (aarch64 or ppc64le) else "'full'" %}
+    {% set num_proc = "" if ppc64le else "'-nauto', " %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
-    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=3000', '--durations=50']" %}
-    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not ppc64le]
-    # NOTE: test suite is skipped on ppc due to bugs in QEMU code that cause
-    # CI to fail, even though the tests should run through on native hardware
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
     - numpy.core.multiarray
