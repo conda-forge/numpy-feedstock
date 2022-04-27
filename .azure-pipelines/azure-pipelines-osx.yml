@@ -8,30 +8,109 @@ jobs:
     vmImage: macOS-10.15
   strategy:
     matrix:
-      osx_64_numpy1.19python3.8.____73_pypy:
-        CONFIG: osx_64_numpy1.19python3.8.____73_pypy
+      osx_64_blas_implacceleratenumpy1.19python3.8.____73_pypy:
+        CONFIG: osx_64_blas_implacceleratenumpy1.19python3.8.____73_pypy
         UPLOAD_PACKAGES: 'True'
-      osx_64_numpy1.19python3.8.____cpython:
-        CONFIG: osx_64_numpy1.19python3.8.____cpython
+      osx_64_blas_implacceleratenumpy1.19python3.8.____cpython:
+        CONFIG: osx_64_blas_implacceleratenumpy1.19python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_numpy1.19python3.9.____73_pypy:
-        CONFIG: osx_64_numpy1.19python3.9.____73_pypy
+      osx_64_blas_implacceleratenumpy1.19python3.9.____73_pypy:
+        CONFIG: osx_64_blas_implacceleratenumpy1.19python3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
-      osx_64_numpy1.19python3.9.____cpython:
-        CONFIG: osx_64_numpy1.19python3.9.____cpython
+      osx_64_blas_implacceleratenumpy1.19python3.9.____cpython:
+        CONFIG: osx_64_blas_implacceleratenumpy1.19python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_numpy1.21python3.10.____cpython:
-        CONFIG: osx_64_numpy1.21python3.10.____cpython
+      osx_64_blas_implacceleratenumpy1.21python3.10.____cpython:
+        CONFIG: osx_64_blas_implacceleratenumpy1.21python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_numpy1.19python3.8.____cpython:
-        CONFIG: osx_arm64_numpy1.19python3.8.____cpython
+      osx_64_blas_implblisnumpy1.19python3.8.____73_pypy:
+        CONFIG: osx_64_blas_implblisnumpy1.19python3.8.____73_pypy
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_numpy1.19python3.9.____cpython:
-        CONFIG: osx_arm64_numpy1.19python3.9.____cpython
+      osx_64_blas_implblisnumpy1.19python3.8.____cpython:
+        CONFIG: osx_64_blas_implblisnumpy1.19python3.8.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_numpy1.21python3.10.____cpython:
-        CONFIG: osx_arm64_numpy1.21python3.10.____cpython
+      osx_64_blas_implblisnumpy1.19python3.9.____73_pypy:
+        CONFIG: osx_64_blas_implblisnumpy1.19python3.9.____73_pypy
         UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implblisnumpy1.19python3.9.____cpython:
+        CONFIG: osx_64_blas_implblisnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implblisnumpy1.21python3.10.____cpython:
+        CONFIG: osx_64_blas_implblisnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklnumpy1.19python3.8.____73_pypy:
+        CONFIG: osx_64_blas_implmklnumpy1.19python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklnumpy1.19python3.8.____cpython:
+        CONFIG: osx_64_blas_implmklnumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklnumpy1.19python3.9.____73_pypy:
+        CONFIG: osx_64_blas_implmklnumpy1.19python3.9.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklnumpy1.19python3.9.____cpython:
+        CONFIG: osx_64_blas_implmklnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklnumpy1.21python3.10.____cpython:
+        CONFIG: osx_64_blas_implmklnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibnumpy1.19python3.8.____73_pypy:
+        CONFIG: osx_64_blas_implnetlibnumpy1.19python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibnumpy1.19python3.8.____cpython:
+        CONFIG: osx_64_blas_implnetlibnumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibnumpy1.19python3.9.____73_pypy:
+        CONFIG: osx_64_blas_implnetlibnumpy1.19python3.9.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibnumpy1.19python3.9.____cpython:
+        CONFIG: osx_64_blas_implnetlibnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibnumpy1.21python3.10.____cpython:
+        CONFIG: osx_64_blas_implnetlibnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasnumpy1.19python3.8.____73_pypy:
+        CONFIG: osx_64_blas_implopenblasnumpy1.19python3.8.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasnumpy1.19python3.8.____cpython:
+        CONFIG: osx_64_blas_implopenblasnumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasnumpy1.19python3.9.____73_pypy:
+        CONFIG: osx_64_blas_implopenblasnumpy1.19python3.9.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasnumpy1.19python3.9.____cpython:
+        CONFIG: osx_64_blas_implopenblasnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasnumpy1.21python3.10.____cpython:
+        CONFIG: osx_64_blas_implopenblasnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implacceleratenumpy1.19python3.8.____cpython:
+        CONFIG: osx_arm64_blas_implacceleratenumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implacceleratenumpy1.19python3.9.____cpython:
+        CONFIG: osx_arm64_blas_implacceleratenumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implacceleratenumpy1.21python3.10.____cpython:
+        CONFIG: osx_arm64_blas_implacceleratenumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implnetlibnumpy1.19python3.8.____cpython:
+        CONFIG: osx_arm64_blas_implnetlibnumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implnetlibnumpy1.19python3.9.____cpython:
+        CONFIG: osx_arm64_blas_implnetlibnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implnetlibnumpy1.21python3.10.____cpython:
+        CONFIG: osx_arm64_blas_implnetlibnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implopenblasnumpy1.19python3.8.____cpython:
+        CONFIG: osx_arm64_blas_implopenblasnumpy1.19python3.8.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implopenblasnumpy1.19python3.9.____cpython:
+        CONFIG: osx_arm64_blas_implopenblasnumpy1.19python3.9.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_arm64_blas_implopenblasnumpy1.21python3.10.____cpython:
+        CONFIG: osx_arm64_blas_implopenblasnumpy1.21python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+    maxParallel: 20
   timeoutInMinutes: 360
 
   steps:
