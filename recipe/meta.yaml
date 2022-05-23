@@ -4,6 +4,9 @@ package:
   name: numpy
   version: {{ version }}
 
+# use 'python_impl' in meta.yaml so it gets picked up by rendering
+# [python_impl == "pypy"]
+
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: b4308198d0e41efaa108e57d69973398439c7299a9d551680cdd603cf6d20709
