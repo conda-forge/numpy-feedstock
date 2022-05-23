@@ -3,7 +3,7 @@ MACOSX_DEPLOYMENT_TARGET:
 c_compiler:
 - clang
 c_compiler_version:
-- '12'
+- '13'
 channel_sources:
 - conda-forge
 channel_targets:
@@ -11,7 +11,7 @@ channel_targets:
 cxx_compiler:
 - clangxx
 cxx_compiler_version:
-- '12'
+- '13'
 libblas:
 - 3.8 *netlib
 libcblas:
@@ -28,6 +28,8 @@ pin_run_as_build:
     max_pin: x.x
 python:
 - 3.8.* *_73_pypy
+python_impl:
+- pypy
 target_platform:
 - osx-64
 zip_keys:
@@ -35,3 +37,4 @@ zip_keys:
   - cxx_compiler_version
 - - python
   - numpy
+  - python_impl
