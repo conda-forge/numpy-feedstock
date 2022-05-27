@@ -85,6 +85,33 @@ test:
     - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
+    # reference for public API is effectively
+    # https://github.com/numpy/numpy/blame/main/numpy/tests/test_public_api.py
+    - numpy.array_api
+    - numpy.array_api.linalg
+    - numpy.ctypeslib
+    - numpy.distutils
+    - numpy.doc
+    - numpy.doc.constants
+    - numpy.doc.ufuncs
+    - numpy.f2py
+    - numpy.fft
+    - numpy.lib
+    - numpy.lib.mixins
+    - numpy.lib.recfunctions
+    - numpy.lib.scimath
+    - numpy.linalg
+    - numpy.ma
+    - numpy.ma.extras
+    - numpy.ma.mrecords
+    - numpy.matlib
+    - numpy.polynomial
+    - numpy.random
+    - numpy.testing
+    - numpy.typing
+    - numpy.version
+    # some private modules that were once upon a time
+    # determined to be useful packaging checks
     - numpy.core.multiarray
     - numpy.core._multiarray_tests
     - numpy.core.numeric
