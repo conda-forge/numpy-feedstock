@@ -70,8 +70,10 @@ test:
     - pytest-xdist         # [CI != "travis"]
     - hypothesis
     - setuptools <60.0.0
-    # some linux tests need a compiler
-    - {{ compiler('c') }}  # [linux]
+    # some linux tests need a C compiler;
+    # extra f2py tests need a fortran compiler
+    - {{ compiler('c') }}        # [linux]
+    - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
