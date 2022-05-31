@@ -80,7 +80,7 @@ test:
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'full'" if (CI != "travis") else "'fast'" %}
+    {% set label = "'fast'" if (CI == "travis") or (aarch64 and python_impl == "pypy") else "'full'" %}
     {% set num_proc = "'-nauto', " if (CI != "travis") else "" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
