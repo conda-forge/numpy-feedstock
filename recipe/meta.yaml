@@ -51,10 +51,8 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
-# Sometimes crashes on travis (needs too much memory)
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [CI == "travis"]
-# Same test as above; since 1.22.4 it fails for pypy
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(python_impl == "pypy") and linux]
+# Sometimes crashes on travis (needs too much memory); since 1.22.4 it fails for pypy
+{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(CI == "travis") or ((python_impl == "pypy") and linux)]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                   # [build_platform != target_platform]
 # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
