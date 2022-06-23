@@ -68,6 +68,7 @@ test:
     - pytest-xdist         # [CI != "travis"]
     - hypothesis
     - setuptools <60.0.0
+    - typing_extensions
     # some linux tests need a C compiler;
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [linux]
