@@ -51,8 +51,8 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
-# Sometimes crashes on travis (needs too much memory); since 1.22.4 it fails for pypy
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(CI == "travis") or ((python_impl == "pypy") and linux)]
+# Fails for pypy since 1.22.4
+{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(python_impl == "pypy") and linux]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                   # [build_platform != target_platform]
 # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
@@ -67,7 +67,7 @@ test:
   requires:
     - pytest
     - pytest-timeout
-    - pytest-xdist         # [CI != "travis"]
+    - pytest-xdist
     # (mostly) optional test requirements (except wheel, python-cov, mypy), see
     # https://github.com/numpy/numpy/blob/main/test_requirements.txt
     - cffi                 # [py<=39 and python_impl != "pypy"]
@@ -88,12 +88,10 @@ test:
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'fast'" if (CI == "travis") or (aarch64 and python_impl == "pypy") else "'full'" %}
-    {% set num_proc = "'-nauto', " if (CI != "travis") else "" %}
+    {% set label = "'fast'" if ((aarch64 or ppc64le) and python_impl == "pypy") else "'full'" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
-    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
-    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not (ppc64le and python_impl == "pypy")]
-    # pypy on ppc times out despite "label='fast'"
+    {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=3000', '--durations=50']" %}
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
     # reference for public API is effectively
