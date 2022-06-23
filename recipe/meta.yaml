@@ -66,7 +66,12 @@ test:
     - pytest
     - pytest-timeout
     - pytest-xdist         # [CI != "travis"]
+    # (mostly) optional test requirements (except wheel, python-cov, mypy), see
+    # https://github.com/numpy/numpy/blob/main/test_requirements.txt
+    - cffi                 # [py<=39 and python_impl != "pypy"]
+    - cython
     - hypothesis
+    - pytz
     - setuptools <60.0.0
     - typing_extensions
     # some linux tests need a C compiler;
