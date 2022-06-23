@@ -11,7 +11,7 @@ Summary: The fundamental package for scientific computing with Python.
 
 Development: https://github.com/numpy/numpy
 
-Documentation: https://numpy.org/doc/stable/reference/
+Documentation: https://numpy.org/doc/stable/
 
 Current build status
 ====================

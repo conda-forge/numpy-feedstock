@@ -1,4 +1,4 @@
-{% set version = "1.22.4" %}
+{% set version = "1.23.0" %}
 
 package:
   name: numpy
@@ -9,10 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: b4308198d0e41efaa108e57d69973398439c7299a9d551680cdd603cf6d20709
-    patches:
-      # backport fix for https://github.com/numpy/numpy/issues/20448
-      - patches/0001-move-get_glibc_version-to-np.testing-skip-2-more-tes.patch
+    sha256: bd3fa4fe2e38533d5336e1272fc4e765cabbbde144309ccee8675509d5cd7b05
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
@@ -54,10 +51,8 @@ requirements:
 {% set tests_to_skip = "_not_a_real_test" %}
 # https://github.com/numpy/numpy/issues/15243
 {% set tests_to_skip = tests_to_skip + " or test_loss_of_precision[complex256]" %}  # [ppc64le]
-# Sometimes crashes on travis (needs too much memory)
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [CI == "travis"]
-# Same test as above; since 1.22.4 it fails for pypy
-{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(python_impl == "pypy") and linux]
+# Sometimes crashes on travis (needs too much memory); since 1.22.4 it fails for pypy
+{% set tests_to_skip = tests_to_skip + " or test_large_archive" %}                  # [(CI == "travis") or ((python_impl == "pypy") and linux)]
 # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
 {% set tests_to_skip = tests_to_skip + " or Test_ARM_Features" %}                   # [build_platform != target_platform]
 # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
@@ -71,23 +66,58 @@ test:
     - pytest
     - pytest-timeout
     - pytest-xdist         # [CI != "travis"]
+    # (mostly) optional test requirements (except wheel, python-cov, mypy), see
+    # https://github.com/numpy/numpy/blob/main/test_requirements.txt
+    - cffi                 # [py<=39 and python_impl != "pypy"]
+    - cython
     - hypothesis
+    - pytz
     - setuptools <60.0.0
-    # some linux tests need a compiler
-    - {{ compiler('c') }}  # [linux]
+    - typing_extensions
+    # some linux tests need a C compiler;
+    # extra f2py tests need a fortran compiler
+    - {{ compiler('c') }}        # [linux]
+    - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'full'" if (CI != "travis") else "'fast'" %}
+    {% set label = "'fast'" if (CI == "travis") or (aarch64 and python_impl == "pypy") else "'full'" %}
     {% set num_proc = "'-nauto', " if (CI != "travis") else "" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
     - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
+    # reference for public API is effectively
+    # https://github.com/numpy/numpy/blame/main/numpy/tests/test_public_api.py
+    - numpy.array_api
+    - numpy.array_api.linalg
+    - numpy.ctypeslib
+    - numpy.distutils
+    - numpy.doc
+    - numpy.doc.constants
+    - numpy.doc.ufuncs
+    - numpy.f2py
+    - numpy.fft
+    - numpy.lib
+    - numpy.lib.mixins
+    - numpy.lib.recfunctions
+    - numpy.lib.scimath
+    - numpy.linalg
+    - numpy.ma
+    - numpy.ma.extras
+    - numpy.ma.mrecords
+    - numpy.matlib
+    - numpy.polynomial
+    - numpy.random
+    - numpy.testing
+    - numpy.typing
+    - numpy.version
+    # some private modules that were once upon a time
+    # determined to be useful packaging checks
     - numpy.core.multiarray
     - numpy.core._multiarray_tests
     - numpy.core.numeric
@@ -104,7 +134,7 @@ about:
   license: BSD-3-Clause
   license_file: LICENSE.txt
   summary: The fundamental package for scientific computing with Python.
-  doc_url: https://numpy.org/doc/stable/reference/
+  doc_url: https://numpy.org/doc/stable/
   dev_url: https://github.com/numpy/numpy
 
 extra:
