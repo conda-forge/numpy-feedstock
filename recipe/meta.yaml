@@ -19,10 +19,10 @@ source:
   #   folder: numpy/core/src/umath/svml
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<38]
   entry_points:
-    - f2py = numpy.f2py.f2py2e:main  # [win]
+    - f2py = numpy.f2py.f2py2e:main
   run_exports:
     - {{ pin_subpackage("numpy") }}
 
