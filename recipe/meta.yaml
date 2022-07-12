@@ -80,7 +80,7 @@ test:
     # some linux tests need a C compiler;
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [linux]
-    - {{ compiler('fortran') }}  # [linux]
+    - {{ compiler('fortran') }}  # [unix]
   source_files:
     - doc/source/f2py/code/fib1.f
   commands:
