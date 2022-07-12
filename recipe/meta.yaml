@@ -81,8 +81,13 @@ test:
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [linux]
     - {{ compiler('fortran') }}  # [linux]
+  source_files:
+    - doc/source/f2py/code/fib1.f
   commands:
     - f2py -h
+    - f2py -m fibby doc/source/f2py/code/fib1.f
+    # compilation needs fortran compiler
+    - f2py -c -m fibby doc/source/f2py/code/fib1.f  # [unix]
     # numpy.test will show SIMD features of agent (in the past, there have been
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
