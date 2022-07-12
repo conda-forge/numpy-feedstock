@@ -23,6 +23,9 @@ build:
   skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main
+    # installed by default by setup.py
+    - f2py3 = numpy.f2py.f2py2e:main
+    - f2py3.{{ CONDA_PY[1:] }} = numpy.f2py.f2py2e:main
   run_exports:
     - {{ pin_subpackage("numpy") }}
 
