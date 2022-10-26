@@ -19,7 +19,7 @@ source:
   #   folder: numpy/core/src/umath/svml
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
@@ -71,6 +71,8 @@ test:
     - cffi                 # [py<=39 and python_impl != "pypy"]
     - cython
     - hypothesis
+    # workaround for python/cpython#98706
+    - importlib_metadata >=4.13  # [py==311]
     - pytz
     - setuptools <60.0.0
     - typing_extensions
