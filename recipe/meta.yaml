@@ -71,6 +71,8 @@ test:
     - cffi                 # [py<=39 and python_impl != "pypy"]
     - cython
     - hypothesis
+    # workaround for python/cpython#98706
+    - importlib_metadata >=4.13  # [py==311]
     - pytz
     - setuptools <60.0.0
     - typing_extensions
