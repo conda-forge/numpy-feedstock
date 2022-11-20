@@ -1,4 +1,4 @@
-{% set version = "1.23.4" %}
+{% set version = "1.23.5" %}
 
 package:
   name: numpy
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: ed2cc92af0efad20198638c69bb0fc2870a58dabfba6eb722c933b48556c686c
+    sha256: 1b1766d6f397c18153d40015ddfc79ddb715cabadc04d2d228d4e5a8bc4ded1a
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
@@ -19,7 +19,7 @@ source:
   #   folder: numpy/core/src/umath/svml
 
 build:
-  number: 1
+  number: 0
   skip: true  # [py<38]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
