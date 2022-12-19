@@ -30,6 +30,7 @@ jobs:
   variables:
     CONDA_BLD_PATH: D:\\bld\\
     SET_PAGEFILE: 'True'
+    UPLOAD_TEMP: D:\\tmp
 
   steps:
     - task: PythonScript@0
@@ -88,6 +89,9 @@ jobs:
     - script: |
         set "GIT_BRANCH=%BUILD_SOURCEBRANCHNAME%"
         set "FEEDSTOCK_NAME=%BUILD_REPOSITORY_NAME:*/=%"
+        set "TEMP=$(UPLOAD_TEMP)"
+        if not exist "%TEMP%\" md "%TEMP%"
+        set "TMP=%TEMP%"
         call activate base
         upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
       displayName: Upload package
