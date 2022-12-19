@@ -1,4 +1,4 @@
-{% set version = "1.23.5" %}
+{% set version = "1.24.0" %}
 
 package:
   name: numpy
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: 1b1766d6f397c18153d40015ddfc79ddb715cabadc04d2d228d4e5a8bc4ded1a
+    sha256: c4ab7c9711fe6b235e86487ca74c1b092a6dd59a3cb45b63241ea0a148501853
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
@@ -59,6 +59,8 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_new_policy" %}                     # [build_platform != target_platform]
 # flaky refcount-based test; already skipped upstream for win+py39
 {% set tests_to_skip = tests_to_skip + " or test_partial_iteration_cleanup" %}      # [osx]
+# non-critical polynomial repr divergence, see https://github.com/numpy/numpy/issues/22825
+{% set tests_to_skip = tests_to_skip + " or (TestPrintOptions and (test_str or test_switch_to_exp or test_non_finite))" %}  # [osx and python_impl == "pypy"]
 
 
 test:
@@ -90,7 +92,8 @@ test:
     {% set num_proc = "'-nauto', " if (CI != "travis") else "" %}
     {% set param = "verbose=1, label=" + label + ", tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', " + num_proc + "'--timeout=3000', '--durations=50']" %}
-    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
+    - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"  # [not (ppc64le and python_impl == "pypy")]
+    # pypy on ppc times out despite "label='fast'"
   imports:
     - numpy
     # reference for public API is effectively
