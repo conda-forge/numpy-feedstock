@@ -59,6 +59,8 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_new_policy" %}                     # [build_platform != target_platform]
 # flaky refcount-based test; already skipped upstream for win+py39
 {% set tests_to_skip = tests_to_skip + " or test_partial_iteration_cleanup" %}      # [osx]
+# non-critical polynomial repr divergence, see https://github.com/numpy/numpy/issues/22825
+{% set tests_to_skip = tests_to_skip + " or (TestPrintOptions and (test_str or test_switch_to_exp or test_non_finite))" %}  # [osx and python_impl == "pypy"]
 
 
 test:
