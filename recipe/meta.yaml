@@ -10,6 +10,9 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: 2386da9a471cc00a1f47845e27d916d5ec5346ae9696e01a8a34760858fe9dd2
+    patches:
+      # backport numpy/numpy#22969, can be dropped for >=v1.24.2
+      - patches/0001-TST-Add-fixture-to-avoid-issue-with-randomizing-test.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
@@ -59,9 +62,6 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_new_policy" %}                     # [build_platform != target_platform]
 # flaky refcount-based test; already skipped upstream for win+py39
 {% set tests_to_skip = tests_to_skip + " or test_partial_iteration_cleanup" %}      # [osx]
-# non-critical polynomial repr divergence, see https://github.com/numpy/numpy/issues/22825
-{% set tests_to_skip = tests_to_skip + " or (TestPrintOptions and (test_str or test_switch_to_exp or test_non_finite))" %}  # [osx and python_impl == "pypy"]
-
 
 test:
   requires:
