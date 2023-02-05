@@ -1,4 +1,4 @@
-{% set version = "1.24.1" %}
+{% set version = "1.24.2" %}
 
 package:
   name: numpy
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: 2386da9a471cc00a1f47845e27d916d5ec5346ae9696e01a8a34760858fe9dd2
+    sha256: 003a9f530e880cb2cd177cba1af7220b9aa42def9c4afc2a2fc3ee6be7eb2b22
     patches:
       # backport numpy/numpy#22969, can be dropped for >=v1.24.2
       - patches/0001-TST-Add-fixture-to-avoid-issue-with-randomizing-test.patch
