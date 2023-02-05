@@ -10,9 +10,6 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: 003a9f530e880cb2cd177cba1af7220b9aa42def9c4afc2a2fc3ee6be7eb2b22
-    patches:
-      # backport numpy/numpy#22969, can be dropped for >=v1.24.2
-      - patches/0001-TST-Add-fixture-to-avoid-issue-with-randomizing-test.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
