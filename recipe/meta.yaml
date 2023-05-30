@@ -14,9 +14,12 @@ source:
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/core/src/umath
-  # - git_url: https://github.com/numpy/SVML.git
-  #   git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
-  #   folder: numpy/core/src/umath/svml
+  - git_url: https://github.com/numpy/SVML.git
+    git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
+    folder: numpy/core/src/umath/svml
+  - git_url: https://github.com/intel/x86-simd-sort.git
+    git_rev: 6283f2491cebe2332795943e30e31828178e5efd
+    folder: numpy/core/src/npysort/x86-simd-sort
 
 build:
   number: 0
