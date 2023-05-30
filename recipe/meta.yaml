@@ -1,4 +1,4 @@
-{% set version = "1.24.3" %}
+{% set version = "1.25.0rc1" %}
 
 package:
   name: numpy
@@ -8,8 +8,8 @@ package:
 # [python_impl == "pypy"]
 
 source:
-  - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: ab344f1bf21f140adab8e47fdbc7c35a477dc01408791f8ba00d018dd0bc5155
+  - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}.tar.gz
+    sha256: b247fdd3759cd269aa845bb10394071cbf916cdb0f64f6c8263d5c7a81e173af
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
