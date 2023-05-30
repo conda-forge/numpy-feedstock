@@ -117,13 +117,8 @@ test:
     # some private modules that were once upon a time
     # determined to be useful packaging checks
     - numpy.core.multiarray
-    - numpy.core._multiarray_tests
     - numpy.core.numeric
-    - numpy.core._operand_flag_tests
-    - numpy.core._struct_ufunc_tests
-    - numpy.core._rational_tests
     - numpy.core.umath
-    - numpy.core._umath_tests
     - numpy.linalg.lapack_lite
     - numpy.random.mtrand
 
