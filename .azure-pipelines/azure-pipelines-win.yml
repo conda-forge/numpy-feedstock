@@ -11,12 +11,6 @@ jobs:
       win_64_numpy1.21python3.10.____cpythonpython_implcpython:
         CONFIG: win_64_numpy1.21python3.10.____cpythonpython_implcpython
         UPLOAD_PACKAGES: 'True'
-      win_64_numpy1.21python3.8.____73_pypypython_implpypy:
-        CONFIG: win_64_numpy1.21python3.8.____73_pypypython_implpypy
-        UPLOAD_PACKAGES: 'True'
-      win_64_numpy1.21python3.8.____cpythonpython_implcpython:
-        CONFIG: win_64_numpy1.21python3.8.____cpythonpython_implcpython
-        UPLOAD_PACKAGES: 'True'
       win_64_numpy1.21python3.9.____73_pypypython_implpypy:
         CONFIG: win_64_numpy1.21python3.9.____73_pypypython_implpypy
         UPLOAD_PACKAGES: 'True'
