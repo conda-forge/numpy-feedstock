@@ -1,4 +1,4 @@
-{% set version = "1.25.0rc1" %}
+{% set version = "1.25.0" %}
 
 package:
   name: numpy
@@ -8,18 +8,18 @@ package:
 # [python_impl == "pypy"]
 
 source:
-  - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}.tar.gz
-    sha256: b247fdd3759cd269aa845bb10394071cbf916cdb0f64f6c8263d5c7a81e173af
+  - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
+    sha256: f1accae9a28dc3cda46a91de86acf69de0d1b5f4edd44a9b0c3ceb8036dfff19
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/core/src/umath
-  - git_url: https://github.com/numpy/SVML.git
-    git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
-    folder: numpy/core/src/umath/svml
-  - git_url: https://github.com/intel/x86-simd-sort.git
-    git_rev: 6283f2491cebe2332795943e30e31828178e5efd
-    folder: numpy/core/src/npysort/x86-simd-sort
+  # - git_url: https://github.com/numpy/SVML.git
+  #   git_rev: 1c5260a61e7dce6be48073dfa96291edb0a11d79
+  #   folder: numpy/core/src/umath/svml
+  # - git_url: https://github.com/intel/x86-simd-sort.git
+  #   git_rev: 6283f2491cebe2332795943e30e31828178e5efd
+  #   folder: numpy/core/src/npysort/x86-simd-sort
 
 build:
   number: 0
