@@ -79,8 +79,10 @@ test:
     - cffi                 # [py<=39 and python_impl != "pypy"]
     - cython
     - hypothesis
+    - meson
     - pytz
-    - setuptools <60.0.0
+    - setuptools <60.0.0   # [py<=311]
+    - setuptools           # [py==312]
     - typing_extensions
     # some linux tests need a C compiler;
     # extra f2py tests need a fortran compiler
@@ -103,10 +105,9 @@ test:
     - numpy.array_api
     - numpy.array_api.linalg
     - numpy.ctypeslib
-    - numpy.distutils
-    - numpy.doc
-    - numpy.doc.constants
-    - numpy.doc.ufuncs
+    - numpy.distutils           # [py<312]
+    - numpy.dtypes
+    - numpy.exceptions
     - numpy.f2py
     - numpy.fft
     - numpy.lib
