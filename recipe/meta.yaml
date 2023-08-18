@@ -10,6 +10,9 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: c67eea90827e1e9aa220a3fc380ce8776428deba8ac9e7c931ce7b69e8dce115
+    patches:
+      # backport numpy/numpy#24414 for unblocking cross-compilation on osx-arm64
+      - patches/0001-BLD-allow-specifying-the-long-double-format-to-avoid.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
