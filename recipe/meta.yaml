@@ -84,9 +84,10 @@ test:
     - setuptools <60.0.0   # [py<=311]
     - setuptools           # [py==312]
     - typing_extensions
-    # some linux tests need a C compiler;
+    # some linux tests need a C/C++ compiler;
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [linux]
+    - {{ compiler('cxx') }}      # [linux]
     - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
