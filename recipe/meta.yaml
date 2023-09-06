@@ -1,4 +1,4 @@
-{% set version = "1.26.0b1" %}
+{% set version = "1.26.0rc1" %}
 
 package:
   name: numpy
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: c67eea90827e1e9aa220a3fc380ce8776428deba8ac9e7c931ce7b69e8dce115
+    sha256: 49a8cafece27db51fd9ec78c044546b15b0c9bf95466c57ada9eeae64075c2f8
     patches:
       # backport numpy/numpy#24414 for unblocking cross-compilation on osx-arm64
       - patches/0001-BLD-allow-specifying-the-long-double-format-to-avoid.patch
