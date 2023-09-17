@@ -1,23 +1,17 @@
-(
-echo [DEFAULT]
-echo library_dirs = %LIBRARY_LIB%
-echo include_dirs = %LIBRARY_INC%
-echo [lapack]
-echo libraries = lapack,blas
-echo [blas]
-echo libraries = cblas,blas
-echo [cblas]
-echo libraries = cblas,blas
-) > site.cfg
+@echo on
 
-set "NPY_LAPACK_ORDER=lapack"
-set "NPY_BLAS_ORDER=blas"
+mkdir builddir
 
-%PYTHON% -m pip install --no-deps --ignore-installed -v .
-if errorlevel 1 exit 1
+:: -wnx flags mean: --wheel --no-isolation --skip-dependency-check
+%PYTHON% -m build -w -n -x ^
+    -Cbuilddir=builddir ^
+    -Csetup-args=-Dblas=blas ^
+    -Csetup-args=-Dlapack=lapack
+if %ERRORLEVEL% neq 0 exit 1
 
-XCOPY %RECIPE_DIR%\f2py.bat %SCRIPTS% /s /e
-if errorlevel 1 exit 1
-
-del %SCRIPTS%\f2py.exe
-if errorlevel 1 exit 1
+:: `pip install dist\numpy*.whl` does not work on windows,
+:: so use a loop; there's only one wheel in dist/ anyway
+for /f %%f in ('dir /b /S .\dist') do (
+    pip install %%f
+    if %ERRORLEVEL% neq 0 exit 1
+)

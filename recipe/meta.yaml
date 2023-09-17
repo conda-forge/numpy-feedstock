@@ -1,4 +1,4 @@
-{% set version = "1.25.2" %}
+{% set version = "1.26.0" %}
 
 package:
   name: numpy
@@ -9,7 +9,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
-    sha256: fd608e19c8d7c55021dffd43bfe5492fab8cc105cc8986f813f8c3c048b38760
+    sha256: f93fc78fe8bf15afe2b8d6b6499f1c73953169fad1e9a8dd086cdff3190e7fdf
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
@@ -34,13 +34,24 @@ requirements:
     - python                                 # [build_platform != target_platform]
     - cross-python_{{ target_platform }}     # [build_platform != target_platform]
     - cython                                 # [build_platform != target_platform]
-    - setuptools <60.0.0                     # [build_platform != target_platform]
+    - ninja                                  # [build_platform != target_platform]
+    - pkg-config                             # [build_platform != target_platform]
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
-    - setuptools <60.0.0
-    - python
+    # temporarily vendored by numpy
+    # - meson
+    # - meson-python
+    # deps of meson-python
+    - pyproject-metadata
+    - tomli                 # [py<=310]
+    - setuptools >=60       # [py==312]
+    # rest
     - pip
+    - ninja
+    - pkg-config
+    - python
+    - python-build
     - cython
     - libblas
     - libcblas
@@ -68,12 +79,15 @@ test:
     - cffi                 # [py<=39 and python_impl != "pypy"]
     - cython
     - hypothesis
+    - meson
     - pytz
-    - setuptools <60.0.0
+    - setuptools <60.0.0   # [py<=311]
+    - setuptools           # [py==312]
     - typing_extensions
-    # some linux tests need a C compiler;
+    # some linux tests need a C/C++ compiler;
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [linux]
+    - {{ compiler('cxx') }}      # [linux]
     - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
@@ -92,10 +106,9 @@ test:
     - numpy.array_api
     - numpy.array_api.linalg
     - numpy.ctypeslib
-    - numpy.distutils
-    - numpy.doc
-    - numpy.doc.constants
-    - numpy.doc.ufuncs
+    - numpy.distutils           # [py<312]
+    - numpy.dtypes
+    - numpy.exceptions
     - numpy.f2py
     - numpy.fft
     - numpy.lib
