@@ -1,11 +1,7 @@
-BUILD:
-- aarch64-conda_cos7-linux-gnu
 c_compiler:
 - gcc
 c_compiler_version:
 - '12'
-cdt_arch:
-- aarch64
 cdt_name:
 - cos7
 channel_sources:
@@ -29,17 +25,17 @@ libcblas:
 liblapack:
 - 3.9 *netlib
 numpy:
-- '1.21'
+- '1.22'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.9.* *_cpython
+- 3.9.* *_73_pypy
 python_impl:
-- cpython
+- pypy
 target_platform:
-- linux-aarch64
+- linux-ppc64le
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
@@ -47,3 +43,4 @@ zip_keys:
 - - python
   - numpy
   - python_impl
+  - channel_sources
