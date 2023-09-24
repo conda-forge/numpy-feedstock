@@ -16,10 +16,9 @@ __migrator:
             - 3.7.* *_73_pypy
             - 3.8.* *_73_pypy
             - 3.9.* *_73_pypy
-    paused: true
-    use_local: True
+    paused: false
     longterm: True
-    pr_limit: 20
+    pr_limit: 60
     max_solver_attempts: 3  # this will make the bot retry "not solvable" stuff 12 times
     exclude:
       # this shouldn't attempt to modify the python feedstocks
@@ -34,10 +33,10 @@ __migrator:
 
 python:
   - 3.12.* *_cpython
+channel_sources:
+  - conda-forge/label/python_rc,conda-forge
 # additional entries to add for zip_keys
 numpy:
   - 1.26
 python_impl:
   - cpython
-channel_sources:
-  - conda-forge/label/python_rc,conda-forge
