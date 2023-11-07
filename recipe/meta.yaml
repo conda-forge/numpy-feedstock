@@ -28,6 +28,9 @@ build:
     - f2py = numpy.f2py.f2py2e:main  # [win]
   run_exports:
     - {{ pin_subpackage("numpy") }}
+  script:  # [unix]
+    - sed -i '/build-backend\|backend-path/d' pyproject.toml  # [linux and with_meson == "no"]
+    - bash -e "${RECIPE_DIR}/build-numpy.sh"  # [unix]
 
 requirements:
   build:
