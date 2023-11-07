@@ -91,6 +91,7 @@ test:
     - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
+    - python -c 'import sys, numpy as np; sys.exit(not np.signbit(np.arctanh(-1j).real))'
     # numpy.test will show SIMD features of agent (in the past, there have been
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
