@@ -32,4 +32,4 @@ $PYTHON -m build -w -n -x \
     -Csetup-args=${MESON_ARGS_REDUCED// / -Csetup-args=} \
     || (cat builddir/meson-logs/meson-log.txt && exit 1)
 
-pip install dist/numpy*.whl
+$PYTHON -m pip install dist/numpy*.whl
