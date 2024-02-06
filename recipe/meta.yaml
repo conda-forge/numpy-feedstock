@@ -39,15 +39,10 @@ requirements:
     - {{ compiler('c') }}
     - {{ compiler('cxx') }}
   host:
+    - pip
     # temporarily vendored by numpy
     # - meson
-    # - meson-python
-    # deps of meson-python
-    - pyproject-metadata
-    - tomli                 # [py<=310]
-    - setuptools >=60       # [py==312]
-    # rest
-    - pip
+    - meson-python
     - ninja
     - pkg-config
     - python
