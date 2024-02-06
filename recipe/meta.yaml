@@ -74,6 +74,7 @@ requirements:
 test:
   requires:
     - pytest
+    - pytest <8            # [python_impl == "pypy"]
     - pytest-timeout
     - pytest-xdist
     # (mostly) optional test requirements (except wheel, python-cov, mypy), see
