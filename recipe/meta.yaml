@@ -77,7 +77,7 @@ test:
     - pytest-timeout
     - pytest-xdist
     # (mostly) optional test requirements (except wheel, python-cov, mypy), see
-    # https://github.com/numpy/numpy/blob/main/test_requirements.txt
+    # https://github.com/numpy/numpy/blob/main/requirements/test_requirements.txt
     - cffi                 # [py<=39 and python_impl != "pypy"]
     - cython
     - hypothesis
