@@ -24,6 +24,8 @@ source:
 build:
   number: 0
   skip: true  # [py<39]
+  # debug
+  skip: true  # [python_impl != "pypy"]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main  # [win]
   run_exports:
