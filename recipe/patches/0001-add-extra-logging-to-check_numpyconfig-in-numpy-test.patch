@@ -1,0 +1,24 @@
+From aa9b455cb2781731d2424979e9ce244c1f4eef74 Mon Sep 17 00:00:00 2001
+From: "H. Vetinari" <h.vetinari@gmx.com>
+Date: Tue, 19 Mar 2024 20:34:29 +1100
+Subject: [PATCH] add extra logging to check_numpyconfig in
+ numpy/tests/test_configtool.py
+
+---
+ numpy/tests/test_configtool.py | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/numpy/tests/test_configtool.py b/numpy/tests/test_configtool.py
+index 5215057f64..d57cf21475 100644
+--- a/numpy/tests/test_configtool.py
++++ b/numpy/tests/test_configtool.py
+@@ -19,6 +19,9 @@
+ 
+ def check_numpyconfig(arg):
+     p = subprocess.run(['numpy-config', arg], capture_output=True, text=True)
++    stdout, stderr = p.stdout, p.stderr
++    print(stdout)
++    print(stderr)
+     p.check_returncode()
+     return p.stdout.strip()
+ 
