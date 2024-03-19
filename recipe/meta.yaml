@@ -10,6 +10,9 @@ package:
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
     sha256: e0bb33a37d0d0b9a19cd41a093877f830e06bd4d989341b9792896cf08e629f7
+    patches:
+      # debug patch for https://github.com/numpy/numpy/issues/26077
+      - patches/0001-add-extra-logging-to-check_numpyconfig-in-numpy-test.patch
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
