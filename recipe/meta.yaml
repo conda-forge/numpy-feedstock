@@ -103,10 +103,8 @@ test:
     - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
     - numpy
-    # reference for public API is effectively
+    # reference for public API is effectively PUBLIC_MODULES under
     # https://github.com/numpy/numpy/blame/main/numpy/tests/test_public_api.py
-    - numpy.array_api
-    - numpy.array_api.linalg
     - numpy.ctypeslib
     - numpy.distutils           # [py<312]
     - numpy.dtypes
@@ -114,18 +112,30 @@ test:
     - numpy.f2py
     - numpy.fft
     - numpy.lib
+    - numpy.lib.format
     - numpy.lib.mixins
     - numpy.lib.recfunctions
     - numpy.lib.scimath
+    - numpy.lib.stride_tricks
+    - numpy.lib.npyio
+    - numpy.lib.introspect
+    - numpy.lib.array_utils
     - numpy.linalg
     - numpy.ma
     - numpy.ma.extras
     - numpy.ma.mrecords
-    - numpy.matlib
     - numpy.polynomial
+    - numpy.polynomial.chebyshev
+    - numpy.polynomial.hermite
+    - numpy.polynomial.hermite_e
+    - numpy.polynomial.laguerre
+    - numpy.polynomial.legendre
+    - numpy.polynomial.polynomial
     - numpy.random
     - numpy.testing
+    - numpy.testing.overrides
     - numpy.typing
+    - numpy.typing.mypy_plugin
     - numpy.version
     # some private modules that were once upon a time
     # determined to be useful packaging checks
