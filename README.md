@@ -251,14 +251,14 @@ Current release info
 Installing numpy
 ================
 
-Installing `numpy` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `numpy` from the `conda-forge/label/numpy_dev` channel can be achieved by adding `conda-forge/label/numpy_dev` to your channels with:
 
 ```
-conda config --add channels conda-forge
+conda config --add channels conda-forge/label/numpy_dev
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `numpy` can be installed with `conda`:
+Once the `conda-forge/label/numpy_dev` channel has been enabled, `numpy` can be installed with `conda`:
 
 ```
 conda install numpy
@@ -273,26 +273,26 @@ mamba install numpy
 It is possible to list all of the versions of `numpy` available on your platform with `conda`:
 
 ```
-conda search numpy --channel conda-forge
+conda search numpy --channel conda-forge/label/numpy_dev
 ```
 
 or with `mamba`:
 
 ```
-mamba search numpy --channel conda-forge
+mamba search numpy --channel conda-forge/label/numpy_dev
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search numpy --channel conda-forge
+mamba repoquery search numpy --channel conda-forge/label/numpy_dev
 
 # List packages depending on `numpy`:
-mamba repoquery whoneeds numpy --channel conda-forge
+mamba repoquery whoneeds numpy --channel conda-forge/label/numpy_dev
 
 # List dependencies of `numpy`:
-mamba repoquery depends numpy --channel conda-forge
+mamba repoquery depends numpy --channel conda-forge/label/numpy_dev
 ```
 
 
