@@ -44,6 +44,7 @@ requirements:
     - ninja                                  # [build_platform != target_platform]
     - pkg-config                             # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
   host:
     - pip
