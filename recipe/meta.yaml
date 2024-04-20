@@ -1,4 +1,8 @@
 {% set version = "2.0.0rc1" %}
+# numpy will by default use the ABI feature level for the first numpy version
+# that added support for the oldest currently-supported CPython version; see
+# https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
+{% set default_abi_level = "1.19" %}
 
 package:
   name: numpy
@@ -25,13 +29,13 @@ source:
   #   folder: numpy/core/src/npysort/x86-simd-sort
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
     - numpy-config = numpy._configtool:main     # [win]
   run_exports:
-    - {{ pin_subpackage("numpy") }}
+    - numpy >={{ default_abi_level }}
 
 requirements:
   build:
@@ -41,6 +45,7 @@ requirements:
     - ninja                                  # [build_platform != target_platform]
     - pkg-config                             # [build_platform != target_platform]
     - {{ compiler('c') }}
+    - {{ stdlib('c') }}
     - {{ compiler('cxx') }}
   host:
     - pip
