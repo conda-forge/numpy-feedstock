@@ -1,4 +1,5 @@
-{% set version = "2.0.0rc1" %}
+{% set version = "2.0.0" %}
+{% set dev = "rc1" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
 # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
@@ -6,13 +7,13 @@
 
 package:
   name: numpy
-  version: {{ version }}
+  version: {{ version }}{{ dev }}
 
 # use 'python_impl' in meta.yaml so it gets picked up by rendering
 # [python_impl == "pypy"]
 
 source:
-  - url: https://github.com/numpy/numpy/releases/download/v{{ version }}/numpy-{{ version }}.tar.gz
+  - url: https://github.com/numpy/numpy/releases/download/v{{ version }}{{ dev }}/numpy-{{ version }}{{ dev }}.tar.gz
     sha256: f0e169ec6cbc1b8e5f6a235845a80961f76f88352082213a1728a0967a761ad2
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
@@ -59,6 +60,9 @@ requirements:
     - liblapack
   run:
     - python
+{% if dev != '' %}
+    - _numpy_rc
+{% endif %}
   run_constrained:
     # enforce eviction of package from anaconda defaults
     - numpy-base <0a0
