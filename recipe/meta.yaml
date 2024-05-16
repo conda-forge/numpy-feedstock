@@ -1,5 +1,5 @@
 {% set version = "2.0.0" %}
-{% set dev = "rc1" %}
+{% set dev = "rc2" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
 # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
@@ -14,7 +14,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}{{ dev }}/numpy-{{ version }}{{ dev }}.tar.gz
-    sha256: f0e169ec6cbc1b8e5f6a235845a80961f76f88352082213a1728a0967a761ad2
+    sha256: 868e9edbee689d6fdb7957c0b790de2b2123e6feff5d66045d10760c521f2c00
   # the sources by upstream themselves (as opposed to automated by github) contain the
   # svml submodule (which isn't in github tarball due to dear-github/dear-github#214);
   # keep this for reference & debugging when necessary; for exact commit, see:
