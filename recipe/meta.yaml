@@ -9,9 +9,6 @@ package:
   name: numpy
   version: {{ version }}{{ dev }}
 
-# use 'python_impl' in meta.yaml so it gets picked up by rendering
-# [python_impl == "pypy"]
-
 source:
   - url: https://github.com/numpy/numpy/releases/download/v{{ version }}{{ dev }}/numpy-{{ version }}{{ dev }}.tar.gz
     sha256: cf5d1c9e6837f8af9f92b6bd3e86d513cdc11f60fd62185cc49ec7d1aba34864
@@ -29,6 +26,8 @@ source:
 build:
   number: 0
   skip: true  # [py<39]
+  # pypy was excluded from numpy 2.0 migration
+  skip: true  # [python_impl == "pypy"]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
     - numpy-config = numpy._configtool:main     # [win]
@@ -75,11 +74,6 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_new_policy" %}                     # [build_platform != target_platform]
 # emulation problems (apparently) on aarch
 {% set tests_to_skip = tests_to_skip + " or (test_basic_property and float32)" %}   # [aarch64]
-# problems with windows + pypy + meson
-{% set tests_to_skip = tests_to_skip + " or test_cython or test_mem_policy" %}      # [win and python_impl == "pypy"]
-{% set tests_to_skip = tests_to_skip + " or test_multi_fortran_libs_link" %}        # [win and python_impl == "pypy"]
-{% set tests_to_skip = tests_to_skip + " or (test_extending and test_cython)" %}    # [win and python_impl == "pypy"]
-{% set tests_to_skip = tests_to_skip + " or (test_scripts and test_pep338)" %}      # [win and python_impl == "pypy"]
 
 test:
   requires:
@@ -88,7 +82,7 @@ test:
     - pytest-xdist
     # (mostly) optional test requirements (except wheel, python-cov, mypy), see
     # https://github.com/numpy/numpy/blob/main/requirements/test_requirements.txt
-    - cffi                 # [py<=39 and python_impl != "pypy"]
+    - cffi                 # [py<=39]
     - cython
     - hypothesis
     - meson
@@ -107,8 +101,7 @@ test:
     # failures that occured depending on presence/absence of e.g. AVX512);
     # for signature of numpy.test see the following (note default: label='fast'),
     # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-    {% set label = "'fast'" if ((aarch64 or ppc64le) and python_impl == "pypy") else "'full'" %}
-    {% set param = "verbose=1, label=" + label + ", tests=None" %}
+    {% set param = "verbose=1, label='full', tests=None" %}
     {% set extra = "extra_argv=['-k', 'not (" + tests_to_skip + ")', '-nauto', '--timeout=3000', '--durations=50', '--maxfail=100']" %}
     - python -c "import numpy, sys; sys.exit(not numpy.test({{ param }}, {{ extra }}))"
   imports:
