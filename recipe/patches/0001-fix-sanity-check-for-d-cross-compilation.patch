@@ -1,0 +1,59 @@
+From 3180f3c4fb03128ff474da7a2425dfddb220a35b Mon Sep 17 00:00:00 2001
+From: Axel Ricard <axel.ricard@allegrodvt.com>
+Date: Tue, 21 May 2024 14:22:40 +0200
+Subject: [PATCH 1/2] fix sanity check for d cross-compilation
+
+---
+ mesonbuild/compilers/d.py      | 14 ++++++++++++--
+ mesonbuild/compilers/detect.py |  3 ++-
+ 2 files changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/mesonbuild/compilers/d.py b/mesonbuild/compilers/d.py
+index de344c057..46cffdd0f 100644
+--- a/mesonbuild/compilers/d.py
++++ b/mesonbuild/compilers/d.py
+@@ -443,10 +443,18 @@ class DCompiler(Compiler):
+         output_name = os.path.join(work_dir, 'dtest')
+         with open(source_name, 'w', encoding='utf-8') as ofile:
+             ofile.write('''void main() { }''')
+-        pc = subprocess.Popen(self.exelist + self.get_output_args(output_name) + self._get_target_arch_args() + [source_name], cwd=work_dir)
++
++        compile_cmdlist = self.exelist + self.get_output_args(output_name) + self._get_target_arch_args() + [source_name]
++
++        # If cross-compiling, we can't run the sanity check, only compile it.
++        if environment.need_exe_wrapper(self.for_machine) and not environment.has_exe_wrapper():
++            compile_cmdlist += self.get_compile_only_args()
++
++        pc = subprocess.Popen(compile_cmdlist, cwd=work_dir)
+         pc.wait()
+         if pc.returncode != 0:
+             raise EnvironmentException('D compiler %s cannot compile programs.' % self.name_string())
++
+         if environment.need_exe_wrapper(self.for_machine):
+             if not environment.has_exe_wrapper():
+                 # Can't check if the binaries run so we have to assume they do
+@@ -545,7 +553,9 @@ class DCompiler(Compiler):
+         # LDC2 on Windows targets to current OS architecture, but
+         # it should follow the target specified by the MSVC toolchain.
+         if self.info.is_windows():
+-            if self.arch == 'x86_64':
++            if self.is_cross:
++                return [f'-mtriple={self.arch}-windows-msvc']
++            elif self.arch == 'x86_64':
+                 return ['-m64']
+             return ['-m32']
+         return []
+diff --git a/mesonbuild/compilers/detect.py b/mesonbuild/compilers/detect.py
+index 90a3ac597..62187b9c2 100644
+--- a/mesonbuild/compilers/detect.py
++++ b/mesonbuild/compilers/detect.py
+@@ -1161,7 +1161,8 @@ def detect_d_compiler(env: 'Environment', for_machine: MachineChoice) -> Compile
+ 
+             return cls(
+                 exelist, version, for_machine, info, arch,
+-                full_version=full_version, linker=linker, version_output=out)
++                full_version=full_version, linker=linker,
++                is_cross=is_cross, version_output=out)
+         elif 'gdc' in out:
+             cls = d.GnuDCompiler
+             linker = guess_nix_linker(env, exelist, cls, version, for_machine)

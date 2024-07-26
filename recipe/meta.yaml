@@ -36,6 +36,10 @@ source:
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
     git_rev: 31161eef3fc8cf0bf834edc1dd29e490fc6d7713
+    patches:
+      # backport https://github.com/mesonbuild/meson/pull/13411 + follow-up
+      - patches/0001-fix-sanity-check-for-d-cross-compilation.patch              # required precursor
+      - patches/0002-Make-sure-machine_info_can_run-isn-t-called-on-incom.patch  # fix + follow-up
 
 build:
   number: 0
