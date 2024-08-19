@@ -8,15 +8,43 @@ jobs:
     vmImage: windows-2022
   strategy:
     matrix:
-      win_64_numpy1.22python3.10.____cpython:
-        CONFIG: win_64_numpy1.22python3.10.____cpython
+      win_64_blas_implblisnumpy1.22python3.10.____cpython:
+        CONFIG: win_64_blas_implblisnumpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_numpy1.23python3.11.____cpython:
-        CONFIG: win_64_numpy1.23python3.11.____cpython
+      win_64_blas_implblisnumpy1.23python3.11.____cpython:
+        CONFIG: win_64_blas_implblisnumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-      win_64_numpy1.26python3.12.____cpython:
-        CONFIG: win_64_numpy1.26python3.12.____cpython
+      win_64_blas_implblisnumpy1.26python3.12.____cpython:
+        CONFIG: win_64_blas_implblisnumpy1.26python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
+      win_64_blas_implmklnumpy1.22python3.10.____cpython:
+        CONFIG: win_64_blas_implmklnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implmklnumpy1.23python3.11.____cpython:
+        CONFIG: win_64_blas_implmklnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implmklnumpy1.26python3.12.____cpython:
+        CONFIG: win_64_blas_implmklnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implnetlibnumpy1.22python3.10.____cpython:
+        CONFIG: win_64_blas_implnetlibnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implnetlibnumpy1.23python3.11.____cpython:
+        CONFIG: win_64_blas_implnetlibnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implnetlibnumpy1.26python3.12.____cpython:
+        CONFIG: win_64_blas_implnetlibnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implopenblasnumpy1.22python3.10.____cpython:
+        CONFIG: win_64_blas_implopenblasnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implopenblasnumpy1.23python3.11.____cpython:
+        CONFIG: win_64_blas_implopenblasnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      win_64_blas_implopenblasnumpy1.26python3.12.____cpython:
+        CONFIG: win_64_blas_implopenblasnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+    maxParallel: 10
   timeoutInMinutes: 360
   variables:
     CONDA_BLD_PATH: D:\\bld\\

@@ -8,42 +8,103 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_numpy1.22python3.10.____cpython:
-        CONFIG: linux_64_numpy1.22python3.10.____cpython
+      linux_64_blas_implblisnumpy1.22python3.10.____cpython:
+        CONFIG: linux_64_blas_implblisnumpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.23python3.11.____cpython:
-        CONFIG: linux_64_numpy1.23python3.11.____cpython
+      linux_64_blas_implblisnumpy1.23python3.11.____cpython:
+        CONFIG: linux_64_blas_implblisnumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_64_numpy1.26python3.12.____cpython:
-        CONFIG: linux_64_numpy1.26python3.12.____cpython
+      linux_64_blas_implblisnumpy1.26python3.12.____cpython:
+        CONFIG: linux_64_blas_implblisnumpy1.26python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.22python3.10.____cpython:
-        CONFIG: linux_aarch64_numpy1.22python3.10.____cpython
+      linux_64_blas_implmklnumpy1.22python3.10.____cpython:
+        CONFIG: linux_64_blas_implmklnumpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.23python3.11.____cpython:
-        CONFIG: linux_aarch64_numpy1.23python3.11.____cpython
+      linux_64_blas_implmklnumpy1.23python3.11.____cpython:
+        CONFIG: linux_64_blas_implmklnumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_aarch64_numpy1.26python3.12.____cpython:
-        CONFIG: linux_aarch64_numpy1.26python3.12.____cpython
+      linux_64_blas_implmklnumpy1.26python3.12.____cpython:
+        CONFIG: linux_64_blas_implmklnumpy1.26python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.22python3.10.____cpython:
-        CONFIG: linux_ppc64le_numpy1.22python3.10.____cpython
+      linux_64_blas_implnetlibnumpy1.22python3.10.____cpython:
+        CONFIG: linux_64_blas_implnetlibnumpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.23python3.11.____cpython:
-        CONFIG: linux_ppc64le_numpy1.23python3.11.____cpython
+      linux_64_blas_implnetlibnumpy1.23python3.11.____cpython:
+        CONFIG: linux_64_blas_implnetlibnumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
-      linux_ppc64le_numpy1.26python3.12.____cpython:
-        CONFIG: linux_ppc64le_numpy1.26python3.12.____cpython
+      linux_64_blas_implnetlibnumpy1.26python3.12.____cpython:
+        CONFIG: linux_64_blas_implnetlibnumpy1.26python3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_blas_implopenblasnumpy1.22python3.10.____cpython:
+        CONFIG: linux_64_blas_implopenblasnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_blas_implopenblasnumpy1.23python3.11.____cpython:
+        CONFIG: linux_64_blas_implopenblasnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_64_blas_implopenblasnumpy1.26python3.12.____cpython:
+        CONFIG: linux_64_blas_implopenblasnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implnetlibnumpy1.22python3.10.____cpython:
+        CONFIG: linux_aarch64_blas_implnetlibnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implnetlibnumpy1.23python3.11.____cpython:
+        CONFIG: linux_aarch64_blas_implnetlibnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implnetlibnumpy1.26python3.12.____cpython:
+        CONFIG: linux_aarch64_blas_implnetlibnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implopenblasnumpy1.22python3.10.____cpython:
+        CONFIG: linux_aarch64_blas_implopenblasnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implopenblasnumpy1.23python3.11.____cpython:
+        CONFIG: linux_aarch64_blas_implopenblasnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_aarch64_blas_implopenblasnumpy1.26python3.12.____cpython:
+        CONFIG: linux_aarch64_blas_implopenblasnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implnetlibnumpy1.22python3.10.____cpython:
+        CONFIG: linux_ppc64le_blas_implnetlibnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implnetlibnumpy1.23python3.11.____cpython:
+        CONFIG: linux_ppc64le_blas_implnetlibnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implnetlibnumpy1.26python3.12.____cpython:
+        CONFIG: linux_ppc64le_blas_implnetlibnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implopenblasnumpy1.22python3.10.____cpython:
+        CONFIG: linux_ppc64le_blas_implopenblasnumpy1.22python3.10.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implopenblasnumpy1.23python3.11.____cpython:
+        CONFIG: linux_ppc64le_blas_implopenblasnumpy1.23python3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+      linux_ppc64le_blas_implopenblasnumpy1.26python3.12.____cpython:
+        CONFIG: linux_ppc64le_blas_implopenblasnumpy1.26python3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
+    maxParallel: 20
   timeoutInMinutes: 360
   variables: {}
 
