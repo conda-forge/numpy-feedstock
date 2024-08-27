@@ -1,4 +1,4 @@
-{% set version = "2.0.1" %}
+{% set version = "2.0.2" %}
 {% set dev = "" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
@@ -15,11 +15,11 @@ source:
   # the submodules (not in tarball due to dear-github/dear-github#214); for the
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}{{ dev }}.tar.gz
-    sha256: 06da9d00e00344acbb49a003679adbb033d69b51de90481ab56e5d2d617ba77e
+    sha256: 1e7b92235ac9923acd720bb2f140cb9a86c9213288883801f778fddd282efd5a
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
-    git_rev: 1dbb1180e05c55b648f2508d3f97bf26c6f926a8
+    git_rev: 5975f5ef76c3e4364844d869454046f0f8420ef8
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
   - folder: numpy/_core/src/npysort/x86-simd-sort
     git_url: https://github.com/intel/x86-simd-sort.git
@@ -35,11 +35,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
-    git_rev: 31161eef3fc8cf0bf834edc1dd29e490fc6d7713
-    patches:
-      # backport https://github.com/mesonbuild/meson/pull/13411 + follow-up
-      - patches/0001-fix-sanity-check-for-d-cross-compilation.patch              # required precursor
-      - patches/0002-Make-sure-machine_info_can_run-isn-t-called-on-incom.patch  # fix + follow-up
+    git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac
 
 build:
   number: 0
