@@ -109,8 +109,8 @@ test:
     - typing_extensions
     # some linux tests need a C/C++ compiler;
     # extra f2py tests need a fortran compiler
-    - {{ compiler('c') }}        # [linux]
-    - {{ compiler('cxx') }}      # [linux]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('cxx') }}      # [unix]
     - {{ compiler('fortran') }}  # [linux]
   commands:
     - f2py -h
