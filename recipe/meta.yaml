@@ -112,6 +112,8 @@ test:
     - {{ compiler('c') }}        # [unix]
     - {{ compiler('cxx') }}      # [unix]
     - {{ compiler('fortran') }}  # [linux]
+    # For some cython tests
+    - pkg-config
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
