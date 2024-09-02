@@ -42,7 +42,7 @@ source:
     git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
@@ -105,13 +105,15 @@ test:
     - meson
     - pytz
     - setuptools <60.0.0   # [py<=311]
-    - setuptools           # [py==312]
+    - setuptools           # [py>=312]
     - typing_extensions
     # some linux tests need a C/C++ compiler;
     # extra f2py tests need a fortran compiler
-    - {{ compiler('c') }}        # [linux]
-    - {{ compiler('cxx') }}      # [linux]
+    - {{ compiler('c') }}        # [unix]
+    - {{ compiler('cxx') }}      # [unix]
     - {{ compiler('fortran') }}  # [linux]
+    # For some cython tests
+    - pkg-config
   commands:
     - f2py -h
     # numpy.test will show SIMD features of agent (in the past, there have been
