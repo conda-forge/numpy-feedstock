@@ -1,4 +1,4 @@
-{% set version = "2.1.1" %}
+{% set version = "2.1.2" %}
 {% set dev = "" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
@@ -15,7 +15,7 @@ source:
   # the submodules (not in tarball due to dear-github/dear-github#214); for the
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}{{ dev }}.tar.gz
-    sha256: 89c79c707faae3c432c44fa41f24a9ff7e542dccfa65c288ff8b7a49de8c11df
+    sha256: 6a6345a3bf23f5002f035fd3e74336ef43fc7b82133050c81f728beedac311f3
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
@@ -23,7 +23,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
   - folder: numpy/_core/src/common/pythoncapi-compat
     git_url: https://github.com/python/pythoncapi-compat.git
-    git_rev: ea1f7f6eac63ff401937515638252402ff33dccb
+    git_rev: 2d18aecd7b2f549d38a13e27b682ea4966f37bd8
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
   - folder: numpy/_core/src/npysort/x86-simd-sort
     git_url: https://github.com/intel/x86-simd-sort.git
