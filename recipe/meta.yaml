@@ -23,7 +23,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
   - folder: numpy/_core/src/common/pythoncapi-compat
     git_url: https://github.com/python/pythoncapi-compat.git
-    git_rev: ea1f7f6eac63ff401937515638252402ff33dccb
+    git_rev: 2d18aecd7b2f549d38a13e27b682ea4966f37bd8
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
   - folder: numpy/_core/src/npysort/x86-simd-sort
     git_url: https://github.com/intel/x86-simd-sort.git
