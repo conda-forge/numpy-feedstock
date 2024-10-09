@@ -39,7 +39,8 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
-    git_rev: 5f7159556a40844cba411e3a45d61192e36bf9ad
+    git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac  # [not (win and is_freethreading)]
+    git_rev: 5f7159556a40844cba411e3a45d61192e36bf9ad  # [win and is_freethreading]
 
 build:
   number: 0
