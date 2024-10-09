@@ -3,7 +3,7 @@
 mkdir builddir
 
 :: workaround an issue in vendored meson of numpy
-if "%IS_FREETHREADING%=="yes" (
+if "%is_freethreading%=="yes" (
   copy %PREFIX%\libs\python313t.lib %PREFIX%\libs\python313.lib
 )
 
