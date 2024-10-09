@@ -3,7 +3,7 @@
 mkdir builddir
 
 :: workaround an issue in vendored meson of numpy
-if "%is_freethreading%=="yes" (
+if "%is_freethreading%"=="yes" (
   copy %PREFIX%\libs\python313t.lib %PREFIX%\libs\python313.lib
 )
 
@@ -21,7 +21,7 @@ for /f %%f in ('dir /b /S .\dist') do (
     if %ERRORLEVEL% neq 0 exit 1
 )
 
-if "%IS_FREETHREADING%=="yes" (
+if "%is_freethreading%"=="yes" (
   del %PREFIX%\libs\python313.lib
 )
 
