@@ -8,6 +8,8 @@ channel_targets:
 - conda-forge main
 cxx_compiler:
 - vs2019
+is_freethreading:
+- 'false'
 libblas:
 - 3.9 *netlib
 libcblas:
@@ -28,3 +30,4 @@ zip_keys:
 - - python
   - numpy
   - channel_sources
+  - is_freethreading

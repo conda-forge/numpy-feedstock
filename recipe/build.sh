@@ -16,8 +16,7 @@ if [[ $target_platform == "osx-arm64" ]]; then
     # currently cannot properly detect long double format
     # on osx-arm64 when cross-compiling in QEMU, see
     # https://github.com/numpy/numpy/pull/24414
-    echo "[properties]" >> ${CONDA_PREFIX}/meson_cross_file.txt
-    echo "longdouble_format = 'IEEE_DOUBLE_LE'" >> ${CONDA_PREFIX}/meson_cross_file.txt
+    sed -i.bak "s@\[properties\]@[properties]\nlongdouble_format = 'IEEE_DOUBLE_LE'@g" ${CONDA_PREFIX}/meson_cross_file.txt
 fi
 
 # meson-python already sets up a -Dbuildtype=release argument to meson, so
