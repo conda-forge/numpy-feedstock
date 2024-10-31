@@ -36,9 +36,12 @@ source:
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
     git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac
+  - patches:
+    # https://github.com/numpy/numpy/issues/27405
+    - msvccompiler.patch
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
   # pypy was excluded from numpy 2.0 migration
   skip: true  # [python_impl == "pypy"]
