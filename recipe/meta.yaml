@@ -19,7 +19,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
-    git_rev: 5975f5ef76c3e4364844d869454046f0f8420ef8
+    git_rev: a97b5d371d696564e206627a883b1341c65bd983
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
   - folder: numpy/_core/src/common/pythoncapi-compat
     git_url: https://github.com/python/pythoncapi-compat.git
@@ -39,8 +39,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
-    git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac  # [not (win and is_freethreading)]
-    git_rev: 5f7159556a40844cba411e3a45d61192e36bf9ad  # [win and is_freethreading]
+    git_rev: 0d93515fb826440d19707eee47fd92655fe2f166
 
 build:
   number: 0
