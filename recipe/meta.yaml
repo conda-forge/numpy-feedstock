@@ -16,6 +16,9 @@ source:
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}{{ dev }}.tar.gz
     sha256: 1e7b92235ac9923acd720bb2f140cb9a86c9213288883801f778fddd282efd5a
+    patches:
+      # backport https://github.com/numpy/numpy/pull/27406
+      - patches/0001-BUG-Stub-out-get_build_msvc_version-if-distutils.msv.patch
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
@@ -38,7 +41,7 @@ source:
     git_rev: 6f88e485f27bb0a41d31638f0c55055362e0b1ac
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<39]
   # pypy was excluded from numpy 2.0 migration
   skip: true  # [python_impl == "pypy"]
