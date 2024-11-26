@@ -5,6 +5,9 @@
 # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
 {% set default_abi_level = "1.21" %}
 
+# ensure is_freethreading gets detected as a used variable
+# [is_freethreading]
+
 package:
   name: numpy
   version: {{ version }}{{ dev }}
