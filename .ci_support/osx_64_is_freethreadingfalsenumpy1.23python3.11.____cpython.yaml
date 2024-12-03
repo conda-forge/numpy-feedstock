@@ -18,6 +18,10 @@ cxx_compiler:
 - clangxx
 cxx_compiler_version:
 - '18'
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '13'
 is_freethreading:
 - 'false'
 libblas:
@@ -41,6 +45,7 @@ target_platform:
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - fortran_compiler_version
 - - python
   - numpy
   - channel_sources
