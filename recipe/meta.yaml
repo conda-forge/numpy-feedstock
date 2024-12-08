@@ -45,7 +45,7 @@ source:
     git_rev: 0d93515fb826440d19707eee47fd92655fe2f166
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<310]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
@@ -114,7 +114,7 @@ test:
     # extra f2py tests need a fortran compiler
     - {{ compiler('c') }}        # [unix]
     - {{ compiler('cxx') }}      # [unix]
-    - {{ compiler('fortran') }}  # [linux]
+    - {{ compiler("fortran") }}
     # For some cython tests
     - pkg-config
   commands:
