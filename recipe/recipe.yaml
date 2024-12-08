@@ -153,22 +153,6 @@ tests:
             - 'tests_to_skip += " or Test_POWER_Features"'
             # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
             - 'tests_to_skip += " or test_new_policy"'
-        - if: aarch64
-          then:
-            # emulation problems (apparently) on aarch
-            - 'tests_to_skip += " or (test_basic_property and float32)"'
-            - 'tests_to_skip += " or test_generalized_herm_cases"'
-            - 'tests_to_skip += " or test_generalized_nonsq_cases"'
-            - 'tests_to_skip += " or test_generalized_sq_cases"'
-            - 'tests_to_skip += " or test_herm_cases or test_sq_cases"'
-            - 'tests_to_skip += " or test_nonsq_cases"'
-        - if: ppc64le
-          then:
-            # new test failures for 2.2.4; possibly emulation-related; see
-            # https://github.com/numpy/numpy/issues/28548
-            - 'tests_to_skip += " or test_einsum_sums_float32"'
-            - 'tests_to_skip += " or test_ufunc_noncontiguous[matvec]"'
-            - 'tests_to_skip += " or test_accelerate_framework_sgemv_fix "'
         # numpy.test will show SIMD features of agent (in the past, there have been
         # failures that occured depending on presence/absence of e.g. AVX512);
         # for signature of numpy.test see the following (note default: label='fast'),
