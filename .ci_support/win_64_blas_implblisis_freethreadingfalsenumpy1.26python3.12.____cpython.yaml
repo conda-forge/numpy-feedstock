@@ -1,0 +1,35 @@
+blas_impl:
+- blis
+c_compiler:
+- vs2019
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2019
+is_freethreading:
+- 'false'
+libblas:
+- 3.9 *netlib
+libcblas:
+- 3.9 *netlib
+liblapack:
+- 3.9 *netlib
+numpy:
+- '1.26'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.12.* *_cpython
+target_platform:
+- win-64
+zip_keys:
+- - python
+  - numpy
+  - channel_sources
+  - is_freethreading

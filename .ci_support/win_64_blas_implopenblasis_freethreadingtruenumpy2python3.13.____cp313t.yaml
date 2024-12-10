@@ -1,0 +1,35 @@
+blas_impl:
+- openblas
+c_compiler:
+- vs2019
+c_stdlib:
+- vs
+channel_sources:
+- conda-forge/label/numpy_rc,conda-forge/label/cython_dev,conda-forge
+channel_targets:
+- conda-forge main
+cxx_compiler:
+- vs2019
+is_freethreading:
+- 'true'
+libblas:
+- 3.9 *netlib
+libcblas:
+- 3.9 *netlib
+liblapack:
+- 3.9 *netlib
+numpy:
+- '2'
+pin_run_as_build:
+  python:
+    min_pin: x.x
+    max_pin: x.x
+python:
+- 3.13.* *_cp313t
+target_platform:
+- win-64
+zip_keys:
+- - python
+  - numpy
+  - channel_sources
+  - is_freethreading
