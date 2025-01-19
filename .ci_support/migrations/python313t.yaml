@@ -21,7 +21,6 @@ __migrator:
             - 3.9.* *_73_pypy
     paused: true
     longterm: true
-    use_local: true
     pr_limit: 20
     max_solver_attempts: 3  # this will make the bot retry "not solvable" stuff 12 times
     exclude:
