@@ -22,7 +22,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
-    git_rev: 68b0fdebffb14f3b8473fed1c33ce368efc431e7
+    git_rev: 0b696633f9ad89497dd5532b55eaa01625ad71ca
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
   - folder: numpy/_core/src/common/pythoncapi-compat
     git_url: https://github.com/python/pythoncapi-compat.git
