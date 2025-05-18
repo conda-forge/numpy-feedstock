@@ -9,7 +9,7 @@ channel_targets:
 cxx_compiler:
 - vs2019
 is_freethreading:
-- 'false'
+- false
 libblas:
 - 3.9.* *netlib
 libcblas:
