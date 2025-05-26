@@ -8,10 +8,6 @@ jobs:
     vmImage: ubuntu-latest
   strategy:
     matrix:
-      linux_64_is_freethreadingfalsenumpy1.22python3.10.____cpython:
-        CONFIG: linux_64_is_freethreadingfalsenumpy1.22python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_64_is_freethreadingfalsenumpy1.23python3.11.____cpython:
         CONFIG: linux_64_is_freethreadingfalsenumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -28,10 +24,6 @@ jobs:
         CONFIG: linux_64_is_freethreadingtruenumpy2python3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_aarch64_is_freethreadingfalsenumpy1.22python3.10.____cpython:
-        CONFIG: linux_aarch64_is_freethreadingfalsenumpy1.22python3.10.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_aarch64_is_freethreadingfalsenumpy1.23python3.11.____cpython:
         CONFIG: linux_aarch64_is_freethreadingfalsenumpy1.23python3.11.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -46,10 +38,6 @@ jobs:
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_aarch64_is_freethreadingtruenumpy2python3.13.____cp313t:
         CONFIG: linux_aarch64_is_freethreadingtruenumpy2python3.13.____cp313t
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
-      linux_ppc64le_is_freethreadingfalsenumpy1.22python3.10.____cpython:
-        CONFIG: linux_ppc64le_is_freethreadingfalsenumpy1.22python3.10.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
       linux_ppc64le_is_freethreadingfalsenumpy1.23python3.11.____cpython:
