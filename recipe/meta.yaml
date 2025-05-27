@@ -1,9 +1,9 @@
-{% set version = "2.2.6" %}
-{% set dev = "" %}
+{% set version = "2.3.0" %}
+{% set dev = "rc1" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
 # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
-{% set default_abi_level = "1.21" %}
+{% set default_abi_level = "1.23" %}
 
 # ensure is_freethreading gets detected as a used variable
 # [is_freethreading]
@@ -18,7 +18,7 @@ source:
   # the submodules (not in tarball due to dear-github/dear-github#214); for the
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}{{ dev }}.tar.gz
-    sha256: 4d7604ff87ace3af216f4ff469ce101315fc0a8c3f8b38fb721c5299d7b87406
+    sha256: 8b1eea9b532ed5ffaffa26b4cadeed0826b3c5688b43ec2bf2df3bbc019af99d
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
@@ -30,7 +30,7 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
   - folder: numpy/_core/src/npysort/x86-simd-sort
     git_url: https://github.com/intel/x86-simd-sort.git
-    git_rev: 9a1b616d5cd4eaf49f7664fb86ccc1d18bad2b8d
+    git_rev: c306ac581a59f89585d778254c4ed7197e64ba2d
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/umath
   - folder: numpy/_core/src/umath/svml
     git_url: https://github.com/numpy/SVML.git
@@ -42,11 +42,11 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
   - folder: vendored-meson/meson
     git_url: https://github.com/numpy/meson.git
-    git_rev: 0d93515fb826440d19707eee47fd92655fe2f166
+    git_rev: f754c4258805056ed7be09830d96af45215d341b
 
 build:
   number: 0
-  skip: true  # [py<310]
+  skip: true  # [py<311]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
     - numpy-config = numpy._configtool:main     # [win]
