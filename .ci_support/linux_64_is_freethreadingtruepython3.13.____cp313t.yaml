@@ -23,7 +23,7 @@ fortran_compiler:
 fortran_compiler_version:
 - '13'
 is_freethreading:
-- false
+- true
 libblas:
 - 3.9.* *netlib
 libcblas:
@@ -31,20 +31,18 @@ libcblas:
 liblapack:
 - 3.9.* *netlib
 numpy:
-- '1.22'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.13.* *_cp313t
 target_platform:
-- linux-aarch64
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
 - - python
-  - numpy
-  - channel_sources
   - is_freethreading

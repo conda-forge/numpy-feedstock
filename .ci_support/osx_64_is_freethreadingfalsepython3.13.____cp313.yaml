@@ -29,19 +29,17 @@ liblapack:
 macos_machine:
 - x86_64-apple-darwin13.4.0
 numpy:
-- '1.23'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.13.* *_cp313
 target_platform:
 - osx-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
 - - python
-  - numpy
-  - channel_sources
   - is_freethreading
