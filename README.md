@@ -31,171 +31,171 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>linux_64_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>linux_64_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>linux_64_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_64_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>linux_64_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>linux_aarch64_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>linux_aarch64_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>linux_aarch64_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_aarch64_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>linux_aarch64_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_aarch64_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>linux_ppc64le_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>linux_ppc64le_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>linux_ppc64le_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>linux_ppc64le_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>osx_64_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>osx_64_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>osx_64_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>osx_64_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>osx_arm64_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>osx_arm64_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>osx_arm64_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_arm64_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>osx_arm64_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_is_freethreadingfalsenumpy1.23python3.11.____cpython</td>
+              <td>win_64_is_freethreadingfalsepython3.11.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsenumpy1.23python3.11.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsepython3.11.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_is_freethreadingfalsenumpy1.26python3.12.____cpython</td>
+              <td>win_64_is_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsenumpy1.26python3.12.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsepython3.12.____cpython" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_is_freethreadingfalsenumpy2python3.13.____cp313</td>
+              <td>win_64_is_freethreadingfalsepython3.13.____cp313</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsenumpy2python3.13.____cp313" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingfalsepython3.13.____cp313" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_is_freethreadingtruenumpy2python3.13.____cp313t</td>
+              <td>win_64_is_freethreadingtruepython3.13.____cp313t</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingtruenumpy2python3.13.____cp313t" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=win&configuration=win%20win_64_is_freethreadingtruepython3.13.____cp313t" alt="variant">
                 </a>
               </td>
             </tr>

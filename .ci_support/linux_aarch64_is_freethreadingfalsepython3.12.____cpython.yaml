@@ -9,7 +9,7 @@ c_stdlib_version:
 cdt_name:
 - conda
 channel_sources:
-- conda-forge/label/numpy_rc,conda-forge
+- conda-forge
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -31,19 +31,18 @@ libcblas:
 liblapack:
 - 3.9.* *netlib
 numpy:
-- '1.23'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.11.* *_cpython
+- 3.12.* *_cpython
 target_platform:
-- linux-64
+- linux-aarch64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
   - fortran_compiler_version
 - - python
-  - numpy
   - is_freethreading
