@@ -29,19 +29,17 @@ liblapack:
 macos_machine:
 - arm64-apple-darwin20.0.0
 numpy:
-- '1.22'
+- '2'
 pin_run_as_build:
   python:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.10.* *_cpython
+- 3.12.* *_cpython
 target_platform:
 - osx-arm64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
 - - python
-  - numpy
-  - channel_sources
   - is_freethreading
