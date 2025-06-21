@@ -1,4 +1,4 @@
-{% set version = "2.3.0" %}
+{% set version = "2.3.1" %}
 {% set dev = "" %}
 # numpy will by default use the ABI feature level for the first numpy version
 # that added support for the oldest currently-supported CPython version; see
@@ -18,7 +18,7 @@ source:
   # the submodules (not in tarball due to dear-github/dear-github#214); for the
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v{{ version }}{{ dev }}.tar.gz
-    sha256: ddf2fe9de0034d44213f3ff8e2c2e9707d7c928660ad99ce294f3c9c65fe89e9
+    sha256: d040da6eb210b6e04cb76fa40b6ab221858ed9e188828ee8d8daa455cf41456f
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - folder: numpy/_core/src/highway
     git_url: https://github.com/google/highway.git
