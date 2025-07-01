@@ -1,0 +1,6 @@
+blas_impl:
+  - accelerate   # [osx]
+  - netlib
+  - openblas
+  - mkl          # [x86_64]
+  - blis         # [x86_64]
