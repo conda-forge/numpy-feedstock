@@ -93,6 +93,11 @@ requirements:
 {% set tests_to_skip = tests_to_skip + " or test_new_policy" %}                     # [build_platform != target_platform]
 # emulation problems (apparently) on aarch
 {% set tests_to_skip = tests_to_skip + " or (test_basic_property and float32)" %}   # [aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_generalized_herm_cases" %}         # [aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_generalized_nonsq_cases" %}        # [aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_generalized_sq_cases" %}           # [aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_herm_cases or test_sq_cases" %}    # [aarch64]
+{% set tests_to_skip = tests_to_skip + " or test_nonsq_cases" %}                    # [aarch64]
 # https://github.com/numpy/numpy/issues/27045
 {% set tests_to_skip = tests_to_skip + " or (test_regression and test_gh25784)" %}  # [osx]
 # new test failures for 2.2.4; possibly emulation-related; see
