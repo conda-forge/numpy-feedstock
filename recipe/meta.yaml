@@ -45,7 +45,7 @@ source:
     git_rev: f754c4258805056ed7be09830d96af45215d341b
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py<311]
   entry_points:
     - f2py = numpy.f2py.f2py2e:main             # [win]
