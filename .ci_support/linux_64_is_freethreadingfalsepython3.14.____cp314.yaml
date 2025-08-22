@@ -9,7 +9,7 @@ c_stdlib_version:
 cdt_name:
 - conda
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
@@ -23,7 +23,7 @@ fortran_compiler:
 fortran_compiler_version:
 - '14'
 is_freethreading:
-- true
+- false
 libblas:
 - 3.9.* *netlib
 libcblas:
@@ -37,9 +37,9 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.13.* *_cp313t
+- 3.14.* *_cp314
 target_platform:
-- linux-ppc64le
+- linux-64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version

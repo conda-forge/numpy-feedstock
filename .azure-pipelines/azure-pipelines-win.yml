@@ -17,8 +17,14 @@ jobs:
       win_64_is_freethreadingfalsepython3.13.____cp313:
         CONFIG: win_64_is_freethreadingfalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
+      win_64_is_freethreadingfalsepython3.14.____cp314:
+        CONFIG: win_64_is_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
       win_64_is_freethreadingtruepython3.13.____cp313t:
         CONFIG: win_64_is_freethreadingtruepython3.13.____cp313t
+        UPLOAD_PACKAGES: 'True'
+      win_64_is_freethreadingtruepython3.14.____cp314t:
+        CONFIG: win_64_is_freethreadingtruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
   timeoutInMinutes: 360
   variables:
