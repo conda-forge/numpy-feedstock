@@ -3,13 +3,13 @@ c_compiler:
 c_stdlib:
 - vs
 channel_sources:
-- conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
 - vs2022
 is_freethreading:
-- false
+- true
 libblas:
 - 3.9.* *netlib
 libcblas:
@@ -23,7 +23,7 @@ pin_run_as_build:
     min_pin: x.x
     max_pin: x.x
 python:
-- 3.13.* *_cp313
+- 3.14.* *_cp314t
 target_platform:
 - win-64
 zip_keys:
