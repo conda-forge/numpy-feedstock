@@ -46,7 +46,7 @@ source:
     rev: f754c4258805056ed7be09830d96af45215d341b
 
 build:
-  number: 1
+  number: 2
   skip: match(python, "<3.11")
   python:
     entry_points:
