@@ -20,6 +20,8 @@ source:
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v${{ version }}.tar.gz
     sha256: 23c0450bc3643d396989e3e029971a067091d0423a021ae5b4b100e64178d268
+    patches:
+      - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - target_directory: numpy/_core/src/highway
     git: https://github.com/google/highway.git
