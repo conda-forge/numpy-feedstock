@@ -1,0 +1,228 @@
+context:
+  version: "2.3.2"
+  # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
+  rc_num: -1
+  # numpy will by default use the ABI feature level for the first numpy version
+  # that added support for the oldest currently-supported CPython version; see
+  # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
+  default_abi_level: '1.23'
+  # ensure is_freethreading gets detected as a used variable
+  touch_is_freethreading: ${{ is_freethreading }}
+
+package:
+  name: numpy
+  version: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
+
+source:
+  # The sdist distributed by numpy contains submodules; by taking the tarball
+  # from github we can everything pythran ourselves, but manually need to include
+  # the submodules (not in tarball due to dear-github/dear-github#214); for the
+  # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
+  - url: https://github.com/numpy/numpy/archive/refs/tags/v${{ version }}.tar.gz
+    sha256: 23c0450bc3643d396989e3e029971a067091d0423a021ae5b4b100e64178d268
+    patches:
+      - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
+  - target_directory: numpy/_core/src/highway
+    git: https://github.com/google/highway.git
+    rev: 0b696633f9ad89497dd5532b55eaa01625ad71ca
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
+  - target_directory: numpy/_core/src/common/pythoncapi-compat
+    git: https://github.com/python/pythoncapi-compat.git
+    rev: 0f1d42a10a3f594ad48894912396df31b2c2d55d
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
+  - target_directory: numpy/_core/src/npysort/x86-simd-sort
+    git: https://github.com/intel/x86-simd-sort.git
+    rev: c306ac581a59f89585d778254c4ed7197e64ba2d
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/umath
+  - target_directory: numpy/_core/src/umath/svml
+    git: https://github.com/numpy/SVML.git
+    rev: 32bf2a98420762a63ab418aaa0a7d6e17eb9627a
+  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/fft
+  - target_directory: numpy/fft/pocketfft
+    git: https://github.com/mreineck/pocketfft.git
+    rev: 33ae5dc94c9cdc7f1c78346504a85de87cadaa12
+  # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
+  - target_directory: vendored-meson/meson
+    git: https://github.com/numpy/meson.git
+    rev: f754c4258805056ed7be09830d96af45215d341b
+
+build:
+  number: 2
+  skip: match(python, "<3.11")
+  python:
+    entry_points:
+      - if: win
+        then:
+          - f2py = numpy.f2py.f2py2e:main
+          - numpy-config = numpy._configtool:main
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then:
+        - python
+        - cross-python_${{ target_platform }}
+        - cython
+        - ninja
+        - pkg-config
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+  host:
+    - pip
+    # temporarily vendored by numpy
+    # - meson
+    - meson-python
+    - ninja
+    - pkg-config
+    - python
+    - python-build
+    - cython
+    - libblas
+    - libcblas
+    - liblapack
+  run:
+    - python
+    - if: rc_num > -1
+      then: _numpy_rc
+  run_exports:
+    - numpy >=${{ default_abi_level }},<3
+  run_constraints:
+    # enforce eviction of package from anaconda defaults
+    - numpy-base <0a0
+
+tests:
+  - python:
+      imports:
+        - numpy
+        # reference for public API is effectively PUBLIC_MODULES under
+        # https://github.com/numpy/numpy/blame/main/numpy/tests/test_public_api.py
+        - numpy.ctypeslib
+        - if: match(python, "<3.12")
+          then: numpy.distutils
+        - numpy.dtypes
+        - numpy.exceptions
+        - numpy.f2py
+        - numpy.fft
+        - numpy.lib
+        - numpy.lib.format
+        - numpy.lib.mixins
+        - numpy.lib.recfunctions
+        - numpy.lib.scimath
+        - numpy.lib.stride_tricks
+        - numpy.lib.npyio
+        - numpy.lib.introspect
+        - numpy.lib.array_utils
+        - numpy.linalg
+        - numpy.ma
+        - numpy.ma.extras
+        - numpy.ma.mrecords
+        - numpy.polynomial
+        - numpy.polynomial.chebyshev
+        - numpy.polynomial.hermite
+        - numpy.polynomial.hermite_e
+        - numpy.polynomial.laguerre
+        - numpy.polynomial.legendre
+        - numpy.polynomial.polynomial
+        - numpy.random
+        - numpy.testing
+        - numpy.testing.overrides
+        - numpy.typing
+        - numpy.typing.mypy_plugin
+        - numpy.version
+        # some private modules that were once upon a time
+        # determined to be useful packaging checks
+        - numpy.core.multiarray
+        - numpy.core.numeric
+        - numpy.core.umath
+        - numpy.linalg.lapack_lite
+        - numpy.random.mtrand
+
+  - script:
+      - f2py -h
+
+  - requirements:
+      run:
+        - pytest
+        - pytest-timeout
+        - pytest-xdist
+        # (mostly) optional test requirements (except wheel, python-cov, mypy), see
+        # https://github.com/numpy/numpy/blob/main/requirements/test_requirements.txt
+        - cython
+        - hypothesis
+        - meson
+        - pytz
+        - if: match(python, "<=3.11")
+          then: setuptools <60.0.0
+          else: setuptools
+        - typing_extensions
+        # some linux tests need a C/C++ compiler;
+        # extra f2py tests need a fortran compiler
+        - if: unix
+          then:
+            - ${{ compiler('c') }}
+            - ${{ compiler('cxx') }}
+        - if: linux
+          then: ${{ compiler('fortran') }}
+        # For some cython tests
+        - pkg-config
+    script:
+      interpreter: python
+      content:
+        - import numpy, sys
+        - 'tests_to_skip = "_not_a_real_test"'
+        - if: build_platform != target_platform
+          then:
+            # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
+            - 'tests_to_skip += " or Test_ARM_Features"'
+            - 'tests_to_skip += " or Test_POWER_Features"'
+            # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
+            - 'tests_to_skip += " or test_new_policy"'
+        - if: aarch64
+          then:
+            # emulation problems (apparently) on aarch
+            - 'tests_to_skip += " or (test_basic_property and float32)"'
+            - 'tests_to_skip += " or test_generalized_herm_cases"'
+            - 'tests_to_skip += " or test_generalized_nonsq_cases"'
+            - 'tests_to_skip += " or test_generalized_sq_cases"'
+            - 'tests_to_skip += " or test_herm_cases or test_sq_cases"'
+            - 'tests_to_skip += " or test_nonsq_cases"'
+        - if: osx
+          then:
+            # https://github.com/numpy/numpy/issues/27045
+            - 'tests_to_skip += " or (test_regression and test_gh25784)"'
+        - if: ppc64le
+          then:
+            # new test failures for 2.2.4; possibly emulation-related; see
+            # https://github.com/numpy/numpy/issues/28548
+            - 'tests_to_skip += " or test_einsum_sums_float32"'
+            - 'tests_to_skip += " or test_ufunc_noncontiguous[matvec]"'
+            - 'tests_to_skip += " or test_accelerate_framework_sgemv_fix "'
+        # numpy.test will show SIMD features of agent (in the past, there have been
+        # failures that occured depending on presence/absence of e.g. AVX512);
+        # for signature of numpy.test see the following (note default: label='fast'),
+        # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
+        - 'param = {"verbose": 1, "label": "full", "tests": None}'
+        - 'extra_argv = ["-k", f"not ({tests_to_skip})", "-nauto", "--timeout=3000", "--durations=50", "--maxfail=100"]'
+        - 'print(f"running with args: kwargs={param}, extra_argv={extra_argv}")'
+        - 'sys.exit(not numpy.test(**param, extra_argv=extra_argv))'
+
+about:
+  license: BSD-3-Clause
+  license_file: LICENSE.txt
+  summary: The fundamental package for scientific computing with Python.
+  homepage: http://numpy.org/
+  repository: https://github.com/numpy/numpy
+  documentation: https://numpy.org/doc/stable/
+
+extra:
+  recipe-maintainers:
+    - h-vetinari
+    - isuruf
+    - jakirkham
+    - msarahan
+    - ocefpaf
+    - pelson
+    - rgommers
+    - xhochy
