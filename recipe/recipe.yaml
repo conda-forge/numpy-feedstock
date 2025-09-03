@@ -21,7 +21,10 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.11")
+  skip:
+    - match(python, "<3.11")
+    # debug: we're not running tests on osx-arm; don't waste CI
+    - osx and arm64
   python:
     entry_points:
       - if: win
