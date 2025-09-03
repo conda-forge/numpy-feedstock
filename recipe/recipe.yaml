@@ -157,7 +157,7 @@ tests:
         # failures that occured depending on presence/absence of e.g. AVX512);
         # for signature of numpy.test see the following (note default: label='fast'),
         # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-        - 'param = {"verbose": 1, "label": "full", "tests": None}'
+        - 'param = {"verbose": 2, "label": "full", "tests": None}'
         - 'extra_argv = ["-k", f"not ({tests_to_skip})", "-nauto", "--timeout=3000", "--durations=50", "--maxfail=100"]'
         - 'print(f"running with args: kwargs={param}, extra_argv={extra_argv}")'
         - 'sys.exit(not numpy.test(**param, extra_argv=extra_argv))'
