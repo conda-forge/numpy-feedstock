@@ -4,3 +4,7 @@ blas_impl:
   - openblas
   - mkl          # [x86_64]
   - blis         # [x86_64]
+
+# test llvm-openmp v21
+channel_sources:                            # [win]
+  - conda-forge,conda-forge/label/broken    # [win]
