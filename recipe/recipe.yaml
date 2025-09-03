@@ -94,8 +94,6 @@ requirements:
   run_constraints:
     # enforce eviction of package from anaconda defaults
     - numpy-base <0a0
-    - if: win
-      then: llvm-openmp >=21.1
 
 tests:
   - python:
@@ -170,6 +168,8 @@ tests:
             - ${{ compiler('cxx') }}
         - if: linux
           then: ${{ compiler('fortran') }}
+        # for testing purposes
+        - llvm-openmp >=21.1
         # For some cython tests
         - pkg-config
         # make sure we test with all blas implementations
