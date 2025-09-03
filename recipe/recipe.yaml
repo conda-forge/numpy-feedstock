@@ -94,6 +94,8 @@ requirements:
   run_constraints:
     # enforce eviction of package from anaconda defaults
     - numpy-base <0a0
+    - if: win
+      then: llvm-openmp >=21.1
 
 tests:
   - python:
