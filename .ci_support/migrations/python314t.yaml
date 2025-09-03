@@ -1,7 +1,5 @@
 migrator_ts: 1755739493
 __migrator:
-    # no conda-forge-wide migrator yet
-    use_local: true
     commit_message: Rebuild for python 3.14 freethreading
     migration_number: 1
     operation: key_add
@@ -28,10 +26,10 @@ __migrator:
         - cross-python
         - python_abi
     exclude_pinned_pkgs: false
-    # on this feedstock, this has already been done by the 3.13t migrator
-    # additional_zip_keys:
-    #     - is_freethreading
-    #     - is_abi3
+    # if feedstock already has 3.13t migrator this is redundant, but harmless
+    additional_zip_keys:
+        - is_freethreading
+        - is_abi3
     wait_for_migrators:
         - python314
     ignored_deps_per_node:
