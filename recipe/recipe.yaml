@@ -1,5 +1,5 @@
 context:
-  version: "2.3.2"
+  version: "2.3.3"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   # numpy will by default use the ABI feature level for the first numpy version
@@ -19,7 +19,7 @@ source:
   # the submodules (not in tarball due to dear-github/dear-github#214); for the
   # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
   - url: https://github.com/numpy/numpy/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 23c0450bc3643d396989e3e029971a067091d0423a021ae5b4b100e64178d268
+    sha256: eb3c751f1ca356273a3ec7186eda297c5a26cdc5a2829833c252d64cd880c39c
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
@@ -48,7 +48,7 @@ source:
     rev: f754c4258805056ed7be09830d96af45215d341b
 
 build:
-  number: 2
+  number: 0
   skip: match(python, "<3.11")
   python:
     entry_points:
