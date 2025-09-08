@@ -25,11 +25,11 @@ source:
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
   - target_directory: numpy/_core/src/highway
     git: https://github.com/google/highway.git
-    rev: 0b696633f9ad89497dd5532b55eaa01625ad71ca
+    rev: 37c08e5528f63ead9c7e4fd99ba454c1b1a3e3f7
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
   - target_directory: numpy/_core/src/common/pythoncapi-compat
     git: https://github.com/python/pythoncapi-compat.git
-    rev: 0f1d42a10a3f594ad48894912396df31b2c2d55d
+    rev: 90c06a4cae557bdbfa4f231a781d2b5c1a8f6d1c
   # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
   - target_directory: numpy/_core/src/npysort/x86-simd-sort
     git: https://github.com/intel/x86-simd-sort.git
