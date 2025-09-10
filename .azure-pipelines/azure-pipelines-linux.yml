@@ -113,7 +113,7 @@ jobs:
             sudo swapoff $SWAPFILE || true
         fi
         [ -f "$SWAPFILE" ] && sudo rm -f $SWAPFILE
-        sudo fallocate -l 8GiB $SWAPFILE
+        sudo fallocate -l 20GiB $SWAPFILE
         sudo chmod 600 $SWAPFILE
         sudo mkswap $SWAPFILE
         sudo swapon $SWAPFILE
