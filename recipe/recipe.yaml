@@ -1,5 +1,5 @@
 context:
-  version: "2.3.2"
+  version: "2.3.3"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   # numpy will by default use the ABI feature level for the first numpy version
@@ -14,41 +14,13 @@ package:
   version: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
 
 source:
-  # The sdist distributed by numpy contains submodules; by taking the tarball
-  # from github we can everything pythran ourselves, but manually need to include
-  # the submodules (not in tarball due to dear-github/dear-github#214); for the
-  # list of modules see https://github.com/numpy/numpy/blob/main/.gitmodules
-  - url: https://github.com/numpy/numpy/archive/refs/tags/v${{ version }}.tar.gz
-    sha256: 23c0450bc3643d396989e3e029971a067091d0423a021ae5b4b100e64178d268
+  - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
+    sha256: ddc7c39727ba62b80dfdbedf400d1c10ddfa8eefbd7ec8dcb118be8b56d31029
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
-  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src
-  - target_directory: numpy/_core/src/highway
-    git: https://github.com/google/highway.git
-    rev: 0b696633f9ad89497dd5532b55eaa01625ad71ca
-  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/common
-  - target_directory: numpy/_core/src/common/pythoncapi-compat
-    git: https://github.com/python/pythoncapi-compat.git
-    rev: 0f1d42a10a3f594ad48894912396df31b2c2d55d
-  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/npysort
-  - target_directory: numpy/_core/src/npysort/x86-simd-sort
-    git: https://github.com/intel/x86-simd-sort.git
-    rev: c306ac581a59f89585d778254c4ed7197e64ba2d
-  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/_core/src/umath
-  - target_directory: numpy/_core/src/umath/svml
-    git: https://github.com/numpy/SVML.git
-    rev: 32bf2a98420762a63ab418aaa0a7d6e17eb9627a
-  # https://github.com/numpy/numpy/tree/v{{ version }}/numpy/fft
-  - target_directory: numpy/fft/pocketfft
-    git: https://github.com/mreineck/pocketfft.git
-    rev: 33ae5dc94c9cdc7f1c78346504a85de87cadaa12
-  # https://github.com/numpy/numpy/tree/v{{ version }}/vendored-meson
-  - target_directory: vendored-meson/meson
-    git: https://github.com/numpy/meson.git
-    rev: f754c4258805056ed7be09830d96af45215d341b
 
 build:
-  number: 2
+  number: 0
   skip: match(python, "<3.11")
   python:
     entry_points:
