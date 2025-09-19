@@ -21,7 +21,7 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.11")
+  skip: match(python, "!=3.11") or not (linux and x86_64)
   python:
     entry_points:
       - if: win
