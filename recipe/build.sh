@@ -6,15 +6,9 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
 mkdir builddir
 
-# HACK: extend $CONDA_PREFIX/meson_cross_file that's created in
-# https://github.com/conda-forge/ctng-compiler-activation-feedstock/blob/main/recipe/activate-gcc.sh
-# https://github.com/conda-forge/clang-compiler-activation-feedstock/blob/main/recipe/activate-clang.sh
-# to use host python; requires that [binaries] section is last in meson_cross_file
-echo "python = '${PREFIX}/bin/python'" >> ${CONDA_PREFIX}/meson_cross_file.txt
-
 if [[ $target_platform == "osx-arm64" ]]; then
     # currently cannot properly detect long double format
-    # on osx-arm64 when cross-compiling in QEMU, see
+    # on osx-arm64 when cross-compiling, see
     # https://github.com/numpy/numpy/pull/24414
     sed -i.bak "s@\[properties\]@[properties]\nlongdouble_format = 'IEEE_DOUBLE_LE'@g" ${CONDA_PREFIX}/meson_cross_file.txt
 fi
