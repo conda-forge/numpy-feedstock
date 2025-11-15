@@ -20,7 +20,7 @@ source:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
-  number: 0
+  number: 1
   skip: match(python, "<3.11")
   python:
     entry_points:
