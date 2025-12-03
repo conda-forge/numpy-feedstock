@@ -1,7 +1,7 @@
 context:
-  version: "2.3.5"
+  version: "2.4.0"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
-  rc_num: -1
+  rc_num: 1
   # numpy will by default use the ABI feature level for the first numpy version
   # that added support for the oldest currently-supported CPython version; see
   # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
@@ -15,7 +15,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
-    sha256: 784db1dcdab56bf0517743e746dfb0f885fc68d948aba86eeec2cba234bdf1c0
+    sha256: 658096d9a274d5a44ed22f4ccf6ca1e59e098decc0f6040e9ae7d5a932ec3168
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
