@@ -1,7 +1,8 @@
 context:
-  version: "2.4.0"
+  base_version: "2.4.0"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: 1
+  version: ${{ base_version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
   # numpy will by default use the ABI feature level for the first numpy version
   # that added support for the oldest currently-supported CPython version; see
   # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
@@ -11,7 +12,7 @@ context:
 
 package:
   name: numpy
-  version: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
+  version: ${{ base_version }}
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
