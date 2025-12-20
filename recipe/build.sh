@@ -6,7 +6,7 @@ export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
 mkdir builddir
 
-if [[ $target_platform == "osx-arm64" ]]; then
+if [[ $host_platform == "osx-arm64" ]]; then
     # currently cannot properly detect long double format
     # on osx-arm64 when cross-compiling, see
     # https://github.com/numpy/numpy/pull/24414
