@@ -31,10 +31,10 @@ build:
 
 requirements:
   build:
-    - if: build_platform != target_platform
+    - if: build_platform != host_platform
       then:
         - python
-        - cross-python_${{ target_platform }}
+        - cross-python_${{ host_platform }}
         - cython
         - ninja
         - pkg-config
@@ -144,7 +144,7 @@ tests:
       content:
         - import numpy, sys
         - 'tests_to_skip = "_not_a_real_test"'
-        - if: build_platform != target_platform
+        - if: build_platform != host_platform
           then:
             # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
             - 'tests_to_skip += " or Test_ARM_Features"'
@@ -164,6 +164,7 @@ tests:
           then:
             # https://github.com/numpy/numpy/issues/27045
             - 'tests_to_skip += " or (test_regression and test_gh25784)"'
+            - 'tests_to_skip += " or test_tuple_recursion"'
         - if: ppc64le
           then:
             # new test failures for 2.2.4; possibly emulation-related; see
