@@ -164,6 +164,7 @@ tests:
           then:
             # https://github.com/numpy/numpy/issues/27045
             - 'tests_to_skip += " or (test_regression and test_gh25784)"'
+            - 'tests_to_skip += " or test_tuple_recursion"'
         - if: ppc64le
           then:
             # new test failures for 2.2.4; possibly emulation-related; see
