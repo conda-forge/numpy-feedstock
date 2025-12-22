@@ -455,6 +455,42 @@ description = "Build numpy-feedstock with variant osx_64_blas_implnetlibis_freet
 [tasks."inspect-osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t.yaml"
 description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313 directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314 directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t"
+[tasks."build-osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t.yaml"
+description = "Build numpy-feedstock with variant osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t directly (without setup scripts)"
+[tasks."inspect-osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t.yaml"
+description = "List contents of numpy-feedstock packages built for variant osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t"
 [tasks."build-osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython.yaml"
 description = "Build numpy-feedstock with variant osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython directly (without setup scripts)"
