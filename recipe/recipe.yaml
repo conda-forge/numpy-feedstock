@@ -1,5 +1,5 @@
 context:
-  version: "2.3.5"
+  version: "2.4.0"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   # numpy will by default use the ABI feature level for the first numpy version
@@ -15,7 +15,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
-    sha256: 784db1dcdab56bf0517743e746dfb0f885fc68d948aba86eeec2cba234bdf1c0
+    sha256: 6e504f7b16118198f138ef31ba24d985b124c2c469fe8467007cf30fd992f934
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
@@ -160,11 +160,6 @@ tests:
             - 'tests_to_skip += " or test_generalized_sq_cases"'
             - 'tests_to_skip += " or test_herm_cases or test_sq_cases"'
             - 'tests_to_skip += " or test_nonsq_cases"'
-        - if: osx
-          then:
-            # https://github.com/numpy/numpy/issues/27045
-            - 'tests_to_skip += " or (test_regression and test_gh25784)"'
-            - 'tests_to_skip += " or test_tuple_recursion"'
         - if: ppc64le
           then:
             # new test failures for 2.2.4; possibly emulation-related; see
