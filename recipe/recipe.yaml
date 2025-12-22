@@ -20,7 +20,7 @@ source:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
-  number: 0
+  number: 1
   skip: match(python, "<3.11")
   python:
     entry_points:
@@ -160,18 +160,9 @@ tests:
             - 'tests_to_skip += " or test_generalized_sq_cases"'
             - 'tests_to_skip += " or test_herm_cases or test_sq_cases"'
             - 'tests_to_skip += " or test_nonsq_cases"'
-        - if: osx
+        - if: osx and match(python, ">=3.14")
           then:
-            # https://github.com/numpy/numpy/issues/27045
-            - 'tests_to_skip += " or (test_regression and test_gh25784)"'
             - 'tests_to_skip += " or test_tuple_recursion"'
-        - if: ppc64le
-          then:
-            # new test failures for 2.2.4; possibly emulation-related; see
-            # https://github.com/numpy/numpy/issues/28548
-            - 'tests_to_skip += " or test_einsum_sums_float32"'
-            - 'tests_to_skip += " or test_ufunc_noncontiguous[matvec]"'
-            - 'tests_to_skip += " or test_accelerate_framework_sgemv_fix "'
         # numpy.test will show SIMD features of agent (in the past, there have been
         # failures that occured depending on presence/absence of e.g. AVX512);
         # for signature of numpy.test see the following (note default: label='fast'),
