@@ -21,7 +21,12 @@ source:
 
 build:
   number: 0
-  skip: match(python, "<3.11")
+  skip:
+    - match(python, "<3.11")
+    # debug: we're not running tests on osx-arm; don't waste CI
+    - osx and arm64
+    # debug: new variant, avoid redoing others
+    - blas_impl != "newaccelerate"
   python:
     entry_points:
       - if: win
@@ -139,6 +144,8 @@ tests:
           then: ${{ compiler('fortran') }}
         # For some cython tests
         - pkg-config
+        # make sure we test with all blas implementations
+        - libblas =*=*${{ blas_impl }}
     script:
       interpreter: python
       content:
@@ -151,27 +158,11 @@ tests:
             - 'tests_to_skip += " or Test_POWER_Features"'
             # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
             - 'tests_to_skip += " or test_new_policy"'
-        - if: aarch64
-          then:
-            # emulation problems (apparently) on aarch
-            - 'tests_to_skip += " or (test_basic_property and float32)"'
-            - 'tests_to_skip += " or test_generalized_herm_cases"'
-            - 'tests_to_skip += " or test_generalized_nonsq_cases"'
-            - 'tests_to_skip += " or test_generalized_sq_cases"'
-            - 'tests_to_skip += " or test_herm_cases or test_sq_cases"'
-            - 'tests_to_skip += " or test_nonsq_cases"'
-        - if: ppc64le
-          then:
-            # new test failures for 2.2.4; possibly emulation-related; see
-            # https://github.com/numpy/numpy/issues/28548
-            - 'tests_to_skip += " or test_einsum_sums_float32"'
-            - 'tests_to_skip += " or test_ufunc_noncontiguous[matvec]"'
-            - 'tests_to_skip += " or test_accelerate_framework_sgemv_fix "'
         # numpy.test will show SIMD features of agent (in the past, there have been
         # failures that occured depending on presence/absence of e.g. AVX512);
         # for signature of numpy.test see the following (note default: label='fast'),
         # https://github.com/numpy/numpy/blob/maintenance/1.22.x/numpy/_pytesttester.py#L81-L82
-        - 'param = {"verbose": 1, "label": "full", "tests": None}'
+        - 'param = {"verbose": 2, "label": "full", "tests": None}'
         - 'extra_argv = ["-k", f"not ({tests_to_skip})", "-nauto", "--timeout=3000", "--durations=50", "--maxfail=100"]'
         - 'print(f"running with args: kwargs={param}, extra_argv={extra_argv}")'
         - 'sys.exit(not numpy.test(**param, extra_argv=extra_argv))'

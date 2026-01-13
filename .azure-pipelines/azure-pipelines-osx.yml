@@ -8,42 +8,115 @@ jobs:
     vmImage: macOS-15
   strategy:
     matrix:
-      osx_64_is_freethreadingfalsepython3.11.____cpython:
-        CONFIG: osx_64_is_freethreadingfalsepython3.11.____cpython
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_is_freethreadingfalsepython3.12.____cpython:
-        CONFIG: osx_64_is_freethreadingfalsepython3.12.____cpython
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_64_is_freethreadingfalsepython3.13.____cp313:
-        CONFIG: osx_64_is_freethreadingfalsepython3.13.____cp313
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
-      osx_64_is_freethreadingfalsepython3.14.____cp314:
-        CONFIG: osx_64_is_freethreadingfalsepython3.14.____cp314
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
-      osx_64_is_freethreadingtruepython3.13.____cp313t:
-        CONFIG: osx_64_is_freethreadingtruepython3.13.____cp313t
+      osx_64_blas_implaccelerateis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingtruepython3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
-      osx_64_is_freethreadingtruepython3.14.____cp314t:
-        CONFIG: osx_64_is_freethreadingtruepython3.14.____cp314t
+      osx_64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingfalsepython3.11.____cpython:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.11.____cpython
+      osx_64_blas_implblisis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingfalsepython3.12.____cpython:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.12.____cpython
+      osx_64_blas_implblisis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingfalsepython3.13.____cp313:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.13.____cp313
+      osx_64_blas_implblisis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingfalsepython3.14.____cp314:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.14.____cp314
+      osx_64_blas_implblisis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingtruepython3.13.____cp313t:
-        CONFIG: osx_arm64_is_freethreadingtruepython3.13.____cp313t
+      osx_64_blas_implblisis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implblisis_freethreadingtruepython3.13.____cp313t
         UPLOAD_PACKAGES: 'True'
-      osx_arm64_is_freethreadingtruepython3.14.____cp314t:
-        CONFIG: osx_arm64_is_freethreadingtruepython3.14.____cp314t
+      osx_64_blas_implblisis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implblisis_freethreadingtruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implmklis_freethreadingtruepython3.13.____cp313t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implmklis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implmklis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingtruepython3.13.____cp313t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingtruepython3.13.____cp313t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingtruepython3.13.____cp313t:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingtruepython3.13.____cp313t
+        UPLOAD_PACKAGES: 'True'
+      osx_64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+    maxParallel: 17
   timeoutInMinutes: 360
   variables: {}
 
