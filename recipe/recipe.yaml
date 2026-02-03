@@ -20,7 +20,7 @@ source:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
-  number: 0
+  number: 1
   skip: match(python, "<3.11")
   python:
     entry_points:
@@ -36,24 +36,22 @@ requirements:
         - python
         - cross-python_${{ host_platform }}
         - cython
-        - ninja
-        - pkg-config
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
-  host:
-    - pip
-    # temporarily vendored by numpy
-    # - meson
-    - meson-python
     - ninja
     - pkg-config
-    - python
-    - python-build
-    - cython
+  host:
+    # ABI-relevant
     - libblas
     - libcblas
     - liblapack
+    - python
+    # interpreted py-libs used during installation
+    - cython
+    - meson-python
+    - pip
+    - python-build
   run:
     - python
     - if: rc_num > -1
