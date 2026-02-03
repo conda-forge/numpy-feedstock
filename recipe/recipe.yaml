@@ -42,16 +42,16 @@ requirements:
     - ninja
     - pkg-config
   host:
-    - pip
-    # temporarily vendored by numpy
-    # - meson
-    - meson-python
-    - python
-    - python-build
-    - cython
+    # ABI-relevant
     - libblas
     - libcblas
     - liblapack
+    - python
+    # interpreted py-libs used during installation
+    - cython
+    - meson-python
+    - pip
+    - python-build
   run:
     - python
     - if: rc_num > -1
