@@ -1,5 +1,5 @@
 context:
-  version: "2.4.3"
+  version: "2.4.4"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   # numpy will by default use the ABI feature level for the first numpy version
@@ -15,7 +15,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
-    sha256: 483a201202b73495f00dbc83796c6ae63137a9bdade074f7648b3e32613412dd
+    sha256: 2d390634c5182175533585cc89f3608a4682ccb173cc9bb940b2881c8d6f8fa0
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
@@ -142,6 +142,10 @@ tests:
       content:
         - import numpy, sys
         - 'tests_to_skip = "_not_a_real_test"'
+        - if: linux
+          then:
+            # OOMs on GHA agents
+            - 'tests_to_skip += " or test_huge_list_error"'
         - if: build_platform != host_platform
           then:
             # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
