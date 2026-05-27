@@ -8,62 +8,400 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_is_freethreadingfalsepython3.11.____cpython:
-        CONFIG: osx_64_is_freethreadingfalsepython3.11.____cpython
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_is_freethreadingfalsepython3.12.____cpython:
-        CONFIG: osx_64_is_freethreadingfalsepython3.12.____cpython
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_is_freethreadingfalsepython3.13.____cp313:
-        CONFIG: osx_64_is_freethreadingfalsepython3.13.____cp313
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_is_freethreadingfalsepython3.14.____cp314:
-        CONFIG: osx_64_is_freethreadingfalsepython3.14.____cp314
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_64_is_freethreadingtruepython3.14.____cp314t:
-        CONFIG: osx_64_is_freethreadingtruepython3.14.____cp314t
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_is_freethreadingfalsepython3.11.____cpython:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.11.____cpython
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implblisis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implblisis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implblisis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implblisis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implblisis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implblisis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implblisis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implmklis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implmklis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implmklis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implmklis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implmklis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implmklis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implmklis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.11.____cpython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_is_freethreadingfalsepython3.12.____cpython:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.12.____cpython
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_is_freethreadingfalsepython3.13.____cp313:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.13.____cp313
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.13.____cp313
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_is_freethreadingfalsepython3.14.____cp314:
-        CONFIG: osx_arm64_is_freethreadingfalsepython3.14.____cp314
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_arm64_blas_implaccelerateis_freethreadingfalsepython3.14.____cp314
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
-      osx_arm64_is_freethreadingtruepython3.14.____cp314t:
-        CONFIG: osx_arm64_is_freethreadingtruepython3.14.____cp314t
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_arm64_blas_implaccelerateis_freethreadingtruepython3.14.____cp314t
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
         store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implblisis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_arm64_blas_implblisis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implblisis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_arm64_blas_implblisis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implblisis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_arm64_blas_implblisis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implblisis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_arm64_blas_implblisis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implblisis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_arm64_blas_implblisis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_arm64_blas_implnetlibis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_arm64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_arm64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_arm64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_arm64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_arm64_blas_implnewaccelerateis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_arm64_blas_implnewaccelerateis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython:
+        CONFIG: osx_arm64_blas_implopenblasis_freethreadingfalsepython3.11.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython:
+        CONFIG: osx_arm64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313:
+        CONFIG: osx_arm64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314:
+        CONFIG: osx_arm64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+      osx_arm64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t:
+        CONFIG: osx_arm64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15-arm64
+        build_workspace_dir: ~/miniforge3/conda-bld
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
+    maxParallel: 37
   timeoutInMinutes: 360
   variables: {}
 
   steps:
   # TODO: Fast finish on azure pipelines?
   - script: |
+      export MINIFORGE_HOME=$(tools_install_dir)
+      export CONDA_BLD_PATH=$(build_workspace_dir)
       export CI=azure
       export flow_run_id=azure_$(Build.BuildNumber).$(System.JobAttempt)
       export remote_url=$(Build.Repository.Uri)
