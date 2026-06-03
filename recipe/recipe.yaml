@@ -1,27 +1,28 @@
 context:
-  version: "2.4.6"
+  version: "2.5.0"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
-  rc_num: -1
+  rc_num: 1
+  version_rc: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
   # numpy will by default use the ABI feature level for the first numpy version
   # that added support for the oldest currently-supported CPython version; see
-  # https://github.com/numpy/numpy/blob/v2.0.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
-  default_abi_level: '1.23'
+  # https://github.com/numpy/numpy/blob/v2.5.0rc1/numpy/_core/include/numpy/numpyconfig.h#L124
+  default_abi_level: '1.25'
   # ensure is_freethreading gets detected as a used variable
   touch_is_freethreading: ${{ is_freethreading }}
 
 package:
   name: numpy
-  version: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
+  version: ${{ version_rc }}
 
 source:
-  - url: https://github.com/numpy/numpy/releases/download/v${{ version }}/numpy-${{ version }}.tar.gz
-    sha256: f3a3570c4a2a16746ac2c31a7c7c7b0c186b95ce902e33db6f28094ed7387dda
+  - url: https://github.com/numpy/numpy/releases/download/v${{ version_rc }}/numpy-${{ version_rc }}.tar.gz
+    sha256: 4de3e0d48e58ef53e32c756bddea2722b9dde7ec25f96afc5fe7ece620cc4cb9
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
   number: 0
-  skip: match(python, "<3.11")
+  skip: match(python, "<3.12")
   python:
     entry_points:
       - if: win
@@ -69,8 +70,6 @@ tests:
         # reference for public API is effectively PUBLIC_MODULES under
         # https://github.com/numpy/numpy/blame/main/numpy/tests/test_public_api.py
         - numpy.ctypeslib
-        - if: match(python, "<3.12")
-          then: numpy.distutils
         - numpy.dtypes
         - numpy.exceptions
         - numpy.f2py
@@ -123,9 +122,7 @@ tests:
         - hypothesis
         - meson
         - pytz
-        - if: match(python, "<=3.11")
-          then: setuptools <60.0.0
-          else: setuptools
+        - setuptools
         - typing_extensions
         # some linux tests need a C/C++ compiler;
         # extra f2py tests need a fortran compiler
