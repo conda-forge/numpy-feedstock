@@ -1,10 +1,5 @@
 azure:
   free_disk_space: true
-  settings_linux:
-    swapfile_size: 20GiB
-  settings_win:
-    variables:
-      SET_PAGEFILE: 'True'
 build_platform:
   linux_ppc64le: linux_64
 conda_build:
@@ -19,3 +14,6 @@ provider:
   linux_aarch64: default
   osx_arm64: default
 test: native_and_emulated
+workflow_settings:
+  pagefile_size:
+    - value: 16
