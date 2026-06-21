@@ -1,7 +1,7 @@
 context:
   version: "2.5.0"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
-  rc_num: 1
+  rc_num: -1
   version_rc: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
   # numpy will by default use the ABI feature level for the first numpy version
   # that added support for the oldest currently-supported CPython version; see
@@ -16,7 +16,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version_rc }}/numpy-${{ version_rc }}.tar.gz
-    sha256: 4de3e0d48e58ef53e32c756bddea2722b9dde7ec25f96afc5fe7ece620cc4cb9
+    sha256: 5a129578019311b6e56bdd714250f19b518f7dceeeb8d1af5490f4942d3f891c
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
