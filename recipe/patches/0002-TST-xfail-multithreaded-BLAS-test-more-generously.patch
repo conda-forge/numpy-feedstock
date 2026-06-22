@@ -1,0 +1,44 @@
+From 361dd09ce8e79fc1db94012e9829e409d15a74a2 Mon Sep 17 00:00:00 2001
+From: Nathan Goldbaum <nathan.goldbaum@gmail.com>
+Date: Mon, 22 Jun 2026 14:05:46 -0600
+Subject: [PATCH 2/2] TST: xfail multithreaded BLAS test more generously
+
+---
+ numpy/_core/tests/test_multithreading.py | 12 ++++++++++--
+ 1 file changed, 10 insertions(+), 2 deletions(-)
+
+diff --git a/numpy/_core/tests/test_multithreading.py b/numpy/_core/tests/test_multithreading.py
+index 63267fe731..6c2c7d214c 100644
+--- a/numpy/_core/tests/test_multithreading.py
++++ b/numpy/_core/tests/test_multithreading.py
+@@ -95,12 +95,19 @@ def _detected_blas():
+ 
+ 
+ def _openblas_predates_gemm_fix(name, version):
++    name = (name or '').lower().strip()
++    # Assume failures using wrapper BLAS packages are buggy OpenBLAS.
++    # This may ignore a genuine bug but we can't do anything more fine-grained.
++    if name in ('blas', 'cblas', 'flexiblas', 'unknown', ''):
++        return True
+     if 'openblas' not in name:
++        # e.g. MKL, accelerate, where we'd want to know about a new failure
+         return False
+     try:
+         parsed = tuple(int(p) for p in version.split('.'))
+     except ValueError:
+-        return False
++        # unparseable OpenBLAS version so assume an old buggy version
++        return True
+     return parsed < (0, 3, 33, 112)
+ 
+ 
+@@ -143,7 +150,8 @@ def closure(i, b):
+     if mismatches and _openblas_predates_gemm_fix(blas_name, blas_version):
+         pytest.xfail(
+             f"OpenBLAS version ({blas_version}) predates first OpenBLAS "
+-            "version with a fix (0.3.33.112)"
++            "version with a fix (0.3.33.112) or BLAS metadata is not "
++            "sufficient to identify the BLAS implementation."
+         )
+ 
+     assert mismatches == 0, (

@@ -19,6 +19,8 @@ source:
     sha256: 5a129578019311b6e56bdd714250f19b518f7dceeeb8d1af5490f4942d3f891c
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
+      # backport https://github.com/numpy/numpy/pull/31714
+      - patches/0002-TST-xfail-multithreaded-BLAS-test-more-generously.patch
 
 build:
   number: 0
