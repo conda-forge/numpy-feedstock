@@ -139,6 +139,8 @@ tests:
       content:
         - import numpy, sys
         - 'tests_to_skip = "_not_a_real_test"'
+        # see https://github.com/numpy/numpy/issues/31708
+        - 'tests_to_skip += " or test_blas_gemm_thread_safety"'
         - if: linux
           then:
             # OOMs on GHA agents
