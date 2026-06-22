@@ -22,7 +22,7 @@ jobs:
       max-parallel: 50
       matrix:
         include:
-          - CONFIG: linux_64_is_freethreadingfalsepython3.12.____cpython
+          - CONFIG: linux_64_blas_implblisis_freethreadingfalsepython3.12.____cpython
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -34,7 +34,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_is_freethreadingfalsepython3.13.____cp313
+          - CONFIG: linux_64_blas_implblisis_freethreadingfalsepython3.13.____cp313
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -46,7 +46,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_is_freethreadingfalsepython3.14.____cp314
+          - CONFIG: linux_64_blas_implblisis_freethreadingfalsepython3.14.____cp314
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -58,7 +58,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_64_is_freethreadingtruepython3.14.____cp314t
+          - CONFIG: linux_64_blas_implblisis_freethreadingtruepython3.14.____cp314t
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -70,7 +70,151 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_is_freethreadingfalsepython3.12.____cpython
+          - CONFIG: linux_64_blas_implmklis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implmklis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implmklis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implmklis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implblisis_freethreadingfalsepython3.12.____cpython
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -82,7 +226,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_is_freethreadingfalsepython3.13.____cp313
+          - CONFIG: linux_aarch64_blas_implblisis_freethreadingfalsepython3.13.____cp313
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -94,7 +238,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_is_freethreadingfalsepython3.14.____cp314
+          - CONFIG: linux_aarch64_blas_implblisis_freethreadingfalsepython3.14.____cp314
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -106,7 +250,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_aarch64_is_freethreadingtruepython3.14.____cp314t
+          - CONFIG: linux_aarch64_blas_implblisis_freethreadingtruepython3.14.____cp314t
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -118,7 +262,103 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_is_freethreadingfalsepython3.12.____cpython
+          - CONFIG: linux_aarch64_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_aarch64_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-24.04-arm']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_blas_implnetlibis_freethreadingfalsepython3.12.____cpython
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -130,7 +370,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_is_freethreadingfalsepython3.13.____cp313
+          - CONFIG: linux_ppc64le_blas_implnetlibis_freethreadingfalsepython3.13.____cp313
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -142,7 +382,7 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_is_freethreadingfalsepython3.14.____cp314
+          - CONFIG: linux_ppc64le_blas_implnetlibis_freethreadingfalsepython3.14.____cp314
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
@@ -154,7 +394,55 @@ jobs:
             resize_partitions: False
             runs_on: ['ubuntu-latest']
             tools_install_dir: ~/miniforge3
-          - CONFIG: linux_ppc64le_is_freethreadingtruepython3.14.____cp314t
+          - CONFIG: linux_ppc64le_blas_implnetlibis_freethreadingtruepython3.14.____cp314t
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_blas_implopenblasis_freethreadingfalsepython3.12.____cpython
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_blas_implopenblasis_freethreadingfalsepython3.13.____cp313
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_blas_implopenblasis_freethreadingfalsepython3.14.____cp314
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: build_artifacts
+            docker_run_args: 
+            free_disk_space: skip
+            os: ubuntu
+            pagefile_size: 16
+            resize_partitions: False
+            runs_on: ['ubuntu-latest']
+            tools_install_dir: ~/miniforge3
+          - CONFIG: linux_ppc64le_blas_implopenblasis_freethreadingtruepython3.14.____cp314t
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
