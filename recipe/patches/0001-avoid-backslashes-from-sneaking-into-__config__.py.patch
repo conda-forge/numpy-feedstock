@@ -1,17 +1,17 @@
-From fcb119272a06a1204830823ec972e9ca60d3de8a Mon Sep 17 00:00:00 2001
+From 7e329380342adf6683fc143ffb2fe766c68c9b42 Mon Sep 17 00:00:00 2001
 From: "H. Vetinari" <h.vetinari@gmx.com>
 Date: Wed, 27 Aug 2025 23:40:27 +1100
-Subject: [PATCH] avoid backslashes from sneaking into `__config__.py`
+Subject: [PATCH 1/2] avoid backslashes from sneaking into `__config__.py`
 
 ---
  numpy/meson.build | 6 ++++--
  1 file changed, 4 insertions(+), 2 deletions(-)
 
 diff --git a/numpy/meson.build b/numpy/meson.build
-index 67e4861d7a..468ae0e431 100644
+index 36694ef4ef..7001debf4e 100644
 --- a/numpy/meson.build
 +++ b/numpy/meson.build
-@@ -411,7 +411,8 @@ endforeach
+@@ -426,7 +426,8 @@ endforeach
  conf_data.set('CROSS_COMPILED', meson.is_cross_build())
  
  # Python information
@@ -21,7 +21,7 @@ index 67e4861d7a..468ae0e431 100644
  conf_data.set('PYTHON_VERSION', py.language_version())
  
  # BLAS/LAPACK dependency info. Ensure we report dependencies correctly for
-@@ -438,7 +439,8 @@ foreach name, dep : dependency_map
+@@ -453,7 +454,8 @@ foreach name, dep : dependency_map
      conf_data.set(name + '_INCLUDEDIR', dep.get_variable('includedir', default_value: 'unknown'))
      conf_data.set(name + '_LIBDIR', dep.get_variable('libdir', default_value: 'unknown'))
      conf_data.set(name + '_OPENBLAS_CONFIG', dep.get_variable('openblas_config', default_value: 'unknown'))
