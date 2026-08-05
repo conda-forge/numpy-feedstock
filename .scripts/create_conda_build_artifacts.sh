@@ -118,8 +118,15 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
-        "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
+    if ! tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
+            "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" . &&
+        [[ -s ${BLD_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${BLD_ARTIFACT_PATH}" "${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}"
+        BLD_ARTIFACT_NAME+=-broken
+        BLD_ARTIFACT_PATH=${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}
+    fi
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
     echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
@@ -134,14 +141,21 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 fi
 
 # Make the workdir artifact archive
-if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
+if [[ ! -z "$WRK_ARTIFACT_PREFIX" && -n ${WORK_PATHS[@]} ]]; then
     export WRK_ARTIFACT_NAME="${WRK_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export WRK_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${WRK_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
-        "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${WORK_PATHS[@]}"
+    if ! tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
+            "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${WORK_PATHS[@]}" &&
+        [[ -s ${WRK_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${WRK_ARTIFACT_PATH}" "${WRK_ARTIFACT_PATH/%.tar.zst/-broken&}"
+        WRK_ARTIFACT_NAME+=-broken
+        WRK_ARTIFACT_PATH=${WRK_ARTIFACT_PATH/%.tar.zst/-broken&}
+    fi
 
     echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
     echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
@@ -156,11 +170,18 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
 fi
 
 # Make the environments artifact archive
-if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
+if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}"
+    if ! tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}" &&
+        [[ -s ${ENV_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${ENV_ARTIFACT_PATH}" "${ENV_ARTIFACT_PATH/%.tar.zst/-broken&}"
+        ENV_ARTIFACT_NAME+=-broken
+        ENV_ARTIFACT_PATH=${ENV_ARTIFACT_PATH/%.tar.zst/-broken&}
+    fi
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
     echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"

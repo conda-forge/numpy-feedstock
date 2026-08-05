@@ -126,7 +126,6 @@ jobs:
   - script: |
       export ARTIFACT_STAGING_DIR="$(Build.ArtifactStagingDirectory)"
       # Archive everything in CONDA_BLD_PATH except environments
-      export BLD_ARTIFACT_PREFIX=conda_pkgs
       export CI=azure
       export CI_RUN_ID=$(build.BuildNumber).$(system.JobAttempt)
       export CONDA_BLD_PATH=$(build_workspace_dir)
@@ -136,6 +135,10 @@ jobs:
         # Archive the CONDA_BLD_PATH environments only when the job fails
         export ENV_ARTIFACT_PREFIX=conda_envs
         export WRK_ARTIFACT_PREFIX=conda_work
+        # Use a different prefix for failed build artifacts
+        export BLD_ARTIFACT_PREFIX=conda_pkgs_failed
+      else
+        export BLD_ARTIFACT_PREFIX=conda_pkgs
       fi
       ./.scripts/create_conda_build_artifacts.sh
     displayName: Prepare conda build artifacts
