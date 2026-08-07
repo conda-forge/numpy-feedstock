@@ -1,5 +1,10 @@
 @echo on
 
+if "%PY_VER%" == "3.13" (
+    REM intentional failure to test artifact generation
+    exit 1
+)
+
 mkdir builddir
 
 :: -wnx flags mean: --wheel --no-isolation --skip-dependency-check
