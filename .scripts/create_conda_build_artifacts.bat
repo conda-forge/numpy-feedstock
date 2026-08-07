@@ -22,8 +22,12 @@ rem ENV_ARTIFACT_NAME
 rem ENV_ARTIFACT_PATH
 rem WRK_ARTIFACT_NAME
 rem WRK_ARTIFACT_PATH
-
-call "%MINIFORGE_HOME%\Scripts\activate.bat"
+set "PATH=%USERPROFILE%\.pixi\bin;%PATH%"
+set "ACTIVATE_PIXI=%TMP%\pixi-activate-%RANDOM%.bat"
+pixi shell-hook --environment build > "%ACTIVATE_PIXI%"
+if !errorlevel! neq 0 exit /b !errorlevel!
+call "%ACTIVATE_PIXI%"
+if !errorlevel! neq 0 exit /b !errorlevel!
 
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
@@ -84,8 +88,8 @@ set "EXCLUDE_FROM_WORK=%EXCLUDE_COMMON%%EXCLUDE_FROM_WORK%"
 
 rem Make the build artifact archive
 if defined BLD_ARTIFACT_PREFIX (
+    echo Creating build artifact archive ...
     set BLD_ARTIFACT_NAME=%BLD_ARTIFACT_PREFIX%_%ARTIFACT_UNIQUE_ID%
-    echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
     bsdtar -c -f "!BLD_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_BUILD_ARTIFACTS% .
@@ -95,23 +99,32 @@ if defined BLD_ARTIFACT_PREFIX (
             set "BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
         )
     )
-    echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
 
-    if "%CI%" == "azure" (
-        echo ##vso[task.setVariable variable=BLD_ARTIFACT_NAME]!BLD_ARTIFACT_NAME!
-        echo ##vso[task.setVariable variable=BLD_ARTIFACT_PATH]!BLD_ARTIFACT_PATH!
+    if exist "!BLD_ARTIFACT_PATH!" (
+        echo Archive created:
+        dir "!BLD_ARTIFACT_PATH!"
+
+        if "%CI%" == "azure" (
+            echo ##vso[task.setVariable variable=BLD_ARTIFACT_NAME]!BLD_ARTIFACT_NAME!
+            echo ##vso[task.setVariable variable=BLD_ARTIFACT_PATH]!BLD_ARTIFACT_PATH!
+        )
+        if "%CI%" == "github_actions" (
+            echo BLD_ARTIFACT_NAME=!BLD_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
+            echo BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
+        )
+    ) else (
+        echo No archive created
     )
-    if "%CI%" == "github_actions" (
-        echo BLD_ARTIFACT_NAME=!BLD_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
-        echo BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
-    )
+) else (
+    echo Skipping build artifact archive
 )
+echo.
 
 rem Make the work directory artifact archive
 if defined WRK_ARTIFACT_PREFIX (
     if not "%WORK_PATHS%" == "" (
+        echo Creating work directory archive ...
         set WRK_ARTIFACT_NAME=!WRK_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
-        echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
 
         set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
         bsdtar -c -f "!WRK_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_WORK% %WORK_PATHS%
@@ -121,24 +134,35 @@ if defined WRK_ARTIFACT_PREFIX (
                 set "WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
             )
         )
-        echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
 
-        if "%CI%" == "azure" (
-            echo ##vso[task.setVariable variable=WRK_ARTIFACT_NAME]!WRK_ARTIFACT_NAME!
-            echo ##vso[task.setVariable variable=WRK_ARTIFACT_PATH]!WRK_ARTIFACT_PATH!
+        if exist "!WRK_ARTIFACT_PATH!" (
+            echo Archive created:
+            dir "!WRK_ARTIFACT_PATH!"
+
+            if "%CI%" == "azure" (
+                echo ##vso[task.setVariable variable=WRK_ARTIFACT_NAME]!WRK_ARTIFACT_NAME!
+                echo ##vso[task.setVariable variable=WRK_ARTIFACT_PATH]!WRK_ARTIFACT_PATH!
+            )
+            if "%CI%" == "github_actions" (
+                echo WRK_ARTIFACT_NAME=!WRK_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
+                echo WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
+            )
+        ) else (
+            echo No archive created
         )
-        if "%CI%" == "github_actions" (
-            echo WRK_ARTIFACT_NAME=!WRK_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
-            echo WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
-        )
+    ) else (
+        echo Skipping work directory artifact archive because of no files
     )
+) else (
+    echo Skipping work directory artifact archive
 )
+echo.
 
 rem Make the environment artifact archive
 if defined ENV_ARTIFACT_PREFIX (
     if not "%ENVIRONMENT_PATHS%" == "" (
+        echo Creating build environment artifact archive ...
         set ENV_ARTIFACT_NAME=!ENV_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
-        echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
         set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
         bsdtar -c -f "!ENV_ARTIFACT_PATH!" %ZSTD% %ENVIRONMENT_PATHS%
@@ -148,15 +172,26 @@ if defined ENV_ARTIFACT_PREFIX (
                 set "ENV_ARTIFACT_PATH=!ENV_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
             )
         )
-        echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
-        if "%CI%" == "azure" (
-            echo ##vso[task.setVariable variable=ENV_ARTIFACT_NAME]!ENV_ARTIFACT_NAME!
-            echo ##vso[task.setVariable variable=ENV_ARTIFACT_PATH]!ENV_ARTIFACT_PATH!
+        if exist "!ENV_ARTIFACT_PATH!" (
+            echo Archive created:
+            dir "!ENV_ARTIFACT_PATH!"
+
+            if "%CI%" == "azure" (
+                echo ##vso[task.setVariable variable=ENV_ARTIFACT_NAME]!ENV_ARTIFACT_NAME!
+                echo ##vso[task.setVariable variable=ENV_ARTIFACT_PATH]!ENV_ARTIFACT_PATH!
+            )
+            if "%CI%" == "github_actions" (
+                echo ENV_ARTIFACT_NAME=!ENV_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
+                echo ENV_ARTIFACT_PATH=!ENV_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
+            )
+        ) else (
+            echo No archive created
         )
-        if "%CI%" == "github_actions" (
-            echo ENV_ARTIFACT_NAME=!ENV_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
-            echo ENV_ARTIFACT_PATH=!ENV_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
-        )
+    ) else (
+        echo Skipping environment artifact archive because of no files
     )
+) else (
+    echo Skipping environment artifact archive
 )
+echo.

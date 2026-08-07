@@ -30,9 +30,9 @@ source .scripts/logging_utils.sh
 set -e
 
 # mangle_homebrew hides zstd on GHA macos 15 runners, so use conda-forge tools
-if [[ -d ${MINIFORGE_HOME} ]]; then
-    . "${MINIFORGE_HOME}/etc/profile.d/conda.sh"
-    conda activate
+if [[ -d ~/.pixi/bin ]]; then
+    export PATH="~/.pixi/bin:$PATH"
+    eval "$(pixi shell-hook --environment build)"
 fi
 
 # Check that the conda-build directory exists
@@ -113,6 +113,7 @@ EXCLUDE_FROM_WORK=(
 
 # Make the build artifact archive
 if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
+    echo "Creating build artifact archive ..."
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
@@ -128,20 +129,28 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
         BLD_ARTIFACT_PATH=${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}
     fi
 
-    echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
-    echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
+    if [[ -s ${BLD_ARTIFACT_PATH} ]]; then
+        echo "Archive created:"
+        ls -l -h "${BLD_ARTIFACT_PATH}"
 
-    if [[ "$CI" == "azure" ]]; then
-        echo "##vso[task.setVariable variable=BLD_ARTIFACT_NAME]$BLD_ARTIFACT_NAME"
-        echo "##vso[task.setVariable variable=BLD_ARTIFACT_PATH]$BLD_ARTIFACT_PATH"
-    elif [[ "$CI" == "github_actions" ]]; then
-        echo "BLD_ARTIFACT_NAME=$BLD_ARTIFACT_NAME" >> $GITHUB_OUTPUT
-        echo "BLD_ARTIFACT_PATH=$BLD_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        if [[ "$CI" == "azure" ]]; then
+            echo "##vso[task.setVariable variable=BLD_ARTIFACT_NAME]$BLD_ARTIFACT_NAME"
+            echo "##vso[task.setVariable variable=BLD_ARTIFACT_PATH]$BLD_ARTIFACT_PATH"
+        elif [[ "$CI" == "github_actions" ]]; then
+            echo "BLD_ARTIFACT_NAME=$BLD_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+            echo "BLD_ARTIFACT_PATH=$BLD_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        fi
+    else
+        echo "No archive created"
     fi
+else
+    echo "Skipping build artifact archive"
 fi
+echo
 
 # Make the workdir artifact archive
 if [[ ! -z "$WRK_ARTIFACT_PREFIX" && -n ${WORK_PATHS[@]} ]]; then
+    echo "Creating work directory archive ..."
     export WRK_ARTIFACT_NAME="${WRK_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export WRK_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${WRK_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
@@ -157,20 +166,28 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" && -n ${WORK_PATHS[@]} ]]; then
         WRK_ARTIFACT_PATH=${WRK_ARTIFACT_PATH/%.tar.zst/-broken&}
     fi
 
-    echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
-    echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
+    if [[ -s ${WRK_ARTIFACT_PATH} ]]; then
+        echo "Archive created:"
+        ls -l -h "${WRK_ARTIFACT_PATH}"
 
-    if [[ "$CI" == "azure" ]]; then
-        echo "##vso[task.setVariable variable=WRK_ARTIFACT_NAME]$WRK_ARTIFACT_NAME"
-        echo "##vso[task.setVariable variable=WRK_ARTIFACT_PATH]$WRK_ARTIFACT_PATH"
-    elif [[ "$CI" == "github_actions" ]]; then
-        echo "WRK_ARTIFACT_NAME=$WRK_ARTIFACT_NAME" >> $GITHUB_OUTPUT
-        echo "WRK_ARTIFACT_PATH=$WRK_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        if [[ "$CI" == "azure" ]]; then
+            echo "##vso[task.setVariable variable=WRK_ARTIFACT_NAME]$WRK_ARTIFACT_NAME"
+            echo "##vso[task.setVariable variable=WRK_ARTIFACT_PATH]$WRK_ARTIFACT_PATH"
+        elif [[ "$CI" == "github_actions" ]]; then
+            echo "WRK_ARTIFACT_NAME=$WRK_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+            echo "WRK_ARTIFACT_PATH=$WRK_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        fi
+    else
+        echo "No archive created"
     fi
+else
+    echo "Skipping work directory artifact archive"
 fi
+echo
 
 # Make the environments artifact archive
 if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
+    echo "Creating build environment artifact archive ..."
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
@@ -183,16 +200,23 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
         ENV_ARTIFACT_PATH=${ENV_ARTIFACT_PATH/%.tar.zst/-broken&}
     fi
 
-    echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
-    echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
+    if [[ -s ${ENV_ARTIFACT_PATH} ]]; then
+        echo "Archive created:"
+        ls -l -h "${ENV_ARTIFACT_PATH}"
 
-    if [[ "$CI" == "azure" ]]; then
-        echo "##vso[task.setVariable variable=ENV_ARTIFACT_NAME]$ENV_ARTIFACT_NAME"
-        echo "##vso[task.setVariable variable=ENV_ARTIFACT_PATH]$ENV_ARTIFACT_PATH"
-    elif [[ "$CI" == "github_actions" ]]; then
-        echo "ENV_ARTIFACT_NAME=$ENV_ARTIFACT_NAME" >> $GITHUB_OUTPUT
-        echo "ENV_ARTIFACT_PATH=$ENV_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        if [[ "$CI" == "azure" ]]; then
+            echo "##vso[task.setVariable variable=ENV_ARTIFACT_NAME]$ENV_ARTIFACT_NAME"
+            echo "##vso[task.setVariable variable=ENV_ARTIFACT_PATH]$ENV_ARTIFACT_PATH"
+        elif [[ "$CI" == "github_actions" ]]; then
+            echo "ENV_ARTIFACT_NAME=$ENV_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+            echo "ENV_ARTIFACT_PATH=$ENV_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        fi
+    else
+        echo "No archive created"
     fi
+else
+    echo "Skipping environment artifact archive"
 fi
+echo
 
 popd
