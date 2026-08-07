@@ -1,6 +1,6 @@
 @echo on
 
-if "%python%" == "3.13" (
+if "%PY_VER%" == "3.13" (
     REM intentional failure to test artifact generation
     exit 1
 )

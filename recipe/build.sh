@@ -4,7 +4,7 @@ set -ex
 # necessary for cross-compilation to point to the right env
 export PKG_CONFIG_PATH=$PREFIX/lib/pkgconfig
 
-if [[ "$python" == "3.13" ]]; then
+if [[ "$PY_VER" == "3.13" ]]; then
     # intentional failure to test artifact generation
     exit 1
 fi
