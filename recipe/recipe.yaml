@@ -1,5 +1,5 @@
 context:
-  version: "2.5.1"
+  version: "2.5.2"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   version_rc: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
@@ -16,7 +16,7 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version_rc }}/numpy-${{ version_rc }}.tar.gz
-    sha256: a48a113e6afea91f5608793bafa7ef2ad481fefbda87ec5069f483de61cb9fa3
+    sha256: d482d171c406ae88c5b19cad3b6a1c4c5209f886ab74bc44c2c865c23f52d860
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
