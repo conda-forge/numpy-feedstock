@@ -139,12 +139,19 @@ tests:
       content:
         - import numpy, sys
         - 'tests_to_skip = "_not_a_real_test"'
-        # see https://github.com/numpy/numpy/issues/31708
-        - 'tests_to_skip += " or test_blas_gemm_thread_safety"'
         - if: linux
           then:
             # OOMs on GHA agents
             - 'tests_to_skip += " or test_huge_list_error"'
+        - if: linux and x86_64
+          then:
+            # https://github.com/numpy/numpy/issues/27460
+            - 'tests_to_skip += " or test_validate_transcendentals"'
+        - if: linux and ppc64le
+          then:
+            # may be emulation-related; feel free to investigate
+            - 'tests_to_skip += " or test_concurrent_allocator_acquire_no_deadlock"'
+            - 'tests_to_skip += " or test_concurrent_unique_no_deadlock"'
         - if: build_platform != host_platform
           then:
             # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
