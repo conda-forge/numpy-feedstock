@@ -12,7 +12,7 @@ if [[ $build_platform != $host_platform ]]; then
     # write to separate cross-file to not interfere with default cross-python activation, c.f.
     # https://github.com/conda-forge/cross-python-feedstock/blob/91d3c9cf/recipe/activate-cross-python.sh#L111-L125
     echo "[properties]"                                      > $SRC_DIR/numpy_cross_file.txt
-    if [[ $host_platform == "linux-aarch64" ]]; then
+    if [[ $host_platform == "linux-aarch64" || $host_platform == "linux-riscv64" ]]; then
         echo "longdouble_format = 'IEEE_QUAD_LE'"           >> $SRC_DIR/numpy_cross_file.txt
     elif [[ $host_platform == "linux-ppc64le" ]]; then
         echo "longdouble_format = 'IBM_DOUBLE_DOUBLE_LE'"   >> $SRC_DIR/numpy_cross_file.txt
