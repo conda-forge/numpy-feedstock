@@ -118,7 +118,7 @@ tests:
         - pytest-xdist
         # (mostly) optional test requirements (except wheel, python-cov, mypy), see
         # https://github.com/numpy/numpy/blob/main/requirements/test_requirements.txt
-        - cython
+        - cython <3.3
         - hypothesis
         - meson
         - pytz
