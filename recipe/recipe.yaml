@@ -21,7 +21,7 @@ source:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
-  number: 0
+  number: 1
   skip: match(python, "<3.12")
   python:
     entry_points:
@@ -118,7 +118,7 @@ tests:
         - pytest-xdist
         # (mostly) optional test requirements (except wheel, python-cov, mypy), see
         # https://github.com/numpy/numpy/blob/main/requirements/test_requirements.txt
-        - cython
+        - cython <3.3
         - hypothesis
         - meson
         - pytz
@@ -147,16 +147,21 @@ tests:
           then:
             # https://github.com/numpy/numpy/issues/27460
             - 'tests_to_skip += " or test_validate_transcendentals"'
-        - if: linux and ppc64le
+        - if: linux and (ppc64le or riscv64)
           then:
             # may be emulation-related; feel free to investigate
             - 'tests_to_skip += " or test_concurrent_allocator_acquire_no_deadlock"'
             - 'tests_to_skip += " or test_concurrent_unique_no_deadlock"'
+        - if: linux and riscv64
+          then:
+            # see https://github.com/numpy/numpy/issues/32461
+            - 'tests_to_skip += " or test_unary_spurious_fpexception"'
         - if: build_platform != host_platform
           then:
             # there are some tests that cannot really work in emulation, see e.g. numpy/numpy#20445
             - 'tests_to_skip += " or Test_ARM_Features"'
             - 'tests_to_skip += " or Test_POWER_Features"'
+            - 'tests_to_skip += " or Test_RISCV_Features"'
             # test_new_policy reruns part of test suite; including a CPU feature test that fails in emulation
             - 'tests_to_skip += " or test_new_policy"'
         # numpy.test will show SIMD features of agent (in the past, there have been

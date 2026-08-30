@@ -145,6 +145,24 @@ description = "Build numpy-feedstock with variant linux_ppc64le_is_freethreading
 [feature.build.tasks."inspect-linux_ppc64le_is_freethreadingtruepython3.14.____cp314t"]
 cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_ppc64le_is_freethreadingtruepython3.14.____cp314t.yaml"
 description = "List contents of numpy-feedstock packages built for variant linux_ppc64le_is_freethreadingtruepython3.14.____cp314t"
+[feature.build.tasks."build-linux_riscv64_is_freethreadingfalsepython3.14.____cp314"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_riscv64_is_freethreadingfalsepython3.14.____cp314.yaml"
+description = "Build numpy-feedstock with variant linux_riscv64_is_freethreadingfalsepython3.14.____cp314 directly (without setup scripts)"
+[feature.build.tasks."debug-linux_riscv64_is_freethreadingfalsepython3.14.____cp314"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_riscv64_is_freethreadingfalsepython3.14.____cp314.yaml"
+description = "Build numpy-feedstock with variant linux_riscv64_is_freethreadingfalsepython3.14.____cp314 directly (without setup scripts)"
+[feature.build.tasks."inspect-linux_riscv64_is_freethreadingfalsepython3.14.____cp314"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_riscv64_is_freethreadingfalsepython3.14.____cp314.yaml"
+description = "List contents of numpy-feedstock packages built for variant linux_riscv64_is_freethreadingfalsepython3.14.____cp314"
+[feature.build.tasks."build-linux_riscv64_is_freethreadingtruepython3.14.____cp314t"]
+cmd = "rattler-build build --recipe recipe -m .ci_support/linux_riscv64_is_freethreadingtruepython3.14.____cp314t.yaml"
+description = "Build numpy-feedstock with variant linux_riscv64_is_freethreadingtruepython3.14.____cp314t directly (without setup scripts)"
+[feature.build.tasks."debug-linux_riscv64_is_freethreadingtruepython3.14.____cp314t"]
+cmd = "rattler-build debug setup --recipe recipe -m .ci_support/linux_riscv64_is_freethreadingtruepython3.14.____cp314t.yaml"
+description = "Build numpy-feedstock with variant linux_riscv64_is_freethreadingtruepython3.14.____cp314t directly (without setup scripts)"
+[feature.build.tasks."inspect-linux_riscv64_is_freethreadingtruepython3.14.____cp314t"]
+cmd = "inspect_artifacts --recipe-dir recipe -m .ci_support/linux_riscv64_is_freethreadingtruepython3.14.____cp314t.yaml"
+description = "List contents of numpy-feedstock packages built for variant linux_riscv64_is_freethreadingtruepython3.14.____cp314t"
 [feature.build.tasks."build-osx_64_is_freethreadingfalsepython3.12.____cpython"]
 cmd = "rattler-build build --recipe recipe -m .ci_support/osx_64_is_freethreadingfalsepython3.12.____cpython.yaml"
 description = "Build numpy-feedstock with variant osx_64_is_freethreadingfalsepython3.12.____cpython directly (without setup scripts)"
