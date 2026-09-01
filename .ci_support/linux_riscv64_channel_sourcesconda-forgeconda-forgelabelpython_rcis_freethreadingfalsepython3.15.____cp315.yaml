@@ -1,23 +1,25 @@
-MACOSX_DEPLOYMENT_TARGET:
-- '11.0'
-MACOSX_SDK_VERSION:
-- '11.0'
 c_compiler:
-- clang
+- gcc
 c_compiler_version:
-- '21'
+- '15'
 c_stdlib:
-- macosx_deployment_target
+- sysroot
 c_stdlib_version:
-- '11.0'
+- '2.39'
 channel_sources:
-- conda-forge/label/python_rc,conda-forge
+- conda-forge,conda-forge/label/python_rc
 channel_targets:
 - conda-forge main
 cxx_compiler:
-- clangxx
+- gxx
 cxx_compiler_version:
-- '21'
+- '15'
+docker_image:
+- quay.io/condaforge/linux-anvil-x86_64:alma10
+fortran_compiler:
+- gfortran
+fortran_compiler_version:
+- '15'
 is_freethreading:
 - false
 libblas:
@@ -26,8 +28,6 @@ libcblas:
 - 3.9.* *netlib
 liblapack:
 - 3.9.* *netlib
-macos_machine:
-- arm64-apple-darwin20.0.0
 pin_run_as_build:
   python:
     min_pin: x.x
@@ -35,10 +35,11 @@ pin_run_as_build:
 python:
 - 3.15.* *_cp315
 target_platform:
-- osx-arm64
+- linux-riscv64
 zip_keys:
 - - c_compiler_version
   - cxx_compiler_version
+  - fortran_compiler_version
 - - python
   - channel_sources
   - is_freethreading

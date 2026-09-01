@@ -38,6 +38,13 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
+              <td>osx_64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
               <td>osx_64_channel_sourcesconda-forgeis_freethreadingfalsepython3.12.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
@@ -66,10 +73,10 @@ Current build status
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315</td>
+              <td>osx_arm64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315" alt="variant">
                 </a>
               </td>
             </tr><tr>
@@ -98,13 +105,6 @@ Current build status
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
                   <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_channel_sourcesconda-forgeis_freethreadingtruepython3.14.____cp314t" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_arm64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=704&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/numpy-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315" alt="variant">
                 </a>
               </td>
             </tr>

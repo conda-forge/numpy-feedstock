@@ -8,6 +8,16 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
+      osx_64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315:
+        CONFIG: osx_64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315
+        UPLOAD_PACKAGES: 'True'
+        VMIMAGE: macOS-15
+        build_workspace_dir: ~/miniforge3/conda-bld
+        free_disk_space: skip
+        pagefile_size: 16
+        resize_partitions: false
+        store_build_artifacts: false
+        tools_install_dir: ~/miniforge3
       osx_64_channel_sourcesconda-forgeis_freethreadingfalsepython3.12.____cpython:
         CONFIG: osx_64_channel_sourcesconda-forgeis_freethreadingfalsepython3.12.____cpython
         UPLOAD_PACKAGES: 'True'
@@ -48,10 +58,10 @@ jobs:
         resize_partitions: false
         store_build_artifacts: false
         tools_install_dir: ~/miniforge3
-      osx_64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315:
-        CONFIG: osx_64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315
+      osx_arm64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315:
+        CONFIG: osx_arm64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315
         UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15
+        VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
         free_disk_space: skip
         pagefile_size: 16
@@ -90,16 +100,6 @@ jobs:
         tools_install_dir: ~/miniforge3
       osx_arm64_channel_sourcesconda-forgeis_freethreadingtruepython3.14.____cp314t:
         CONFIG: osx_arm64_channel_sourcesconda-forgeis_freethreadingtruepython3.14.____cp314t
-        UPLOAD_PACKAGES: 'True'
-        VMIMAGE: macOS-15-arm64
-        build_workspace_dir: ~/miniforge3/conda-bld
-        free_disk_space: skip
-        pagefile_size: 16
-        resize_partitions: false
-        store_build_artifacts: false
-        tools_install_dir: ~/miniforge3
-      osx_arm64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315:
-        CONFIG: osx_arm64_channel_sourcesconda-forgelabelpython_rcconda-forgeis_freethreadingfalsepython3.15.____cp315
         UPLOAD_PACKAGES: 'True'
         VMIMAGE: macOS-15-arm64
         build_workspace_dir: ~/miniforge3/conda-bld
