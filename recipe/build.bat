@@ -3,9 +3,7 @@
 mkdir builddir
 
 :: help meson find Python.h
-set "CPPFLAGS=%CPPFLAGS% -I%PREFIX:\=/%/include/python"
-set "CFLAGS=%CFLAGS% -I%PREFIX:\=/%/include/python"
-set "CXXFLAGS=%CXXFLAGS% -I%PREFIX:\=/%/include/python"
+set "INCLUDE=%INCLUDE%;%PREFIX:\=/%/include/python"
 
 :: -wnx flags mean: --wheel --no-isolation --skip-dependency-check
 %PYTHON% -m build -w -n -x ^
