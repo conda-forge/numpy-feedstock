@@ -3,7 +3,7 @@
 mkdir builddir
 
 :: help meson find Python.h
-set "INCLUDEPY=%PREFIX%\include\python"
+set "INCLUDEPY=%PREFIX:\=/%/include/python"
 
 :: -wnx flags mean: --wheel --no-isolation --skip-dependency-check
 %PYTHON% -m build -w -n -x ^
