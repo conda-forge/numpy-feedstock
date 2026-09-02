@@ -1,8 +1,8 @@
 {
   "schema_version": "1.0",
-  "base_prefix": "@PREFIX@",
-  "base_interpreter": "@PREFIX@/python.exe",
-  "platform": "win-x86_64",
+  "base_prefix": ".",
+  "base_interpreter": "python.exe",
+  "platform": "win-amd64",
   "language": {
     "version": "3.15",
     "version_info": {
@@ -22,17 +22,31 @@
       "micro": 0,
       "releaselevel": "candidate",
       "serial": 2
-    },
-    "hexversion": 51314882,
-    "supports_isolated_interpreters": true
+    }
   },
   "abi": {
-    "flags": []
+    "flags": [],
+    "extension_suffix": ".cp315-win_amd64.pyd",
+    "stable_abi_suffix": ".pyd"
+  },
+  "suffixes": {
+    "source": [
+      ".py"
+    ],
+    "bytecode": [
+      ".pyc"
+    ],
+    "extensions": [
+      ".cp315-win_amd64.pyd",
+      ".pyd"
+    ]
   },
   "libpython": {
-    "link_extensions": false,
+    "dynamic": "python315.dll",
+    "dynamic_stableabi": "python3.dll",
+    "link_extensions": true
   },
   "c_api": {
-    "headers": "@PREFIX@/include/python"
+    "headers": "include/python"
   }
 }
