@@ -2,11 +2,8 @@
 
 mkdir builddir
 
-:: sanity-check the sanity-check: is it only failing because of the header?
-copy %PREFIX%\include\python\Python.h %PREFIX%\include\Python.h
-
 :: help meson find Python.h
-set "INCLUDE=%PREFIX%\include\python;%INCLUDE%"
+set "INCLUDEPY=%PREFIX%\include\python"
 
 :: -wnx flags mean: --wheel --no-isolation --skip-dependency-check
 %PYTHON% -m build -w -n -x ^
