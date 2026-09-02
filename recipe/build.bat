@@ -14,6 +14,7 @@ type %RECIPE_DIR%\build-details-win.json
     -Csetup-args=--python.build-config=%RECIPE_DIR%\build-details-win.json"
     -Csetup-args=-Dblas=blas ^
     -Csetup-args=-Dlapack=lapack
+type %SRC_DIR%\builddir\meson-logs\meson-log.txt
 if %ERRORLEVEL% neq 0 exit 1
 
 :: `pip install dist\numpy*.whl` does not work on windows,
