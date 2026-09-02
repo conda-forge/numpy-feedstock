@@ -42,6 +42,8 @@ requirements:
     - ${{ compiler('cxx') }}
     - ninja
     - pkg-config
+    - if: win
+      then: m2-sed
   host:
     # ABI-relevant
     - libblas
