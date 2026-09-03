@@ -14,7 +14,8 @@ __migrator:
             - 3.13.* *_cp313t
             - 3.14.* *_cp314    # new entry
             - 3.14.* *_cp314t   # new entry
-    paused: true
+            - 3.15.* *_cp315
+    use_local: true
     longterm: true
     pr_limit: 20
     max_solver_attempts: 3  # this will make the bot retry "not solvable" stuff 12 times
@@ -25,6 +26,8 @@ __migrator:
         - pypy-meta
         - cross-python
         - python_abi
+        - matplotlib
+        - pyside2
     exclude_pinned_pkgs: false
     # if feedstock already has 3.13t migrator this is redundant, but harmless
     additional_zip_keys:
@@ -35,6 +38,16 @@ __migrator:
     ignored_deps_per_node:
         matplotlib:
             - pyqt
+            - pyside6
+            - pyside2
+        pyarrow:
+            # optional test dependencies
+            - numba
+            - sparse
+        pyzmq:
+            # test dependency not used with free-threaded
+            - auditwheel
+    allowlist_file: free-threaded-314.txt
 
 python:
 - 3.14.* *_cp314t
@@ -45,5 +58,7 @@ is_python_min:
 - false
 is_abi3:
 - false
+# due to the order of migrations and their additional_zip_keys,
+# we need this here as long as 3.15 is not yet GA
 channel_sources:
-- conda-forge,conda-forge/label/python_rc
+- conda-forge
