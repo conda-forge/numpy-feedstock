@@ -1,5 +1,5 @@
 context:
-  version: "2.5.2"
+  version: "2.5.3"
   # -1, or less, means "not a dev version", a number > -1 will emit postfix "rc${{ rc_num }}"
   rc_num: -1
   version_rc: ${{ version }}${{ ("rc" ~ rc_num) if rc_num > -1 else "" }}
@@ -16,12 +16,12 @@ package:
 
 source:
   - url: https://github.com/numpy/numpy/releases/download/v${{ version_rc }}/numpy-${{ version_rc }}.tar.gz
-    sha256: d482d171c406ae88c5b19cad3b6a1c4c5209f886ab74bc44c2c865c23f52d860
+    sha256: df2d5874ff183595a4ba404edd04f6bd9b5505c1d7708573f6a6c17489a67563
     patches:
       - patches/0001-avoid-backslashes-from-sneaking-into-__config__.py.patch
 
 build:
-  number: 1
+  number: 0
   skip: match(python, "<3.12")
   python:
     entry_points:
@@ -143,10 +143,10 @@ tests:
           then:
             # OOMs on GHA agents
             - 'tests_to_skip += " or test_huge_list_error"'
-        - if: linux and x86_64
-          then:
+            - if: x86_64
+              then:
             # https://github.com/numpy/numpy/issues/27460
-            - 'tests_to_skip += " or test_validate_transcendentals"'
+                - 'tests_to_skip += " or test_validate_transcendentals"'
         - if: linux and (ppc64le or riscv64)
           then:
             # may be emulation-related; feel free to investigate
