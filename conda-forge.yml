@@ -12,7 +12,8 @@ github:
 provider:
   linux_aarch64: default
   osx_arm64: default
+  win_arm64: default
 test: native_and_emulated
 workflow_settings:
   pagefile_size:
-    - value: 16
+  - value: 16
