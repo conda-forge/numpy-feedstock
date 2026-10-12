@@ -20,6 +20,9 @@ if "%MINIFORGE_HOME%"=="" (
 )
 :: Remove trailing backslash, if present
 if "%MINIFORGE_HOME:~-1%"=="\" set "MINIFORGE_HOME=%MINIFORGE_HOME:~0,-1%"
+
+set "arch=64"
+if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 call :start_group "Provisioning base env with pixi"
 echo Installing pixi
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "iwr -useb https://pixi.sh/install.ps1 | iex"
@@ -34,8 +37,6 @@ if "%PIXI_CACHE_DIR%"=="%MINIFORGE_HOME%" (
     pushd "%REPO_ROOT%"
 )
 move /y pixi.toml pixi.toml.bak
-set "arch=64"
-if "%PROCESSOR_ARCHITECTURE%"=="ARM64" set "arch=arm64"
 powershell -NoProfile -ExecutionPolicy unrestricted -Command "(Get-Content pixi.toml.bak -Encoding UTF8) -replace 'platforms = .*', 'platforms = [''win-%arch%'']' | Out-File pixi.toml -Encoding UTF8"
 :: Git on Windows needs to run post link scripts to properly set up SSL certificates
 pixi config set --global run-post-link-scripts insecure
@@ -89,7 +90,7 @@ call :end_group
 
 :: Build the recipe
 echo Building recipe
-rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --build-platform %BUILD_PLATFORM% --target-platform %HOST_PLATFORM%
+rattler-build.exe build --recipe "recipe" -m .ci_support\%CONFIG%.yaml %EXTRA_CB_OPTIONS% --target-platform %HOST_PLATFORM%
 if !errorlevel! neq 0 exit /b !errorlevel!
 
 call :start_group "Inspecting artifacts"
