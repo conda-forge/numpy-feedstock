@@ -302,7 +302,7 @@ jobs:
             os: macos
             pagefile_size: 16
             resize_partitions: False
-            runs_on: ['macos-26-arm64']
+            runs_on: ['macos-26']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_channel_sourcesconda-forgeis_freethreadingfalsepython3.12.____cpython
             STORE_BUILD_ARTIFACTS: False
@@ -313,7 +313,7 @@ jobs:
             os: macos
             pagefile_size: 16
             resize_partitions: False
-            runs_on: ['macos-26-arm64']
+            runs_on: ['macos-26']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_channel_sourcesconda-forgeis_freethreadingfalsepython3.13.____cp313
             STORE_BUILD_ARTIFACTS: False
@@ -324,7 +324,7 @@ jobs:
             os: macos
             pagefile_size: 16
             resize_partitions: False
-            runs_on: ['macos-26-arm64']
+            runs_on: ['macos-26']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_channel_sourcesconda-forgeis_freethreadingfalsepython3.14.____cp314
             STORE_BUILD_ARTIFACTS: False
@@ -335,7 +335,7 @@ jobs:
             os: macos
             pagefile_size: 16
             resize_partitions: False
-            runs_on: ['macos-26-arm64']
+            runs_on: ['macos-26']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_channel_sourcesconda-forgeis_freethreadingtruepython3.14.____cp314t
             STORE_BUILD_ARTIFACTS: False
@@ -346,7 +346,7 @@ jobs:
             os: macos
             pagefile_size: 16
             resize_partitions: False
-            runs_on: ['macos-26-arm64']
+            runs_on: ['macos-26']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_channel_sourcesconda-forgeconda-forgelabelpython_rcis_freethreadingfalsepython3.15.____cp315
             STORE_BUILD_ARTIFACTS: False
