@@ -12,10 +12,10 @@ __migrator:
             - 3.12.* *_cpython
             - 3.13.* *_cp313
             - 3.13.* *_cp313t
-            - 3.14.* *_cp314    # new entry
+            - 3.14.* *_cp314
             - 3.14.* *_cp314t   # new entry
             - 3.15.* *_cp315
-    use_local: true
+            - 3.15.* *_cp315t
     longterm: true
     pr_limit: 20
     max_solver_attempts: 3  # this will make the bot retry "not solvable" stuff 12 times
@@ -58,7 +58,3 @@ is_python_min:
 - false
 is_abi3:
 - false
-# due to the order of migrations and their additional_zip_keys,
-# we need this here as long as 3.15 is not yet GA
-channel_sources:
-- conda-forge
