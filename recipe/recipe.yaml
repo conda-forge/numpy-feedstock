@@ -41,7 +41,7 @@ requirements:
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
     - ninja
-    - pkg-config
+    - pkgconf
   host:
     # ABI-relevant
     - libblas
@@ -133,7 +133,7 @@ tests:
         - if: linux
           then: ${{ compiler('fortran') }}
         # For some cython tests
-        - pkg-config
+        - pkgconf
     script:
       interpreter: python
       content:
