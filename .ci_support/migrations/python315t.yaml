@@ -4,7 +4,6 @@ __migrator:
     migration_number: 1
     operation: key_add
     primary_key: python
-    use_local: true
     ordering:
         python:
             - 3.9.* *_cpython
